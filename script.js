@@ -12,13 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchWeatherData(cityName);
         }
     });
-   // Kullanıcı Enter tuşuna bastığında da arama yapılacak
-   cityInput.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-        event.preventDefault(); // Formun submit olmasını engelle
-        searchButton.click(); // Butona tıklanmış gibi işlem yap
-    }
-});
+    // Kullanıcı Enter tuşuna bastığında da arama yapılacak
+    cityInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Formun submit olmasını engelle
+            searchButton.click(); // Butona tıklanmış gibi işlem yap
+        }
+    });
     function fetchWeatherData(city) {
         fetch(`/update-weather?city=${city}`)
             .then(response => response.json())
@@ -51,7 +51,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('forecast-night').innerHTML = `
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
+
+                updateHourlyChart(data); // grafiğe bilgileri gönderme
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
+
+    // grafik güncelleme fonksiyonu
+    function updateHourlyChart(data) {
+        const labels = data.hourly_weather.map(hour => hour.saat);
+        const temperatures = data.hourly_weather.map(hour => hour.sıcaklık);
+
+        hourlyChart.data.labels = labels;
+        hourlyChart.data.datasets[0].data = temperatures;
+        hourlyChart.update();
+    }
+
 });
