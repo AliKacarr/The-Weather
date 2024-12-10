@@ -251,8 +251,6 @@
                     </tbody>
                 </table>
             
-                <!-- Gizli veriler için buton -->
-                <button class="toggle-button" onclick="toggleMoreData()">Gizli Verileri Göster</button>
             
                 <!-- Gizli 16 saatlik veriler -->
                 <div id="hidden-data" class="hidden">
@@ -398,6 +396,9 @@
                     </table>
                 </div>
             
+                <!-- Gizli veriler için buton -->
+                <button class="toggle-button" onclick="toggleMoreData()">Gizli Verileri Göster</button>
+
                 <script>
                     function toggleMoreData() {
                         const hiddenData = document.getElementById("hidden-data");
@@ -408,13 +409,16 @@
                 </script>
             </div>
         
+    </section>
+
+    <div class="hourly-forecast">
         <!-- Saatlik hava durumu grafiği -->
         <h1>Saatlik Grafiği</h1>
         <div class="chart-container">
             <canvas id="hourly-chart"></canvas>
         </div>
-    </section>
-    
+    </div>
+
      <!-- haftalık hava durumu -->
     <section id="haftalik">
         <h1>Haftalık Hava Durumu</h1>

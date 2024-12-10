@@ -172,7 +172,7 @@ main {
 
 
 #last-update{
-    margin-right: 50px;
+    margin-left: 50px;
 }
 
 /* Duyarlı */
@@ -183,12 +183,10 @@ main {
 }
 
 footer {
-    text-align: right;
     padding: 8px 0;
     color: white;
     font-size: 0.8em;
     background-color: #270a78ae;
-    text-align: right;
     margin-top: 20px;
     width: 100%;
 }
