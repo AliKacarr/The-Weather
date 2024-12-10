@@ -8,12 +8,18 @@ const app = express();
 app.use('/icons', express.static(path.join(__dirname, 'icons')));
 app.use('/css', express.static(path.join(__dirname, 'css')));
 app.use('/js', express.static(path.join(__dirname, 'js')));
+app.use('/html', express.static(path.join(__dirname, 'html')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// HTML klasörünü statik olarak sunuyoruz
-app.use(express.static(path.join(__dirname, 'html')));
+app.use(express.static(__dirname)); // Ana dizindeki dosyaları statik olarak sunar
+
+// Ana sayfaya gelen isteği yönlendirmek
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html')); // Ana dizindeki index.html dosyasını gönderir
+});
+
 
 const mongoUri = process.env.MONGO_URI;
 const weatherApiKey = process.env.WEATHERAPI_API_KEY;
