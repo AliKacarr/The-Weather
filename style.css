@@ -79,23 +79,28 @@ main {
 
 /* Üst Şerit */
 .city-weather-strip {
-    display: flex;
+    display: flex; 
     justify-content: space-around;
-    background-color: rgba(46, 57, 158, 0.96);
     padding: 10px 0;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    height: 50px; 
+    background-color: #08468d84; 
+    align-items: center; 
+    color: white; 
 }
 
 .city-weather {
-    text-align: center;
-    width: 120px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
 }
 
+
 .city-weather img {
-    width: 50px;
-    height: 50px;
+    height: 20px;
+    width: 20px; 
 }
 
 /* Mevcut Hava Durumu */
@@ -116,6 +121,10 @@ main {
     align-items: center;
 }
 
+.weather-info p {
+    margin: 5px 0;
+}
+
 #weather-icon {
     width: 80px;
     height: 80px;
@@ -127,6 +136,14 @@ main {
     justify-content: space-between;
     gap: 10px;
 }
+
+/* Duyarlı */
+@media (max-width: 768px) {
+    .daily-forecast {
+        flex-direction: column;
+    }
+}
+
 
 .forecast-box {
     text-align: center;
@@ -175,12 +192,6 @@ main {
     margin-left: 50px;
 }
 
-/* Duyarlı */
-@media (max-width: 768px) {
-    .daily-forecast {
-        flex-direction: column;
-    }
-}
 
 footer {
     padding: 8px 0;
@@ -200,9 +211,7 @@ footer {
     margin: 20px auto;
     width: 95%;
 }
-.weather-info p {
-    margin: 5px 0;
-}
+
 /* hartalık görünüm */
 .weekly-forecast {
     display: grid;
@@ -258,11 +267,12 @@ section {
     padding: 20px;
 }
 
-.hourly-forecast, .weekly-forecast {
+.hourly-forecast, .weekly-forecast, .weekly-forecast-graphic {
     background-color: #051894e3; /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
     margin: 20px 0;
+    width: 98%;
 }
 
 .temp-icon img {
@@ -282,10 +292,12 @@ section {
     height: 500px; 
     margin: auto; 
 }
+
+/* Saatlik tablo */
 .weather-table table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 .weather-table th, .weather-table td {
@@ -311,6 +323,25 @@ section {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
 }
+
+.weather-table .toggle-button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.weather-table .hidden {
+    display: none;
+}
+
+.weather-table .toggle-button:hover {
+    background-color: #0056b3;
+}
+
 .flag-icon {
     width: 20px; /* Bayrak boyutunu ayarla */
     height: auto;
@@ -318,11 +349,8 @@ section {
     vertical-align: middle; /* Metinle hizalama */
 }
 
-/* Saatlik tablo */
-.weather-table table {
-    width: 100%;
-    border-collapse: collapse; 
-}
+
+
 
 /* Tablo başlık hücreleri */
 .weather-table th {
@@ -354,30 +382,9 @@ section {
     border: 1px solid #A7C8E8; 
 }
 
-/* Üst şerit şehirler */
-.city-weather-strip {
-    display: flex;
-    height: 50px; 
-    background-color: #08468d84; 
-    align-items: center; 
-    justify-content: space-around; 
-    color: white; 
-}
 
-.city-weather {
-    display: flex;
-    align-items: center;
-    gap: 10px; 
-}
 
-.city-weather p {
-    margin: 0; 
-}
 
-.city-weather img {
-    height: 20px;
-    width: 20px; 
-}
 
 
 

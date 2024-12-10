@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hava Durumu Web Sitesi</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
     
@@ -110,7 +112,6 @@
         <p id="last-update">Son Güncelleme: --</p>
     </footer>
 
-    <script src="script.js"></script>
 
 
     <section id="saatlik">
@@ -119,38 +120,7 @@
 
             <!--  saatlik hava durumu verisi -->
             <div class="weather-table">
-                <style>
-                    .weather-table {
-                        margin: 20px;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                    }
-                    th, td {
-                        border: 1px solid #ddd;
-                        padding: 8px;
-                        text-align: center;
-                    }
-                    th {
-                        background-color: #f4f4f4;
-                    }
-                    .hidden {
-                        display: none;
-                    }
-                    .toggle-button {
-                        margin: 10px 0;
-                        padding: 10px;
-                        background-color: #007BFF;
-                        color: white;
-                        border: none;
-                        cursor: pointer;
-                        border-radius: 5px;
-                    }
-                    .toggle-button:hover {
-                        background-color: #0056b3;
-                    }
-                </style>
+                
             
                 <table>
                     <thead>
@@ -411,13 +381,15 @@
         
     </section>
 
+    <section id="hourly-graphic">
+        <h1>Saatlik Grafiği</h1>
     <div class="hourly-forecast">
         <!-- Saatlik hava durumu grafiği -->
-        <h1>Saatlik Grafiği</h1>
         <div class="chart-container">
             <canvas id="hourly-chart"></canvas>
         </div>
     </div>
+    </section>
 
      <!-- haftalık hava durumu -->
     <section id="haftalik">
@@ -488,14 +460,15 @@
             </div>
         </div>
     </section>
-    
+    <section id="weekly-graphic">
         <!-- Haftalık hava durumu grafiği -->
+        <div class="weekly-forecast-graphic">
         <h1>Haftalık Grafiği</h1>
         <div class="chart-container">
             <canvas id="weekly-chart"></canvas>
         </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </div>
+    </section>
     <script>
 
         //  saatlik grafik
@@ -504,12 +477,13 @@ var hourlyChart = new Chart(ctxHourly, {
     type: 'line',
     data: {
         labels: [
+            '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
             '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', 
-            '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'
+            '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
         ],
         datasets: [{
             label: 'Sıcaklık (°C)',
-            data: [15, 17, 19, 21, 23, 24, 25, 24, 23, 21, 19, 17, 15], 
+            data: [11, 10, 8, 8, 9, 11, 13, 13, 14, 14 ,15, 17, 19, 21, 23, 24, 25, 24, 23, 21, 19, 17, 15, 13, 12, 11], 
             borderColor: 'rgba(255, 159, 64, 1)',
             borderWidth: 2,
             fill: false
