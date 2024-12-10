@@ -7,32 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-        function searchWeather() {
-            const city = document.getElementById('cityInput').value.trim();
-            if (city) {
-                // Örneğin, hava durumu verilerini alacağınız API'nin URL'sini kullanabilirsiniz.
-                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY&units=metric`;
-    
-                // API çağrısı
-                fetch(weatherUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.cod === 200) {
-                            alert(`Hava durumu: ${data.weather[0].description}, Sıcaklık: ${data.main.temp}°C`);
-                        } else {
-                            alert('Şehir bulunamadı veya hava durumu verisi alınamadı.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Hata:', error);
-                        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-                    });
-            } else {
-                alert('Lütfen bir şehir adı girin.');
-            }
-        }
-    </script>
     
     <nav class="navbar">
         <div class="logo">
@@ -42,29 +16,21 @@
             <input type="text" placeholder="Şehir Ara">
             <button class="search-btn">Ara</button>
         </div>
+
         <div class="user-actions">
             <a href="#signup">Kayıt Ol</a>
             <a href="#login">Giriş Yap</a>
 
             <!-- Türk Bayrağı ve dil seçimi -->
-<div class="language-selector">
-    <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
-    <a href="#" class="language-link" onclick="showLanguageOptions()">TR</a>
-</div>
-
-<!-- JavaScript ile dil seçim seçeneklerini gösteren bir fonksiyon -->
-<script>
-    function showLanguageOptions() {
-        // Burada dil seçim seçeneklerini açacak kodu ekleyebilirsiniz.
-        alert('Dil seçenekleri gösterilecek.');
-    }
-</script>
+        <div class="language-selector">
+            <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
+            <a href="#" class="language-link" onclick="showLanguageOptions()">TR</a>
+        </div>
 
             <button class="menu-btn">☰</button>
         </div>
         
     </nav>
-</div>
 
     <!-- Ana İçerik -->
     <main>
@@ -86,7 +52,6 @@
         <img src="" alt="Şehir 3 hava durumu ikonu">
     </div>
 </section>
-</style>
 
 <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
 <section class="current-weather">
@@ -99,7 +64,6 @@
         <p id="description">Hava durumu açıklaması...</p>
     </div>
 </section>
-        </section>
 
         <!-- Günlük Tahmin -->
          
@@ -148,7 +112,6 @@
 
     <script src="script.js"></script>
 
-    </section>
 
     <section id="saatlik">
         <h1>Saatlik Hava Durumu</h1>
@@ -527,7 +490,6 @@
         <div class="chart-container">
             <canvas id="weekly-chart"></canvas>
         </div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
