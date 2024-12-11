@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 updateHourlyChart(data); // saatlik grafiğe bilgileri gönderme
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
+                updateWeeklyForecast(data)
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
@@ -86,6 +87,35 @@ document.addEventListener('DOMContentLoaded', () => {
         weeklyChart.data.labels = labels.slice(0, data.weekly_weather.length); // Veriler kadarını al
         weeklyChart.data.datasets[0].data = temperatures;
         weeklyChart.update();
+    }
+
+    function updateWeeklyForecast(data) {
+        const forecastContainer = document.querySelector('.weekly-forecast');
+        forecastContainer.innerHTML = ''; // Eski içerikleri temizle
+
+        const todayIndex = new Date().getDay(); // Bugün hangi gün
+        const orderedDays = getOrderedWeekDays(todayIndex === 0 ? 6 : todayIndex - 1); // Gün sıralaması al
+
+        data.weekly_weather.forEach((day, index) => {
+            const dayElement = `
+            <div class="day">
+                <p class="day-name">${orderedDays[index]}</p>
+                <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
+                <div class="temp-icon">
+                    <img src="${day.hava_durumu_ikonu}" alt="Hava Durumu İkonu">
+                    <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
+                </div>
+                <p class="weather-condition">Hava Durumu</p>
+            </div>
+        `;
+            forecastContainer.innerHTML += dayElement;
+        });
+    }
+
+
+    function getOrderedWeekDays(startDayIndex) {
+        const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+        return [...days.slice(startDayIndex), ...days.slice(0, startDayIndex)];
     }
 
 
