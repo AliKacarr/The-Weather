@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-button');
     const cityInput = document.getElementById('city-input'); // Kullanıcıdan şehir adı alır
+    const toggleButton = document.querySelector('.toggle-button');
+    const weatherTbody = document.getElementById('weather-tbody');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
     // Varsayılan olarak İstanbul verisini yükle
-    fetchWeatherData('İstanbul');
+    fetchWeatherData('Istanbul');
 
     // Şehir arama butonuna tıklanınca veri güncelle
     searchButton.addEventListener('click', () => {
@@ -58,7 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 updateHourlyChart(data); // saatlik grafiğe bilgileri gönderme
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
-                updateWeeklyForecast(data)
+                updateWeeklyForecast(data) //Haftalık tabloyu doldur
+                populateTable(data); // Saatlik tabloyu doldur
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
@@ -122,5 +125,56 @@ document.addEventListener('DOMContentLoaded', () => {
         return [...days.slice(startDayIndex), ...days.slice(0, startDayIndex)];
     }
 
+
+    /* saatlik tablo*/
+    function populateTable(data) {
+        // Saatlik tablodaki satırları oluştur
+        weatherTbody.innerHTML = generateTableRows(data.hourly_weather);
+
+        // İlk 8 satırı hariç diğer satırları gizle
+        const rows = weatherTbody.querySelectorAll('tr');
+        rows.forEach((row, index) => {
+            if (index >= 9) row.classList.add('hidden-row'); // 9. satırdan sonrasını gizle
+        });
+
+        // Buton metnini başlangıç durumu olarak ayarla
+        toggleButton.textContent = "Gizli Verileri Göster";
+        toggleButton.dataset.expanded = "false"; // Gizli satırların gösterilmediğini belirt
+    }
+
+    function generateTableRows(hours) {
+        return hours.map(hour => `
+            <tr>
+                <td>${hour.saat}</td>
+                <td>${hour.sıcaklık}°C</td>
+                <td>${hour.yağış_ihtimali}%</td>
+                <td>${hour.yağış} mm</td>
+                <td>${hour.basınç} hPa</td>
+                <td>${hour.nem}%</td>
+                <td>${hour.rüzgar} m/s</td>
+            </tr>
+        `).join('');
+    }
+
+    // "Gizli Verileri Göster/Gizle" butonunu işlevsel hale getirme
+    toggleButton.addEventListener('click', toggleMoreData);
+
+    function toggleMoreData() {
+        const rows = weatherTbody.querySelectorAll('tr');
+
+        if (toggleButton.dataset.expanded === "false") {
+            // Gizli satırları göster
+            rows.forEach(row => row.classList.remove('hidden-row'));
+            toggleButton.textContent = "Gizli Verileri Gizle"; // Buton metnini değiştir
+            toggleButton.dataset.expanded = "true"; // Durumu güncelle
+        } else {
+            // Gizli satırları tekrar gizle
+            rows.forEach((row, index) => {
+                if (index >= 8) row.classList.add('hidden-row');
+            });
+            toggleButton.textContent = "Gizli Verileri Göster"; // Buton metnini değiştir
+            toggleButton.dataset.expanded = "false"; // Durumu güncelle
+        }
+    }
 
 });

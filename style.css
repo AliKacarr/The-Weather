@@ -296,6 +296,11 @@ section {
     background-color: #CBE4FF; 
 }
 
+/* Saatlik tablosu için satırları gizleme */
+.hidden-row {
+    display: none;
+}
+
 /* Tablonun genel kenarlığını düzelt */
 .hourly-forecast table,
 .hourly-forecast th,
@@ -401,7 +406,6 @@ section {
     height: 500px; 
     margin: auto; 
 }
-
 
 
 
