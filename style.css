@@ -174,7 +174,7 @@ main {
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: -5px;
 }
 
 .info-box {
