@@ -52,12 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
-                updateHourlyChart(data); // grafiğe bilgileri gönderme
+                updateHourlyChart(data); // saatlik grafiğe bilgileri gönderme
+                updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
 
-    // grafik güncelleme fonksiyonu
+    //Saatlik grafik güncelleme fonksiyonu
     function updateHourlyChart(data) {
         const labels = data.hourly_weather.map(hour => hour.saat);
         const temperatures = data.hourly_weather.map(hour => hour.sıcaklık);
@@ -66,5 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
         hourlyChart.data.datasets[0].data = temperatures;
         hourlyChart.update();
     }
+
+    //Haftalık grafik güncelleme fonksiyonu
+    function updateWeeklyChart(data) {
+        const labels = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+        const temperatures = data.weekly_weather.map(day => (day.sabah_sıcaklık + day.gece_sıcaklık) / 2);
+
+        weeklyChart.data.labels = labels.slice(0, data.weekly_weather.length); // Veriler kadarını al
+        weeklyChart.data.datasets[0].data = temperatures;
+        weeklyChart.update();
+    }
+
 
 });
