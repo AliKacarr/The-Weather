@@ -314,37 +314,37 @@ section {
 }
 
 /* Saatlik tablo */
-.weather-table table {
+.hourly-forecast table {
     width: 100%;
     border-collapse: collapse;
     margin: 30px 0;
 }
 
-.weather-table th, .weather-table td {
+.hourly-forecast th, .hourly-forecast td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
 
-.weather-table th {
+.hourly-forecast th {
     background-color: #f4f4f4;
     color: #333;
 }
 
-.weather-table tr:nth-child(even) {
+.hourly-forecast tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-.weather-table tr:hover {
+.hourly-forecast tr:hover {
     background-color: #f1f1f1;
 }
 
-.weather-table th, .weather-table td {
+.hourly-forecast th, .hourly-forecast td {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
 }
 
-.weather-table .toggle-button {
+.hourly-forecast .toggle-button {
     margin: 10px 0;
     padding: 10px;
     background-color: #007BFF;
@@ -354,11 +354,11 @@ section {
     border-radius: 5px;
 }
 
-.weather-table .hidden {
+.hourly-forecast .hidden {
     display: none;
 }
 
-.weather-table .toggle-button:hover {
+.hourly-forecast .toggle-button:hover {
     background-color: #0056b3;
 }
 
@@ -373,7 +373,7 @@ section {
 
 
 /* Tablo başlık hücreleri */
-.weather-table th {
+.hourly-forecast th {
     background-color: #4A90E2; 
     color: white; 
     text-align: center;
@@ -382,7 +382,7 @@ section {
 }
 
 /* Tablo veri hücreleri */
-.weather-table td {
+.hourly-forecast td {
     background-color: #D9ECFF; 
     color: black; /* Veri hücreleri metin rengi */
     text-align: center;
@@ -391,14 +391,14 @@ section {
 }
 
 
-.weather-table tr:nth-child(even) td {
+.hourly-forecast tr:nth-child(even) td {
     background-color: #CBE4FF; 
 }
 
 /* Tablonun genel kenarlığını düzelt */
-.weather-table table,
-.weather-table th,
-.weather-table td {
+.hourly-forecast table,
+.hourly-forecast th,
+.hourly-forecast td {
     border: 1px solid #A7C8E8; 
 }
 
