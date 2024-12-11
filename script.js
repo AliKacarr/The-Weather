@@ -72,9 +72,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Haftalık grafik güncelleme fonksiyonu
     function updateWeeklyChart(data) {
-        const labels = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+        // Bugünden itibaren günlerin sırasını hesaplayan fonksiyon
+        function getWeekDays() {
+            const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+            const today = new Date().getDay(); // 0: Pazar, 1: Pazartesi, ..., 6: Cumartesi
+            const orderedDays = [...days.slice(today === 0 ? 6 : today - 1), ...days.slice(0, today === 0 ? 6 : today - 1)];
+            return orderedDays.slice(0, 5); // Haftalık verilerin uzunluğuna göre ilk 5 gün
+        }
+    
+        const labels = getWeekDays(); // Bugünden itibaren günleri al
         const temperatures = data.weekly_weather.map(day => (day.sabah_sıcaklık + day.gece_sıcaklık) / 2);
-
+    
         weeklyChart.data.labels = labels.slice(0, data.weekly_weather.length); // Veriler kadarını al
         weeklyChart.data.datasets[0].data = temperatures;
         weeklyChart.update();
