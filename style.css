@@ -85,7 +85,7 @@ main {
     padding: 20px;
 }
 
-/* Üst Şerit */
+/* Üst Şerit Geçmiş Aramalar */
 .city-weather-strip {
     display: none; 
     justify-content: space-around;
@@ -146,14 +146,6 @@ main {
     gap: 10px;
 }
 
-/* Duyarlı */
-@media (max-width: 768px) {
-    .daily-forecast {
-        flex-direction: column;
-    }
-}
-
-
 .forecast-box {
     text-align: center;
     flex: 1;
@@ -176,6 +168,15 @@ main {
     font-size: 1.5em;
     font-weight: bold;
 }
+
+
+/* Duyarlı */
+@media (max-width: 768px) {
+    .daily-forecast {
+        flex-direction: column;
+    }
+}
+
 
 /* Ekstra Bilgiler */
 .extra-info {
@@ -202,7 +203,7 @@ main {
 }
 
 
-footer {
+#last_update_footer {
     padding: 8px 0;
     color: white;
     font-size: 0.8em;
