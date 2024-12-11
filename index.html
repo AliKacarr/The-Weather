@@ -438,26 +438,10 @@
                 </div>
                 <p class="weather-condition">Bulutlu</p>
             </div>
-            <div class="day">
-                <p class="day-name">Cumartesi</p>
-                <p class="date">07 Aralık</p>
-                <div class="temp-icon">
-                    <img src="sun-icon.png" alt="Güneşli">
-                    <p class="temp">23°C / 16°C</p>
-                </div>
-                <p class="weather-condition">Güneşli</p>
-            </div>
-            <div class="day">
-                <p class="day-name">Pazar</p>
-                <p class="date">08 Aralık</p>
-                <div class="temp-icon">
-                    <img src="rain-icon.png" alt="Yağmurlu">
-                    <p class="temp">21°C / 14°C</p>
-                </div>
-                <p class="weather-condition">Yağmurlu</p>
-            </div>
         </div>
     </section>
+
+    
     <section id="weekly-graphic">
         <!-- Haftalık hava durumu grafiği -->
         <h1>Haftalık Grafiği</h1>
@@ -512,10 +496,10 @@ var hourlyChart = new Chart(ctxHourly, {
         var weeklyChart = new Chart(ctxWeekly, {
             type: 'bar',
             data: {
-                labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'],
+                labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'],
                 datasets: [{
                     label: 'Günlük Ortalama Sıcaklık (°C)',
-                    data: [20, 22, 24, 19, 18, 23, 21],
+                    data: [20, 22, 24, 19, 18],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
