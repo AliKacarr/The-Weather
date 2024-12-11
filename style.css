@@ -62,6 +62,13 @@ body {
     width: 150px;
 }
 
+.flag-icon {
+    width: 20px; /* Bayrak boyutunu ayarla */
+    height: auto;
+    margin-right: 5px; 
+    vertical-align: middle; /* Metinle hizalama */
+}
+
 .menu-btn {
     background-color: #c6c9cd;
     color: white;
@@ -72,14 +79,15 @@ body {
     font-size: 18px;
 }
 
+
 /* Ana İçerik */
 main {
     padding: 20px;
 }
 
-/* Üst Şerit */
+/* Üst Şerit Geçmiş Aramalar */
 .city-weather-strip {
-    display: flex; 
+    display: none; 
     justify-content: space-around;
     padding: 10px 0;
     border-radius: 10px;
@@ -130,20 +138,13 @@ main {
     height: 80px;
 }
 
+
 /* Günlük Tahmin */
 .daily-forecast {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
-
-/* Duyarlı */
-@media (max-width: 768px) {
-    .daily-forecast {
-        flex-direction: column;
-    }
-}
-
 
 .forecast-box {
     text-align: center;
@@ -168,13 +169,22 @@ main {
     font-weight: bold;
 }
 
+
+/* Duyarlı */
+@media (max-width: 768px) {
+    .daily-forecast {
+        flex-direction: column;
+    }
+}
+
+
 /* Ekstra Bilgiler */
 .extra-info {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 15px;
-    margin-top: 20px;
+    margin-top: -5px;
 }
 
 .info-box {
@@ -193,7 +203,7 @@ main {
 }
 
 
-footer {
+#last_update_footer {
     padding: 8px 0;
     color: white;
     font-size: 0.8em;
@@ -203,22 +213,123 @@ footer {
 }
 
 
-/* Anasayfa bölümü */
-.weather-summary {
-    background-color: #0d0099ac; /* Kutular için arka plan */
-    border-radius: 10px;
+section {
     padding: 20px;
-    margin: 20px auto;
-    width: 95%;
 }
 
-/* hartalık görünüm */
+/* Saatlik tablo */
+.hourly-forecast{
+    background-color: #051894e3; /* Kutular için arka plan */
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.hourly-forecast table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+}
+
+.hourly-forecast th, .hourly-forecast td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.hourly-forecast th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.hourly-forecast tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.hourly-forecast tr:hover {
+    background-color: #f1f1f1;
+}
+
+.hourly-forecast th, .hourly-forecast td {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+.hourly-forecast .toggle-button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.hourly-forecast .hidden {
+    display: none;
+}
+
+.hourly-forecast .toggle-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Tablo başlık hücreleri */
+.hourly-forecast th {
+    background-color: #4A90E2; 
+    color: white; 
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #3B7ABD;
+}
+
+/* Tablo veri hücreleri */
+.hourly-forecast td {
+    background-color: #D9ECFF; 
+    color: black; /* Veri hücreleri metin rengi */
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #A7C8E8; 
+}
+
+
+.hourly-forecast tr:nth-child(even) td {
+    background-color: #CBE4FF; 
+}
+
+/* Tablonun genel kenarlığını düzelt */
+.hourly-forecast table,
+.hourly-forecast th,
+.hourly-forecast td {
+    border: 1px solid #A7C8E8; 
+}
+
+/*Saatlik grafiği */
+.hourly-forecast-graphic {
+    align-items: center;
+    position: relative;
+    margin: auto;
+    width: 70%;
+    background-color: #051894e3; /* Kutular için arka plan */
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+/* Haftalık tablo*/
 .weekly-forecast {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); 
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
+    margin:auto;
+    width: 80%;
     position: relative;
-    margin-top: 40px; 
+    background-color: #051894e3; /* Kutular için arka plan */
+    border-radius: 10px;
+    padding: 15px;
+}
+
+#haftalik h1 {
+    margin-left: 135px;
 }
 
 .day {
@@ -245,10 +356,16 @@ footer {
     box-shadow: 0 3px 5px rgba(54, 56, 171, 0.911); 
 }
 
+.temp-icon img {
+    max-width: 50px;
+    display: block;
+    margin: auto;
+}
+
 /* Ekran küçüldüğünde Cumartesi ve Pazar'ı yan yana göstermek için */
 @media (max-width: 768px) {
     .weekly-forecast {
-        grid-template-columns: repeat(6, 1fr); 
+        grid-template-columns: repeat(3, 1fr); 
     }
 
     .day:nth-child(6), .day:nth-child(7) {
@@ -257,32 +374,24 @@ footer {
 }
 
 
-/* Diğer bölümler */
-.header-bar {
-    height: 5px;
-    background-color: #ffffff; /* Beyaz bir bar */
-}
-
-section {
-    padding: 20px;
-}
-
-.hourly-forecast, .weekly-forecast, .weekly-forecast-graphic {
+/* Haftalık Grafiği */
+.weekly-forecast-graphic{
+    margin: auto;
+    width: 70%;
     background-color: #051894e3; /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
-    margin: 20px 0;
-    width: 98%;
 }
 
-.temp-icon img {
-    max-width: 50px;
-    display: block;
-    margin: auto;
+#hourly-graphic h1{
+    margin-left: 220px;
 }
+#weekly-graphic h1{
+    margin-left: 210px;
+}
+
 
 /* Grafiklerin görünümü */
-
 .chart-container {
     background-color: #022571e9;
     border-radius: 10px;
@@ -291,95 +400,6 @@ section {
     max-width: 100%; 
     height: 500px; 
     margin: auto; 
-}
-
-/* Saatlik tablo */
-.weather-table table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 30px 0;
-}
-
-.weather-table th, .weather-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-.weather-table th {
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-.weather-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.weather-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.weather-table th, .weather-table td {
-    font-family: 'Arial', sans-serif;
-    font-size: 14px;
-}
-
-.weather-table .toggle-button {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.weather-table .hidden {
-    display: none;
-}
-
-.weather-table .toggle-button:hover {
-    background-color: #0056b3;
-}
-
-.flag-icon {
-    width: 20px; /* Bayrak boyutunu ayarla */
-    height: auto;
-    margin-right: 5px; 
-    vertical-align: middle; /* Metinle hizalama */
-}
-
-
-
-
-/* Tablo başlık hücreleri */
-.weather-table th {
-    background-color: #4A90E2; 
-    color: white; 
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #3B7ABD;
-}
-
-/* Tablo veri hücreleri */
-.weather-table td {
-    background-color: #D9ECFF; 
-    color: black; /* Veri hücreleri metin rengi */
-    text-align: center;
-    padding: 8px;
-    border: 1px solid #A7C8E8; 
-}
-
-
-.weather-table tr:nth-child(even) td {
-    background-color: #CBE4FF; 
-}
-
-/* Tablonun genel kenarlığını düzelt */
-.weather-table table,
-.weather-table th,
-.weather-table td {
-    border: 1px solid #A7C8E8; 
 }
 
 
