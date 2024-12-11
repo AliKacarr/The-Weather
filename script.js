@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (cityName) {
             fetchWeatherData(cityName);
         }
+        cityInput.value = '';  
+        cityInput.blur();      
     });
     // Kullanıcı Enter tuşuna bastığında da arama yapılacak
     cityInput.addEventListener('keypress', (event) => {
