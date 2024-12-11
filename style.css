@@ -79,7 +79,7 @@ main {
 
 /* Üst Şerit */
 .city-weather-strip {
-    display: flex; 
+    display: none; 
     justify-content: space-around;
     padding: 10px 0;
     border-radius: 10px;
@@ -267,7 +267,7 @@ section {
     padding: 20px;
 }
 
-.hourly-forecast, .weekly-forecast, .weekly-forecast-graphic {
+.hourly-forecast, .hourly-forecast-graphics, .weekly-forecast, .weekly-forecast-graphic {
     background-color: #051894e3; /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
