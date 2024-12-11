@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hava Durumu - Giriş ve Kayıt</title>
+  <link rel="stylesheet" href="style2.css">
+  <script src="script2.js"></script>
+</head>
+<body>
+  <!-- Üst Kısım (Header) -->
+  <header>
+    <!-- Giriş Yap Popup -->
+<div id="girisPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('girisPopup')">&times;</span>
+        <h2>Giriş Yap</h2>
+        <form>
+            <label for="email">E-posta:</label>
+            <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin">
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" name="password" placeholder="Şifrenizi girin">
+            <button type="button" onclick="submitLogin()">Giriş Yap</button>
+        </form>
+        <p>Hesabınız yok mu? <a href="#" id="signupFromLogin">Kayıt Ol</a></p>
+    </div>
+</div>
+
+<!-- Kayıt Ol Popup -->
+<div id="kayitPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup('kayitPopup')">&times;</span>
+        <h2>Kayıt Ol</h2>
+        <form>
+            <label for="newUsername">Kullanıcı Adı:</label>
+            <input type="text" id="newUsername" name="newUsername" placeholder="Kullanıcı adınızı girin">
+            <label for="newPassword">Şifre:</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Şifrenizi girin">
+            <label for="newEmail">E-posta:</label>
+            <input type="email" id="newEmail" name="newEmail" placeholder="E-posta adresinizi girin">
+            <button type="button" onclick="submitRegistration()">Kayıt Ol</button>
+        </form>
+    </div>
+</div>
+    <div class="header-container">
+        <button onclick="openPopup('girisPopup')">Giriş Yap</button>
+    <button onclick="openPopup('kayitPopup')">Kayıt Ol</button>
+    </div>
+
+     <!-- Yan Menü -->
+<aside id="sideMenu" class="side-menu">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+
+    <H2 id="menu_id"> MENÜ</H2>
+    <div class="city-data">
+      <a href="#">BUGÜN</a>
+      <a href="#">7 GÜNLÜK</a>
+      <a href="#">SAATLİK</a>
+      <a href="#">TÜRKİYE GENELİ</a>
+      <a href="#">İLLER TABLOSU</a>
+      
+  </div>
+   
+</aside>
+</header>
+<div class="menu-toggle" onclick="openMenu()">☰</div>
+
+  
+
+  <h2>Türkiye Çevresinde Hava Durumu</h2>
+  <div class="weather-container">
+      <a href="https://www.google.com" class="city"><div>İstanbul<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>İzmir<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Ankara<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Bursa<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Elazığ<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Malatya<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Diyarbakır<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Erzincan<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Rize<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Mardin<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Sivas<br>☀️ +5°</div></a>   
+      <a href="https://www.google.com" class="city"><div>Antalya<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Tokat<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Van<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Konya<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Sinop<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Ordu<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Muş<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Hatay<br>☀️ +5°</div></a>
+      <a href="https://www.google.com" class="city"><div>Aksaray<br>☀️ +5°</div></a>
+  </div>
+
+
+
+
+
+<div class="footer">
+    <div class="section">
+        <h3>KURUMSAL</h3>
+        <ul>
+            <li><a href="#">Bize Ulaşın</a></li>
+            <li><a href="#">Hakkımızda</a></li>
+            <li><a href="#">Gizlilik Politikası</a></li>
+            <li><a href="#">Çerez Politikası</a></li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>SOSYAL MEDYA</h3>
+        <div class="social-media">
+            <div class="social-item">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="images/facebook_icon.jpg" alt="Facebook">
+                    
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="images/instagram_icon.jpg" alt="Instagram">
+                   
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.github.com" target="_blank">
+                    <img src="images/github_icon.jpg" alt="GitHub">
+                    
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.linkedin.com" target="_blank">
+                    <img src="images/linkedln_icon.jpg" alt="LinkedIn">
+                   
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://www.twitter.com" target="_blank">
+                    <img src="images/X.png" alt="Twitter">
+                   
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
