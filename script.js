@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-button');
     const cityInput = document.getElementById('city-input'); // Kullanıcıdan şehir adı alır
+    const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
+
 
     // Varsayılan olarak İstanbul verisini yükle
     fetchWeatherData('İstanbul');
@@ -94,15 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
         forecastContainer.innerHTML = ''; // Eski içerikleri temizle
 
         const todayIndex = new Date().getDay(); // Bugün hangi gün
-        const orderedDays = getOrderedWeekDays(todayIndex === 0 ? 6 : todayIndex - 1); // Gün sıralaması al
+        const orderedDays = getOrderedWeekDays(todayIndex === 0 ? 6 : todayIndex - 1); // Dinamik gün sıralaması
 
         data.weekly_weather.forEach((day, index) => {
+            const iconPath = `${iconsBasePath}${day.hava_durumu_ikonu}.png`; // İkon yolunu oluştur
+
             const dayElement = `
             <div class="day">
                 <p class="day-name">${orderedDays[index]}</p>
                 <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
                 <div class="temp-icon">
-                    <img src="${day.hava_durumu_ikonu}" alt="Hava Durumu İkonu">
+                    <img src="${iconPath}" alt="Hava Durumu İkonu">
                     <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
                 </div>
                 <p class="weather-condition">Hava Durumu</p>
