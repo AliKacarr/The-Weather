@@ -203,15 +203,6 @@ footer {
 }
 
 
-/* Anasayfa bölümü */
-.weather-summary {
-    background-color: #0d0099ac; /* Kutular için arka plan */
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    width: 95%;
-}
-
 
 .weekly-forecast {
     display: grid;
