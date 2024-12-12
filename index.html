@@ -11,6 +11,17 @@
 <body>
     
     <!-- Giriş Yap Popup -->
+    <div id="profilPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('profilPopup')">&times;</span>
+            <h2>Profil Ekranı</h2>
+            <form>
+                <p> ⮪ Çıkış Yap </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Giriş Yap Popup -->
     <div id="girisPopup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closePopup('girisPopup')">&times;</span>
@@ -22,7 +33,7 @@
                 <input type="password" id="password" name="password" placeholder="Şifrenizi girin">
                 <button type="button" onclick="submitLogin()">Giriş Yap</button>
             </form>
-            <p>Hesabınız yok mu? <a href="#" id="signupFromLogin" onclick="closePopup('girisPopup'); openPopup('kayitPopup');">Kayıt Ol</a>
+            <p>Hesabınız yok mu? <a href="#" id="signupFromLogin" onclick="closePopup('girisPopup'); openPopup('kayitPopup');">Kayıt Ol</a></p>
         </div>
     </div>
     
@@ -53,6 +64,7 @@
         </div>
 
         <div class="user-actions">
+            <button type="button" id="profilbutton"  onclick="openPopup('profilPopup')" >Profil</button>
             <button type="button" id="submitbutton"  onclick="openPopup('kayitPopup')" >Kayıt Ol</button>
             <button type="button" id="loginbutton" onclick="openPopup('girisPopup')" >Giriş Yap</button>
 
