@@ -186,7 +186,7 @@ main {
 .city-weather-strip {
     display: none; 
     justify-content: space-around;
-    padding: 15px 10px; /* Daha fazla padding ekleyerek içerik aralığını genişlet */
+    padding: 15px 10px; 
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;

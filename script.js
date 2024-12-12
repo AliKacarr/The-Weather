@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchButton.click(); // Butona tıklanmış gibi işlem yap
         }
     });
+
     function fetchWeatherData(city) {
         fetch(`/update-weather?city=${city}`)
             .then(response => response.json())
@@ -179,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
 
-/* Kullanıcı çıkışı */
+/* Kullanıcı hesaptan çıkışı */
 document.getElementById('exitProfil').addEventListener('click', (event) => {
     console.log('aaa');
     event.preventDefault(); // Link varsayılan davranışını engelle
@@ -189,7 +190,7 @@ document.getElementById('exitProfil').addEventListener('click', (event) => {
 
 });
 
-/* Giriş ve Kayıt butonlarını açma*/
+/* Popup görünürlüğünü açma*/
 function openPopup(id) {
     document.getElementById(id).style.display = 'flex';
   
@@ -204,11 +205,13 @@ function openPopup(id) {
     }
   }
   
-  /* Giriş ve Kayıt butonlarını kapatma*/
+  /* Popup görünürlüğünü kapatma*/
   function closePopup(id) {
     document.getElementById(id).style.display = 'none';
   }
 
+
+  /* Kayıt fonksiyonu */
   async function submitRegistration() {
     const user_name = document.getElementById('newUsername').value.trim();
     const password = document.getElementById('newPassword').value.trim();
@@ -240,6 +243,7 @@ function openPopup(id) {
     }
 }
 
+/* Giriş fonksiyonu */
 async function submitLogin() {
     const e_mail = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
@@ -272,7 +276,7 @@ async function submitLogin() {
     }
 }
 
-/* Sayfa yüklenirken butonları ayarlama */
+/* Giriş yapılınca butonları ayarlama */
 function setVisibility(isLoggedIn) {
     const profilButton = document.getElementById('profilbutton');
     const loginButton = document.getElementById('loginbutton');
@@ -306,6 +310,7 @@ async function fetchVisitedCityData(email) {
     }
 }
 
+// Kullanıcının visited_city bilgilerini al ve HTML'e yerleştir devamı
 function updateCityWeather(visitedCitiesData) {
     const cityElements = Array.from(document.querySelectorAll('.city-weather'));
 
