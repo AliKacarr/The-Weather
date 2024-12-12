@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const bcrypt = require('bcrypt');
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
 const path = require('path');
@@ -228,6 +229,69 @@ app.post('/update-weather', async (req, res) => {
         res.render('index', { weatherData: weatherData, error: null });
     } else {
         res.render('index', { weatherData: null, error: 'Veri alınamadı veya güncellenemedi.' });
+    }
+});
+
+// Kullanıcı koleksiyonuna bağlanma
+async function connectUserCollection() {
+    const client = new MongoClient(process.env.MONGO_URI);
+    await client.connect();
+    return client.db('weatherDB').collection('user');
+}
+
+// Kullanıcı kaydı
+app.post('/register', async (req, res) => {
+    const { user_name, password, e_mail } = req.body;
+    try {
+        const collection = await connectUserCollection();
+        const existingUser = await collection.findOne({ e_mail });
+
+        if (existingUser) {
+            return res.status(400).json({ error: 'Bu e-posta zaten kayıtlı.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = {
+            user_name,
+            password: hashedPassword,
+            e_mail,
+            location: "İstanbul",
+            visited_city_1: null,
+            visited_city_2: null,
+            visited_city_3: null,
+            visited_city_4: null,
+            visited_city_5: null
+        };
+
+        await collection.insertOne(newUser);
+        res.status(201).json({ message: 'Kullanıcı başarıyla kaydedildi.' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Bir hata oluştu.' });
+    }
+});
+
+// Kullanıcı girişi
+app.post('/login', async (req, res) => {
+    const { e_mail, password } = req.body;
+    try {
+        const collection = await connectUserCollection();
+        const user = await collection.findOne({ e_mail });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+console.log('aaa');
+        if (!passwordMatch) {
+            return res.status(400).json({ error: 'Hatalı şifre.' });
+        }
+
+        res.status(200).json({ message: 'Giriş başarılı.', user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Bir hata oluştu.' });
     }
 });
 

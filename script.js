@@ -219,3 +219,64 @@ function openPopup(id) {
   function closePopup(id) {
     document.getElementById(id).style.display = 'none';
   }
+
+  async function submitRegistration() {
+    const user_name = document.getElementById('newUsername').value.trim();
+    const password = document.getElementById('newPassword').value.trim();
+    const e_mail = document.getElementById('newEmail').value.trim();
+
+    if (!user_name || !password || !e_mail) {
+        alert('Lütfen tüm alanları doldurun.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ user_name, password, e_mail })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message);
+            closePopup('kayitPopup');
+        } else {
+            alert(data.error || 'Bir hata oluştu.');
+        }
+    } catch (error) {
+        console.error('Kayıt hatası:', error);
+        alert('Bir hata oluştu.');
+    }
+}
+
+async function submitLogin() {
+    const e_mail = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!e_mail || !password) {
+        alert('Lütfen tüm alanları doldurun.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ e_mail, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.message);
+            closePopup('girisPopup');
+        } else {
+            alert(data.error || 'Bir hata oluştu.');
+        }
+    } catch (error) {
+        console.error('Giriş hatası:', error);
+        alert('Bir hata oluştu.');
+    }
+}
