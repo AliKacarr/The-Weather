@@ -256,11 +256,11 @@ app.post('/register', async (req, res) => {
             password: hashedPassword,
             e_mail,
             location: "İstanbul",
-            visited_city_1: null,
-            visited_city_2: null,
-            visited_city_3: null,
-            visited_city_4: null,
-            visited_city_5: null
+            visited_city_1: "Istanul",
+            visited_city_2: "Istanbul",
+            visited_city_3: "Istanbul",
+            visited_city_4: "Istanbul",
+            visited_city_5: "Istanbul"
         };
 
         await collection.insertOne(newUser);
@@ -293,6 +293,54 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Bir hata oluştu.' });
     }
 });
+
+app.get('/get-user-weather', async (req, res) => {
+    const { email } = req.query;
+    if (!email) {
+        return res.status(400).json({ error: 'E-posta gerekli.' });
+    }
+
+    try {
+        const userCollection = await connectUserCollection();
+        const weatherCollection = await connectMongo();
+
+        const user = await userCollection.findOne({ e_mail: email });
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        // Şehir isimlerini normalize et
+        const visitedCities = [
+            user.visited_city_1,
+            user.visited_city_2,
+            user.visited_city_3,
+            user.visited_city_4,
+            user.visited_city_5
+        ]
+            .filter(Boolean) // Null veya undefined değerleri filtrele
+            .map(city => city.trim().toLowerCase()); // Şehir isimlerini normalize et
+
+        const cityWeatherData = [];
+        for (const city of visitedCities) {
+            const weatherData = await weatherCollection.findOne({
+                city_name: { $regex: `^${city}$`, $options: 'i' } // Case insensitive eşleştirme
+            });
+
+            if (weatherData) {
+                cityWeatherData.push({
+                    city_name: weatherData.city_name,
+                    current_weather: weatherData.current_weather
+                });
+            }
+        }
+console.log(user.visited_city_1);
+        res.status(200).json(cityWeatherData);
+    } catch (error) {
+        console.error('Hata oluştu:', error);
+        res.status(500).json({ error: 'Sunucu hatası.' });
+    }
+});
+
 
 app.listen(3000, () => {
     console.log('Sunucu localhost:3000 üzerinde çalışıyor.');

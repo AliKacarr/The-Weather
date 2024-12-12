@@ -5,27 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const weatherTbody = document.getElementById('weather-tbody');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
-     function openPopup(id) {
-    document.getElementById(id).style.display = 'flex';
-  
-    // Metin kutularını temizle
-    if (id === 'girisPopup') {
-        document.getElementById("email").value = ""; // Giriş için eposta
-        document.getElementById("password").value = ""; // Giriş için şifre
-    } else if (id === 'kayitPopup') {
-        document.getElementById("newUsername").value = ""; // Kayıt için kullanıcı adı
-        document.getElementById("newEmail").value = ""; // Kayıt için eposta
-        document.getElementById("newPassword").value = ""; // Kayıt için şifre
-    }
-  }
-  
-  function closePopup(id) {
-    document.getElementById(id).style.display = 'none';
-  }
 
     // Varsayılan olarak İstanbul verisini yükle
     fetchWeatherData('Istanbul');
-
     // Şehir arama butonuna tıklanınca veri güncelle
     searchButton.addEventListener('click', () => {
         const cityName = cityInput.value.trim();
@@ -282,6 +264,7 @@ async function submitLogin() {
             alert(data.message);
             setVisibility(true);
             closePopup('girisPopup');
+            fetchVisitedCityData(e_mail);
         } else {
             alert(data.error || 'Bir hata oluştu.');
         }
@@ -311,3 +294,37 @@ function setVisibility(isLoggedIn) {
     }
 }
 
+// Kullanıcının visited_city bilgilerini al ve HTML'e yerleştir
+async function fetchVisitedCityData(email) {
+    try {
+        const response = await fetch(`/get-user-weather?email=${encodeURIComponent(email)}`);
+        if (!response.ok) {
+            throw new Error('Sunucu hatası veya yanlış yanıt alındı.');
+        }
+
+        const visitedCitiesData = await response.json();
+        updateCityWeather(visitedCitiesData); // Verileri HTML'e yerleştir
+    } catch (error) {
+        console.error('Hata oluştu:', error);
+    }
+}
+
+function updateCityWeather(visitedCitiesData) {
+    const cityElements = Array.from(document.querySelectorAll('.city-weather'));
+
+    cityElements.forEach((cityElement, index) => {
+        const cityData = visitedCitiesData[index];
+
+        if (cityData) {
+            // Şehir verileri mevcutsa bilgileri yerleştir
+            cityElement.querySelector('p').textContent = cityData.city_name; // Şehir adı
+            cityElement.querySelector('p + p').textContent = `${cityData.current_weather.sıcaklık}°C`; // Sıcaklık
+            cityElement.querySelector('img').src = cityData.current_weather.hava_durumu_ikonu; // Hava durumu ikonu
+            cityElement.querySelector('img').alt = cityData.current_weather.hava_durumu_bilgisi; // Alt metin
+            cityElement.style.display = 'block'; // Şehri görünür yap
+        } else {
+            // Veri eksikse city divini gizle
+            cityElement.style.display = 'none';
+        }
+    });
+}
