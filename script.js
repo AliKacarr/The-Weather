@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
-    // Varsayılan olarak İstanbul verisini yükle
-    fetchWeatherData('Istanbul');
+    // Varsayılan olarak Sivas verisini yükle
+    fetchWeatherData('Sivas');
 
     // Giriş ekranındaki Enter tuşu davranışı
     emailInput.addEventListener('keypress', (event) => {
@@ -230,6 +230,19 @@ document.getElementById('exitProfil').addEventListener('click', (event) => {
     closePopup('profilPopup'); // Popup'ı kapat
     setVisibility(false); // Kullanıcı çıkış yaptı, görünürlük ayarla
 });
+
+const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm city-weather divlerini al
+
+    // Tüm divlere tıklama olayı ekle
+    cityWeatherElements.forEach(cityElement => {
+        cityElement.addEventListener('click', () => {
+            const cityName = cityElement.querySelector('p').textContent.trim(); // Şehir adını al
+            if (cityName) {
+                console.log(`Tıklanan şehir: ${cityName}`);
+                fetchWeatherData(cityName); // Şehir adına göre veri al
+            }
+        });
+    });
 
 });
 

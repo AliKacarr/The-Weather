@@ -28,11 +28,11 @@ const weatherApiKey = process.env.WEATHERAPI_API_KEY;
 const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
 
 app.get('/', (req, res) => {
-    res.redirect('/update-weather?city=İstanbul');
+    res.redirect('/update-weather?city=Sivas');
 });
 
 app.get('/update-weather', async (req, res) => {
-    const city = req.query.city || 'İstanbul'; // Varsayılan şehir
+    const city = req.query.city || 'Sivas'; // Varsayılan şehir
     try {console.log("Fetching data for:", city);
         const collection = await connectMongo();
         let weatherData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });

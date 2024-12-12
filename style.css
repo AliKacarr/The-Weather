@@ -184,7 +184,7 @@ main {
 
 /* Üst Şerit Geçmiş Aramalar */
 .city-weather-strip {
-    display: flex; 
+    display: none; 
     justify-content: space-around;
     padding: 10px 8px; 
     border-radius: 10px;
@@ -204,7 +204,14 @@ main {
     border-radius: 10px; /* Yuvarlatılmış köşeler */
     text-align: center; /* Yazıları ortala */
     width: 100px; /* Kutu genişliği */
+    cursor: pointer; /* Tıklanabilir göstermek için */
+    transition: transform 0.3s ease; /* Hover efekti */
 }
+
+.city-weather:hover {
+    transform: scale(1.05); /* Hover durumunda büyüme efekti */
+}
+
 .city-weather p{
     font-size: 15px;
 }
