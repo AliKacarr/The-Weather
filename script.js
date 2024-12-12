@@ -1,3 +1,4 @@
+let islogin = "";
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('search-button');
     const cityInput = document.getElementById('city-input'); // Kullanıcıdan şehir adı alır
@@ -76,6 +77,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.error) {
                     alert('Veri alınamadı: ' + data.error);
                     return;
+                }
+                if (islogin) {
+                    fetchVisitedCityData(islogin); // Geçmiş aramaları göstert
+                    updateVisitedCities(city); //Geçmiş aramaları güncelle
                 }
                 // HTML öğelerini güncelle
                 document.getElementById('city-name').textContent = data.city_name;
@@ -225,11 +230,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* Kullanıcı hesaptan çıkışı */
 document.getElementById('exitProfil').addEventListener('click', (event) => {
-    console.log('aaa');
     event.preventDefault(); // Link varsayılan davranışını engelle
     closePopup('profilPopup'); // Popup'ı kapat
     setVisibility(false); // Kullanıcı çıkış yaptı, görünürlük ayarla
+    islogin=""; //Kullanıcı çıkış yaptı
 });
+
+
 
 const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm city-weather divlerini al
 
@@ -238,7 +245,6 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         cityElement.addEventListener('click', () => {
             const cityName = cityElement.querySelector('p').textContent.trim(); // Şehir adını al
             if (cityName) {
-                console.log(`Tıklanan şehir: ${cityName}`);
                 fetchWeatherData(cityName); // Şehir adına göre veri al
             }
         });
@@ -314,6 +320,7 @@ function openPopup(id) {
 
         if (response.ok) {
             alert(data.message);
+            islogin = e_mail; // Kullanıcının giriş durumu güncelleniyor
             closePopup('kayitPopup');
             setVisibility(true);
             fetchVisitedCityData(e_mail);
@@ -347,6 +354,7 @@ async function submitLogin() {
 
         if (response.ok) {
             alert(data.message);
+            islogin = e_mail; // Kullanıcının giriş durumu güncelleniyor
             setVisibility(true);
             closePopup('girisPopup');
             fetchVisitedCityData(e_mail);
@@ -416,3 +424,21 @@ function updateCityWeather(visitedCitiesData) {
         }
     });
 }
+
+async function updateVisitedCities(city) {
+    try {
+        const response = await fetch('/update-visited-cities', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: islogin, newCity: city })
+        });
+
+        if (!response.ok) {
+            throw new Error('Visited cities güncellenemedi.');
+        }
+
+    } catch (error) {
+        console.error('Hata oluştu:', error);
+    }
+}
+

@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
 
 app.get('/update-weather', async (req, res) => {
     const city = req.query.city || 'Sivas'; // Varsayılan şehir
-    try {console.log("Fetching data for:", city);
+    try {
         const collection = await connectMongo();
         let weatherData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
 
@@ -332,10 +332,46 @@ app.get('/get-user-weather', async (req, res) => {
                 });
             }
         }
-console.log(user.visited_city_1);
         res.status(200).json(cityWeatherData);
     } catch (error) {
         console.error('Hata oluştu:', error);
+        res.status(500).json({ error: 'Sunucu hatası.' });
+    }
+});
+
+
+app.post('/update-visited-cities', async (req, res) => {
+    const { email, newCity } = req.body;
+
+    if (!email || !newCity) {
+        return res.status(400).json({ error: 'E-posta ve yeni şehir bilgisi gereklidir.' });
+    }
+    try {
+        const userCollection = await connectUserCollection();
+
+        // Kullanıcının mevcut verilerini alın
+        const user = await userCollection.findOne({ e_mail: email });
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        // visited_city bilgilerini güncelle
+        await userCollection.updateOne(
+            { e_mail: email },
+            {
+                $set: {
+                    visited_city_5: user.visited_city_4,
+                    visited_city_4: user.visited_city_3,
+                    visited_city_3: user.visited_city_2,
+                    visited_city_2: user.visited_city_1,
+                    visited_city_1: newCity
+                }
+            }
+        );
+
+        res.status(200).json({ message: 'Visited cities başarıyla güncellendi.' });
+    } catch (error) {
+        console.error('Hata:', error);
         res.status(500).json({ error: 'Sunucu hatası.' });
     }
 });
