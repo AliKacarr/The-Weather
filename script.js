@@ -5,6 +5,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const weatherTbody = document.getElementById('weather-tbody');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
+     function openPopup(id) {
+    document.getElementById(id).style.display = 'flex';
+  
+    // Metin kutularını temizle
+    if (id === 'girisPopup') {
+        document.getElementById("email").value = ""; // Giriş için eposta
+        document.getElementById("password").value = ""; // Giriş için şifre
+    } else if (id === 'kayitPopup') {
+        document.getElementById("newUsername").value = ""; // Kayıt için kullanıcı adı
+        document.getElementById("newEmail").value = ""; // Kayıt için eposta
+        document.getElementById("newPassword").value = ""; // Kayıt için şifre
+    }
+  }
+  
+  function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+  }
 
     // Varsayılan olarak İstanbul verisini yükle
     fetchWeatherData('Istanbul');
@@ -181,5 +198,24 @@ document.addEventListener('DOMContentLoaded', () => {
         weeklyChart.update();
     }
     
-
 });
+
+/* Giriş ve Kayıt butonlarını açma*/
+function openPopup(id) {
+    document.getElementById(id).style.display = 'flex';
+  
+    // Metin kutularını temizle
+    if (id === 'girisPopup') {
+        document.getElementById("email").value = ""; // Giriş için eposta
+        document.getElementById("password").value = ""; // Giriş için şifre
+    } else if (id === 'kayitPopup') {
+        document.getElementById("newUsername").value = ""; // Kayıt için kullanıcı adı
+        document.getElementById("newEmail").value = ""; // Kayıt için eposta
+        document.getElementById("newPassword").value = ""; // Kayıt için şifre
+    }
+  }
+  
+  /* Giriş ve Kayıt butonlarını kapatma*/
+  function closePopup(id) {
+    document.getElementById(id).style.display = 'none';
+  }
