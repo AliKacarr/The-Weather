@@ -140,8 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (index >= 9) row.classList.add('hidden-row'); // 9. satırdan sonrasını gizle
         });
 
-        // Buton metnini başlangıç durumu olarak ayarla
-        toggleButton.textContent = "Gizli Verileri Göster";
         toggleButton.dataset.expanded = "false"; // Gizli satırların gösterilmediğini belirt
     }
 
