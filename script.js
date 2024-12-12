@@ -198,6 +198,15 @@ document.addEventListener('DOMContentLoaded', () => {
         weeklyChart.update();
     }
     
+
+/* Kullanıcı çıkışı */
+document.getElementById('exitProfil').addEventListener('click', (event) => {
+    console.log('aaa');
+    event.preventDefault(); // Link varsayılan davranışını engelle
+    closePopup('profilPopup'); // Popup'ı kapat
+    setVisibility(false); // Kullanıcı çıkış yaptı, görünürlük ayarla
+});
+
 });
 
 /* Giriş ve Kayıt butonlarını açma*/
@@ -271,6 +280,7 @@ async function submitLogin() {
 
         if (response.ok) {
             alert(data.message);
+            setVisibility(true);
             closePopup('girisPopup');
         } else {
             alert(data.error || 'Bir hata oluştu.');
@@ -280,3 +290,24 @@ async function submitLogin() {
         alert('Bir hata oluştu.');
     }
 }
+
+/* Sayfa yüklenirken butonları ayarlama */
+function setVisibility(isLoggedIn) {
+    const profilButton = document.getElementById('profilbutton');
+    const loginButton = document.getElementById('loginbutton');
+    const submitButton = document.getElementById('submitbutton');
+    const cityWeatherStrip = document.querySelector('.city-weather-strip');
+
+    if (isLoggedIn) {
+        profilButton.style.display = 'inline-block'; // Profil butonu görünür
+        loginButton.style.display = 'none'; // Giriş butonu gizli
+        submitButton.style.display = 'none'; // Kayıt ol butonu gizli
+        cityWeatherStrip.style.display = 'flex'; // Şehir hava durumu görünür
+    } else {
+        profilButton.style.display = 'none'; // Profil butonu gizli
+        loginButton.style.display = 'inline-block'; // Giriş butonu görünür
+        submitButton.style.display = 'inline-block'; // Kayıt ol butonu görünür
+        cityWeatherStrip.style.display = 'none'; // Şehir hava durumu gizli
+    }
+}
+
