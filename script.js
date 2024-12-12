@@ -3,11 +3,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityInput = document.getElementById('city-input'); // Kullanıcıdan şehir adı alır
     const toggleButton = document.querySelector('.toggle-button');
     const weatherTbody = document.getElementById('weather-tbody');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const newUsernameInput = document.getElementById('newUsername');
+    const newPasswordInput = document.getElementById('newPassword');
+    const newEmailInput = document.getElementById('newEmail');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
     // Varsayılan olarak İstanbul verisini yükle
     fetchWeatherData('Istanbul');
+
+    // Giriş ekranındaki Enter tuşu davranışı
+    emailInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Formun submit olmasını engelle
+            passwordInput.focus();   // Şifre alanına geçiş yap
+        }
+    });
+
+    passwordInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Formun submit olmasını engelle
+            submitLogin();           // Giriş fonksiyonu çalıştır
+        }
+    });
+
+    // Kayıt ekranındaki Enter tuşu davranışı
+    newUsernameInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Formun submit olmasını engelle
+            newPasswordInput.focus(); // Şifre alanına geçiş yap
+        }
+    });
+
+    newPasswordInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Formun submit olmasını engelle
+            newEmailInput.focus();   // E-posta alanına geçiş yap
+        }
+    });
+
+    newEmailInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();  // Formun submit olmasını engelle
+            submitRegistration();    // Kayıt fonksiyonu çalıştır
+        }
+    });
+
     // Şehir arama butonuna tıklanınca veri güncelle
     searchButton.addEventListener('click', () => {
         const cityName = cityInput.value.trim();
@@ -222,6 +265,31 @@ function openPopup(id) {
         return;
     }
 
+    // Kullanıcı adı kontrolü (min 5 karakter)
+    if (user_name.length < 5) {
+        alert('Kullanıcı adı en az 5 karakter olmalı.');
+        return;
+    }
+
+    // Şifre kontrolü (min 8 karakter)
+    if (password.length < 8) {
+        alert('Şifre en az 8 karakter olmalı.');
+        return;
+    }
+
+    // Kullanıcı adı ve şifre aynı olmamalı
+    if (user_name === password) {
+        alert('Kullanıcı adı ve şifre aynı olamaz.');
+        return;
+    }
+
+    // E-posta kontrolü
+    const emailRegex = /^(?:[a-zA-Z0-9._%+-]+)@(gmail\.com|hotmail\.com)$/;
+    if (!emailRegex.test(e_mail)) {
+        alert('E-posta sadece @gmail.com veya @hotmail.com ile bitmeli.');
+        return;
+    }
+
     try {
         const response = await fetch('/register', {
             method: 'POST',
@@ -234,6 +302,8 @@ function openPopup(id) {
         if (response.ok) {
             alert(data.message);
             closePopup('kayitPopup');
+            setVisibility(true);
+            fetchVisitedCityData(e_mail);
         } else {
             alert(data.error || 'Bir hata oluştu.');
         }

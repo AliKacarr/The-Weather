@@ -184,9 +184,9 @@ main {
 
 /* Üst Şerit Geçmiş Aramalar */
 .city-weather-strip {
-    display: none; 
+    display: flex; 
     justify-content: space-around;
-    padding: 15px 10px; 
+    padding: 10px 8px; 
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -203,13 +203,15 @@ main {
     background-color: rgba(255, 255, 255, 0.1); /* Hafif şeffaf arka plan */
     border-radius: 10px; /* Yuvarlatılmış köşeler */
     text-align: center; /* Yazıları ortala */
-    width: 120px; /* Kutu genişliği */
+    width: 100px; /* Kutu genişliği */
+}
+.city-weather p{
+    font-size: 15px;
 }
 
-
 .city-weather img {
-    height: 30px;
-    width: 30px; 
+    height: 25px;
+    width: 25px; 
 }
 
 /* Mevcut Hava Durumu */
