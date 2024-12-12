@@ -118,8 +118,8 @@ body {
 }
 
 
-/* Giriş ve kayıt butonları*/
-#submitbutton, #loginbutton{
+/* Giriş profil ve kayıt butonları*/
+#submitbutton, #loginbutton, #profilbutton{
     padding: 10px 20px;
     background-color: #383fa7;
     color: white;
@@ -129,10 +129,13 @@ body {
     transition: background-color 0.1s ease;
 }
 
-#submitbutton:hover, #loginbutton:hover {
+#submitbutton:hover, #loginbutton:hover #profilbutton:hover{
     background-color:#4b51a9;
 }
 
+#profilbutton{
+    display: none;
+}
 
 /* yan menü */
 .menu-btn {
