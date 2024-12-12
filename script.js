@@ -102,8 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleButton.addEventListener('click', toggleMoreData);
 
     function toggleMoreData() {
-        const rows = weatherTbody.querySelectorAll('tr');
-
         if (toggleButton.dataset.expanded === "false") {
             // Gizli satırları göster
             rows.forEach(row => row.classList.remove('hidden-row'));
@@ -285,7 +283,6 @@ function setVisibility(isLoggedIn) {
         profilButton.style.display = 'inline-block'; // Profil butonu görünür
         loginButton.style.display = 'none'; // Giriş butonu gizli
         submitButton.style.display = 'none'; // Kayıt ol butonu gizli
-        cityWeatherStrip.style.display = 'flex'; // Şehir hava durumu görünür
     } else {
         profilButton.style.display = 'none'; // Profil butonu gizli
         loginButton.style.display = 'inline-block'; // Giriş butonu görünür
@@ -321,7 +318,10 @@ function updateCityWeather(visitedCitiesData) {
             cityElement.querySelector('p + p').textContent = `${cityData.current_weather.sıcaklık}°C`; // Sıcaklık
             cityElement.querySelector('img').src = cityData.current_weather.hava_durumu_ikonu; // Hava durumu ikonu
             cityElement.querySelector('img').alt = cityData.current_weather.hava_durumu_bilgisi; // Alt metin
+            const cityWeatherStrip = document.querySelector('.city-weather-strip');
             cityElement.style.display = 'block'; // Şehri görünür yap
+            
+            cityWeatherStrip.style.display = 'flex';
         } else {
             // Veri eksikse city divini gizle
             cityElement.style.display = 'none';

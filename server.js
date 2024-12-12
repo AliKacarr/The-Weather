@@ -255,12 +255,11 @@ app.post('/register', async (req, res) => {
             user_name,
             password: hashedPassword,
             e_mail,
-            location: "İstanbul",
-            visited_city_1: "Istanul",
-            visited_city_2: "Istanbul",
-            visited_city_3: "Istanbul",
-            visited_city_4: "Istanbul",
-            visited_city_5: "Istanbul"
+            visited_city_1: null,
+            visited_city_2: null,
+            visited_city_3: null,
+            visited_city_4: null,
+            visited_city_5: null
         };
 
         await collection.insertOne(newUser);
