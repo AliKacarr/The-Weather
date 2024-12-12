@@ -296,6 +296,11 @@ section {
     background-color: #CBE4FF; 
 }
 
+/* Saatlik tablosu için satırları gizleme */
+.hidden-row {
+    display: none;
+}
+
 /* Tablonun genel kenarlığını düzelt */
 .hourly-forecast table,
 .hourly-forecast th,
@@ -314,6 +319,9 @@ section {
     padding: 15px;
 }
 
+#hourly-graphic h1{
+    margin-left: 220px;
+}
 
 /* Haftalık tablo*/
 .weekly-forecast {
@@ -383,9 +391,6 @@ section {
     padding: 15px;
 }
 
-#hourly-graphic h1{
-    margin-left: 220px;
-}
 #weekly-graphic h1{
     margin-left: 210px;
 }
@@ -401,7 +406,6 @@ section {
     height: 500px; 
     margin: auto; 
 }
-
 
 
 

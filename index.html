@@ -58,7 +58,7 @@
 <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
 <section class="current-weather">
     <h2 id="city-name">Şehir İsmi</h2>
-    <p id="region-info">Bölge Bilgisi...</p>
+    <p id="region-info" style="display: none;">Bölge Bilgisi...</p>
     <p id="date-time">Güncel Tarih ve Saat</p>
     <div class="weather-info">
         <img id="weather-icon" src="" alt="Hava durumu ikonu">
@@ -116,265 +116,28 @@
 
     <section id="saatlik">
         <h1>Saatlik Hava Durumu</h1>
-            <!--  saatlik hava durumu verisi -->
-            <div class="hourly-forecast">
-                
-             <table>
-                    <thead>
-                        <tr>
-                            <th>Zaman</th>
-                            <th>Sıcaklık</th>
-                            <th>Yağış İhtimali</th>
-                            <th>Yağış</th>
-                            <th>Basınç</th>
-                            <th>Nem</th>
-                            <th>Rüzgar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="weather-tbody">
-                        
-                        <!-- İlk 8 saatlik veriler -->
-                        <tr>
-                            <td>00:00</td>
-                            <td>-13°C</td>
-                            <td>0%</td>
-                            <td>0.07 mm</td>
-                            <td>737 mmHg</td>
-                            <td>80%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>01:00</td>
-                            <td>-13°C</td>
-                            <td>0%</td>
-                            <td>0.07 mm</td>
-                            <td>737 mmHg</td>
-                            <td>80%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>02:00</td>
-                            <td>-12°C</td>
-                            <td>0%</td>
-                            <td>0 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>03:00</td>
-                            <td>-12°C</td>
-                            <td>0%</td>
-                            <td>0.08 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>04:00</td>
-                            <td>-11°C</td>
-                            <td>0%</td>
-                            <td>0.08 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>05:00</td>
-                            <td>-12°C</td>
-                            <td>6%</td>
-                            <td>0.07 mm</td>
-                            <td>738 mmHg</td>
-                            <td>78%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>06:00</td>
-                            <td>-12°C</td>
-                            <td>6%</td>
-                            <td>0.09 mm</td>
-                            <td>738 mmHg</td>
-                            <td>76%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>07:00</td>
-                            <td>-14°C</td>
-                            <td>20%</td>
-                            <td>0.09 mm</td>
-                            <td>737 mmHg</td>
-                            <td>75%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>08:00</td>
-                            <td>-15°C</td>
-                            <td>20%</td>
-                            <td>0.16 mm</td>
-                            <td>739 mmHg</td>
-                            <td>71%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-            
-                <!-- Gizli 16 saatlik veriler -->
-                <div id="hidden-data" class="hidden">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>09:00</td>
-                                <td>-16°C</td>
-                                <td>25%</td>
-                                <td>0.18 mm</td>
-                                <td>740 mmHg</td>
-                                <td>69%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>10:00</td>
-                                <td>-16°C</td>
-                                <td>25%</td>
-                                <td>0.18 mm</td>
-                                <td>740 mmHg</td>
-                                <td>67%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>11:00</td>
-                                <td>-15°C</td>
-                                <td>30%</td>
-                                <td>0.20 mm</td>
-                                <td>741 mmHg</td>
-                                <td>65%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>12:00</td>
-                                <td>-14°C</td>
-                                <td>40%</td>
-                                <td>0.25 mm</td>
-                                <td>741 mmHg</td>
-                                <td>63%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>13:00</td>
-                                <td>-13°C</td>
-                                <td>35%</td>
-                                <td>0.22 mm</td>
-                                <td>742 mmHg</td>
-                                <td>62%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>14:00</td>
-                                <td>-12°C</td>
-                                <td>40%</td>
-                                <td>0.23 mm</td>
-                                <td>742 mmHg</td>
-                                <td>60%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>15:00</td>
-                                <td>-11°C</td>
-                                <td>45%</td>
-                                <td>0.25 mm</td>
-                                <td>743 mmHg</td>
-                                <td>58%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>16:00</td>
-                                <td>-10°C</td>
-                                <td>50%</td>
-                                <td>0.27 mm</td>
-                                <td>743 mmHg</td>
-                                <td>55%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>17:00</td>
-                                <td>-9°C</td>
-                                <td>55%</td>
-                                <td>0.30 mm</td>
-                                <td>744 mmHg</td>
-                                <td>53%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>18:00</td>
-                                <td>-8°C</td>
-                                <td>60%</td>
-                                <td>0.32 mm</td>
-                                <td>744 mmHg</td>
-                                <td>50%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>19:00</td>
-                                <td>-7°C</td>
-                                <td>65%</td>
-                                <td>0.35 mm</td>
-                                <td>745 mmHg</td>
-                                <td>48%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>20:00</td>
-                                <td>-6°C</td>
-                                <td>70%</td>
-                                <td>0.38 mm</td>
-                                <td>745 mmHg</td>
-                                <td>45%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>21:00</td>
-                                <td>-5°C</td>
-                                <td>75%</td>
-                                <td>0.40 mm</td>
-                                <td>746 mmHg</td>
-                                <td>43%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>22:00</td>
-                                <td>-4°C</td>
-                                <td>80%</td>
-                                <td>0.42 mm</td>
-                                <td>746 mmHg</td>
-                                <td>40%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>23:00</td>
-                                <td>-3°C</td>
-                                <td>85%</td>
-                                <td>0.45 mm</td>
-                                <td>747 mmHg</td>
-                                <td>38%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            
-                <!-- Gizli veriler için buton -->
-                <button class="toggle-button" onclick="toggleMoreData()">Gizli Verileri Göster</button>
-
-                <script>
-                    function toggleMoreData() {
-                        const hiddenData = document.getElementById("hidden-data");
-                        hiddenData.classList.toggle("hidden");
-                        const button = document.querySelector(".toggle-button");
-                        button.textContent = hiddenData.classList.contains("hidden") ? "Gizli Verileri Göster" : "Gizli Verileri Gizle";
-                    }
-                </script>
-            </div>
+        <!-- Saatlik hava durumu tablosu -->
+        <div class="hourly-forecast">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zaman</th>
+                        <th>Sıcaklık</th>
+                        <th>Yağış İhtimali</th>
+                        <th>Yağış</th>
+                        <th>Basınç</th>
+                        <th>Nem</th>
+                        <th>Rüzgar</th>
+                    </tr>
+                </thead>
+                <tbody id="weather-tbody">
+                    <!-- JS ile doldurulacak -->
+                </tbody>
+            </table>
+    
+            <!-- Gizli veriler için buton -->
+            <button class="toggle-button">Gizli Verileri Göster</button>
+        </div>
     </section>
 
     <section id="hourly-graphic">
