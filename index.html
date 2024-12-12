@@ -20,16 +20,16 @@
         </div>
 
         <div class="user-actions">
-            <a href="#signup">Kayıt Ol</a>
-            <a href="#login">Giriş Yap</a>
+            <button type="button" id="submitbutton"  onclick="submitRegistration()">Kayıt Ol</button>
+            <button type="button" id="loginbutton" onclick="submitLogin()">Giriş Yap</button>
 
             <!-- Türk Bayrağı ve dil seçimi -->
         <div class="language-selector">
             <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
-            <a href="#" class="language-link" onclick="showLanguageOptions()">TR</a>
+            <a href="#" class="language-link">TR</a>
         </div>
 
-            <button class="menu-btn">☰</button>
+            <button class="menu-btn" id="menu-btn-aside">☰</button>
         </div>
         
     </nav>

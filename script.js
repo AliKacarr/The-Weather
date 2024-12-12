@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cityInput.value = '';  
         cityInput.blur();      
     });
+
     // Kullanıcı Enter tuşuna bastığında da arama yapılacak
     cityInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
@@ -63,73 +64,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
                 updateHourlyChart(data); // saatlik grafiğe bilgileri gönderme
-                updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
-                updateWeeklyForecast(data) //Haftalık tabloyu doldur
                 populateTable(data); // Saatlik tabloyu doldur
+                updateWeeklyForecast(data) //Haftalık tabloyu doldur
+                updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
 
-    //Saatlik grafik güncelleme fonksiyonu
-    function updateHourlyChart(data) {
-        const labels = data.hourly_weather.map(hour => hour.saat);
-        const temperatures = data.hourly_weather.map(hour => hour.sıcaklık);
-
-        hourlyChart.data.labels = labels;
-        hourlyChart.data.datasets[0].data = temperatures;
-        hourlyChart.update();
-    }
-
-    //Haftalık grafik güncelleme fonksiyonu
-    function updateWeeklyChart(data) {
-        // Bugünden itibaren günlerin sırasını hesaplayan fonksiyon
-        function getWeekDays() {
-            const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
-            const today = new Date().getDay(); // 0: Pazar, 1: Pazartesi, ..., 6: Cumartesi
-            const orderedDays = [...days.slice(today === 0 ? 6 : today - 1), ...days.slice(0, today === 0 ? 6 : today - 1)];
-            return orderedDays.slice(0, 5); // Haftalık verilerin uzunluğuna göre ilk 5 gün
-        }
-    
-        const labels = getWeekDays(); // Bugünden itibaren günleri al
-        const temperatures = data.weekly_weather.map(day => (day.sabah_sıcaklık + day.gece_sıcaklık) / 2);
-    
-        weeklyChart.data.labels = labels.slice(0, data.weekly_weather.length); // Veriler kadarını al
-        weeklyChart.data.datasets[0].data = temperatures;
-        weeklyChart.update();
-    }
-
-    function updateWeeklyForecast(data) {
-        const forecastContainer = document.querySelector('.weekly-forecast');
-        forecastContainer.innerHTML = ''; // Eski içerikleri temizle
-
-        const todayIndex = new Date().getDay(); // Bugün hangi gün
-        const orderedDays = getOrderedWeekDays(todayIndex === 0 ? 6 : todayIndex - 1); // Dinamik gün sıralaması
-
-        data.weekly_weather.forEach((day, index) => {
-            const iconPath = `${iconsBasePath}${day.hava_durumu_ikonu}.png`; // İkon yolunu oluştur
-
-            const dayElement = `
-            <div class="day">
-                <p class="day-name">${orderedDays[index]}</p>
-                <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
-                <div class="temp-icon">
-                    <img src="${iconPath}" alt="Hava Durumu İkonu">
-                    <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
-                </div>
-            </div>
-        `;
-            forecastContainer.innerHTML += dayElement;
-        });
-    }
-
-
-    function getOrderedWeekDays(startDayIndex) {
-        const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
-        return [...days.slice(startDayIndex), ...days.slice(0, startDayIndex)];
-    }
-
-
-    /* saatlik tablo*/
+    /* saatlik tablo güncelleme fonksiyonu*/
     function populateTable(data) {
         // Saatlik tablodaki satırları oluştur
         weatherTbody.innerHTML = generateTableRows(data.hourly_weather);
@@ -177,5 +119,67 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleButton.dataset.expanded = "false"; // Durumu güncelle
         }
     }
+
+    //Saatlik grafik güncelleme fonksiyonu
+    function updateHourlyChart(data) {
+        const labels = data.hourly_weather.map(hour => hour.saat);
+        const temperatures = data.hourly_weather.map(hour => hour.sıcaklık);
+
+        hourlyChart.data.labels = labels;
+        hourlyChart.data.datasets[0].data = temperatures;
+        hourlyChart.update();
+    }
+
+    
+    //Haftalık tablo güncelleme fonksiyonu
+    function updateWeeklyForecast(data) {
+        const forecastContainer = document.querySelector('.weekly-forecast');
+        forecastContainer.innerHTML = ''; // Eski içerikleri temizle
+
+        const todayIndex = new Date().getDay(); // Bugün hangi gün
+        const orderedDays = getOrderedWeekDays(todayIndex === 0 ? 6 : todayIndex - 1); // Dinamik gün sıralaması
+
+        data.weekly_weather.forEach((day, index) => {
+            const iconPath = `${iconsBasePath}${day.hava_durumu_ikonu}.png`; // İkon yolunu oluştur
+
+            const dayElement = `
+            <div class="day">
+                <p class="day-name">${orderedDays[index]}</p>
+                <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
+                <div class="temp-icon">
+                    <img src="${iconPath}" alt="Hava Durumu İkonu">
+                    <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
+                </div>
+            </div>
+        `;
+            forecastContainer.innerHTML += dayElement;
+        });
+    }
+
+
+    function getOrderedWeekDays(startDayIndex) {
+        const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+        return [...days.slice(startDayIndex), ...days.slice(0, startDayIndex)];
+    }
+
+
+    //Haftalık grafik güncelleme fonksiyonu
+    function updateWeeklyChart(data) {
+        // Bugünden itibaren günlerin sırasını hesaplayan fonksiyon
+        function getWeekDays() {
+            const days = ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'];
+            const today = new Date().getDay(); // 0: Pazar, 1: Pazartesi, ..., 6: Cumartesi
+            const orderedDays = [...days.slice(today === 0 ? 6 : today - 1), ...days.slice(0, today === 0 ? 6 : today - 1)];
+            return orderedDays.slice(0, 5); // Haftalık verilerin uzunluğuna göre ilk 5 gün
+        }
+    
+        const labels = getWeekDays(); // Bugünden itibaren günleri al
+        const temperatures = data.weekly_weather.map(day => (day.sabah_sıcaklık + day.gece_sıcaklık) / 2);
+    
+        weeklyChart.data.labels = labels.slice(0, data.weekly_weather.length); // Veriler kadarını al
+        weeklyChart.data.datasets[0].data = temperatures;
+        weeklyChart.update();
+    }
+    
 
 });

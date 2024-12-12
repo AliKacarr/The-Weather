@@ -20,6 +20,7 @@ body {
     height: 40px; /* Logo yüksekliği */
 }
 
+/* arama kutusu */
 .search-city {
     display: flex;
     align-items: center;
@@ -33,6 +34,7 @@ body {
     border: 1px solid #ddd;
 }
 
+/* arama butonu */
 .search-btn {
     background-color: #cccdd2b4;
     color: white;
@@ -42,41 +44,63 @@ body {
     cursor: pointer;
     font-size: 17px;
 }
+.search-btn:hover{
+    background-color:  #b9bbc4b4;
+    transition: background-color 0.1s ease;
+}
 
+/* giriş, kayıt, yan menü div i */
 .user-actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 }
 
-.user-actions a {
-    color: #ffffff; /* Bağlantılar için beyaz renk */
-    text-decoration: none;
-    font-size: 16px;
-}
 
-.user-actions input {
-    padding: 5px;
+/* Giriş ve kayıt butonları*/
+#submitbutton, #loginbutton{
+    padding: 10px 20px;
+    background-color: #383fa7;
+    color: white;
+    border: none;
     border-radius: 5px;
-    border: 1px solid #ddd;
-    width: 150px;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
 }
 
+#submitbutton:hover, #loginbutton:hover {
+    background-color:#4b51a9;
+}
+
+
+/* yan menü */
+.menu-btn {
+    background-color: #5a8bcb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+#menu-btn-aside:hover{
+    background-color:  #8baad2;
+}
+
+
+/* bayrak */
 .flag-icon {
-    width: 20px; /* Bayrak boyutunu ayarla */
+    width: 25px; /* Bayrak boyutunu ayarla */
     height: auto;
     margin-right: 5px; 
     vertical-align: middle; /* Metinle hizalama */
 }
 
-.menu-btn {
-    background-color: #c6c9cd;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 18px;
+/* dil seçimi*/
+.language-link{
+color: #ffffff;
+text-decoration: none;
 }
 
 
