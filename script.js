@@ -116,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${iconPath}" alt="Hava Durumu İkonu">
                     <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
                 </div>
-                <p class="weather-condition">Hava Durumu</p>
             </div>
         `;
             forecastContainer.innerHTML += dayElement;
