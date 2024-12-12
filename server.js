@@ -283,7 +283,6 @@ app.post('/login', async (req, res) => {
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
-console.log('aaa');
         if (!passwordMatch) {
             return res.status(400).json({ error: 'Hatalı şifre.' });
         }

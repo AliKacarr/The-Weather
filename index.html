@@ -10,7 +10,7 @@
 </head>
 <body>
     
-    <!-- Giriş Yap Popup -->
+    <!-- Profil Popup -->
     <div id="profilPopup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closePopup('profilPopup')">&times;</span>
@@ -64,6 +64,8 @@
         </div>
 
         <div class="user-actions">
+            <button type="button" id="profilbutton"  onclick="openPopup('profilPopup')" >Profil</button>
+            <button type="button" id="loginbutton"  onclick="openPopup('girisPopup')" >Giriş Yap</button>
             <button type="button" id="submitbutton"  onclick="openPopup('kayitPopup')" >Kayıt Ol</button>
 
             <!-- Türk Bayrağı ve dil seçimi -->
