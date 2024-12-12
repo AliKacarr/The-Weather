@@ -168,14 +168,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (toggleButton.dataset.expanded === "false") {
             // Gizli satırları göster
             rows.forEach(row => row.classList.remove('hidden-row'));
-            toggleButton.textContent = "Gizli Verileri Gizle"; // Buton metnini değiştir
+            toggleButton.textContent = "Sonraki 8 Saat"; // Buton metnini değiştir
             toggleButton.dataset.expanded = "true"; // Durumu güncelle
         } else {
             // Gizli satırları tekrar gizle
             rows.forEach((row, index) => {
-                if (index >= 8) row.classList.add('hidden-row');
+                if (index >= 9) row.classList.add('hidden-row');
             });
-            toggleButton.textContent = "Gizli Verileri Göster"; // Buton metnini değiştir
+            toggleButton.textContent = "Sonraki 24 Saat"; // Buton metnini değiştir
             toggleButton.dataset.expanded = "false"; // Durumu güncelle
         }
     }
