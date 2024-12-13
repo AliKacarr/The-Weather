@@ -393,6 +393,28 @@ app.post('/update-visited-cities', async (req, res) => {
     }
 });
 
+app.get('/get-user-info', async (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).json({ error: "E-posta bilgisi gerekli." });
+    }
+
+    try {
+        const userCollection = await connectUserCollection();
+        const user = await userCollection.findOne({ e_mail: email });
+
+        if (user) {
+            res.status(200).json({ user_name: user.user_name, e_mail: user.e_mail });
+        } else {
+            res.status(404).json({ error: "Kullanıcı bulunamadı." });
+        }
+    } catch (error) {
+        console.error("Kullanıcı bilgisi alınırken hata oluştu:", error);
+        res.status(500).json({ error: "Sunucu hatası." });
+    }
+});
+
 
 app.listen(3000, () => {
     console.log('Sunucu localhost:3000 üzerinde çalışıyor.');

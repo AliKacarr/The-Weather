@@ -267,6 +267,22 @@ function openPopup(id) {
         document.getElementById("newUsername").value = ""; // Kayıt için kullanıcı adı
         document.getElementById("newEmail").value = ""; // Kayıt için eposta
         document.getElementById("newPassword").value = ""; // Kayıt için şifre
+    } else if (id === 'profilPopup') {
+        if (islogin) {
+            fetch(`/get-user-info?email=${encodeURIComponent(islogin)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {  
+                        document.getElementById("profilUserName").textContent = `Kullanıcı adı: ${data.user_name}`; 
+                        document.getElementById("profilUserEmail").textContent = `Eposta: ${data.e_mail}`;  
+                    } else {
+                        alert("Kullanıcı bilgileri alınamadı.");
+                    }
+                })
+                .catch(error => console.error("Profil bilgileri alınırken hata oluştu:", error));
+        } else {
+            alert("Giriş yapmamışsınız!");
+        }
     }
   }
   
