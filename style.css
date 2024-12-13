@@ -1,7 +1,6 @@
 body {
     background-color: #043db9fd; /* Koyu mavi arka plan rengi */
     background-image: url('images/dark123.jpg');
-
     color: #ffffff; /* Beyaz metin rengi */
     font-family: Arial, sans-serif; /* Yazı tipi */
     margin: 0;
@@ -518,8 +517,64 @@ section {
 }
 
 
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    background-color: #cbd7e4;
+    padding: 15px 0;
+    border-top: 2px solid #000;
+    width: 100%;
+    color: black;
+    margin-top: 30px;
+}
 
+.section2 h3 {
+    font-weight: bold;
+    text-decoration: underline;
+}
 
+.section2 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.section2 ul li {
+    margin: 5px 0;
+}
+
+.section2 ul li a {
+    text-decoration: none;
+    color: black;
+}
+
+.social-media {
+    display: flex;
+    gap: 23px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.social-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.social-item span {
+    margin-top: 5px;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}
 
 
 
