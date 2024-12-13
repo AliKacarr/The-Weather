@@ -40,7 +40,6 @@ app.get('/update-weather', async (req, res) => {
         if (!weatherData || !(await isWeatherDataUpToDate(city))) {
             weatherData = await fetchAndSaveWeatherData(city); // Güncel değilse yenile
         }
-
         res.json(weatherData); // JSON formatında döndür
     } catch (error) {
         console.error(error);

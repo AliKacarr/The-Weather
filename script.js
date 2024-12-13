@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newUsernameInput = document.getElementById('newUsername');
     const newPasswordInput = document.getElementById('newPassword');
     const newEmailInput = document.getElementById('newEmail');
+    const cityElements = document.querySelectorAll('.city');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 populateTable(data); // Saatlik tabloyu doldur
                 updateWeeklyForecast(data) //Haftalık tabloyu doldur
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
+                updateCityWeatherIconsAndTemperatures();
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }
@@ -154,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleButton.addEventListener('click', toggleMoreData);
 
     function toggleMoreData() {
+        const rows = weatherTbody.querySelectorAll('tr');
         if (toggleButton.dataset.expanded === "false") {
             // Gizli satırları göster
             rows.forEach(row => row.classList.remove('hidden-row'));
@@ -253,7 +256,46 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         });
     });
 
+    cityElements.forEach(cityElement => {
+        cityElement.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            const cityName = cityElement.querySelector('.city-name').textContent.trim();
+            fetchWeatherData(cityName);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    function updateCityWeatherIconsAndTemperatures() {
+        cityElements.forEach(cityElement => {
+            const cityName = cityElement.querySelector('.city-name').textContent.trim();
+            if (cityName) {
+                // Şehir adıyla hava durumu verilerini çek
+                fetch(`/update-weather?city=${cityName}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            console.error(`Hata: ${data.error}`);
+                            return;
+                        }
+
+                        // İlgili şehir kutucuğunu güncelle
+                        const iconElement = cityElement.querySelector('.city-icon');
+                        const tempElement = cityElement.querySelector('.city-temperature');
+
+                        if (iconElement && tempElement) {
+                            iconElement.src = data.current_weather.hava_durumu_ikonu;
+                            iconElement.alt = data.current_weather.hava_durumu_bilgisi;
+                            tempElement.textContent = `${data.current_weather.sıcaklık}°C`;
+                        }
+                    })
+                    .catch(error => console.error(`Hava durumu güncellenirken hata: ${cityName}`, error));
+            }
+        });
+    }
+
 });
+/* -------------------Dom Bitişi------------------------ */
+
 
 /* Popup görünürlüğünü açma*/
 function openPopup(id) {
