@@ -263,7 +263,7 @@ app.post('/register', async (req, res) => {
         };
 
         await collection.insertOne(newUser);
-        res.status(201).json({ message: 'Kullanıcı başarıyla kaydedildi.' });
+        res.status(201).json({  });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Bir hata oluştu.' });
@@ -286,7 +286,7 @@ app.post('/login', async (req, res) => {
             return res.status(400).json({ error: 'Hatalı şifre.' });
         }
 
-        res.status(200).json({ message: 'Giriş başarılı.', user });
+        res.status(200).json({  user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Bir hata oluştu.' });
@@ -344,32 +344,49 @@ app.post('/update-visited-cities', async (req, res) => {
     const { email, newCity } = req.body;
 
     if (!email || !newCity) {
-        return res.status(400).json({ error: 'E-posta ve yeni şehir bilgisi gereklidir.' });
+        return res.status(400).json({ error: 'Email ve yeni şehir bilgisi gerekli.' });
     }
+
     try {
         const userCollection = await connectUserCollection();
 
-        // Kullanıcının mevcut verilerini alın
+        // Kullanıcının mevcut verilerini al
         const user = await userCollection.findOne({ e_mail: email });
+
         if (!user) {
             return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
         }
 
-        // visited_city bilgilerini güncelle
+        // Kullanıcının mevcut visited_city verilerini al
+        const visitedCities = [
+            user.visited_city_1,
+            user.visited_city_2,
+            user.visited_city_3,
+            user.visited_city_4,
+            user.visited_city_5,
+        ];
+
+        // Eğer yeni şehir mevcut visited_city'lerde varsa, onu kaldır
+        const filteredCities = visitedCities.filter(city => city && city !== newCity);
+
+        // Yeni visited_city listesini oluştur
+        const updatedCities = [newCity, ...filteredCities.slice(0, 4)];
+
+        // Kullanıcı verilerini güncelle
         await userCollection.updateOne(
             { e_mail: email },
             {
                 $set: {
-                    visited_city_5: user.visited_city_4,
-                    visited_city_4: user.visited_city_3,
-                    visited_city_3: user.visited_city_2,
-                    visited_city_2: user.visited_city_1,
-                    visited_city_1: newCity
-                }
+                    visited_city_1: updatedCities[0] || null,
+                    visited_city_2: updatedCities[1] || null,
+                    visited_city_3: updatedCities[2] || null,
+                    visited_city_4: updatedCities[3] || null,
+                    visited_city_5: updatedCities[4] || null,
+                },
             }
         );
 
-        res.status(200).json({ message: 'Visited cities başarıyla güncellendi.' });
+        res.status(200).json({ message: 'Visited cities güncellendi.' });
     } catch (error) {
         console.error('Hata:', error);
         res.status(500).json({ error: 'Sunucu hatası.' });

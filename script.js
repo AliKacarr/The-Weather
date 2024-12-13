@@ -71,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function fetchWeatherData(city) {
+        city = city.trim(); // İlk harf büyük diğer harfler küçük
+        city= city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+
         fetch(`/update-weather?city=${city}`)
             .then(response => response.json())
             .then(data => {
@@ -319,7 +322,6 @@ function openPopup(id) {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message);
             islogin = e_mail; // Kullanıcının giriş durumu güncelleniyor
             closePopup('kayitPopup');
             setVisibility(true);
@@ -353,7 +355,6 @@ async function submitLogin() {
         const data = await response.json();
 
         if (response.ok) {
-            alert(data.message);
             islogin = e_mail; // Kullanıcının giriş durumu güncelleniyor
             setVisibility(true);
             closePopup('girisPopup');
