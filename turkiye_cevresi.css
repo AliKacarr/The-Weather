@@ -1,0 +1,55 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #cbd7e4;
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    color: #000;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.weather-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 90vw;
+    height: 80vh;
+    padding: 10px;
+    background-color: #cbd7e4;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    align-content: center;
+    justify-items: center;
+}
+
+.city {
+    text-decoration: none; /* Alt çizgiyi kaldırır */
+
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.5vw;
+    font-weight: bold;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 75%;
+    height: 100%;
+}
