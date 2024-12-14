@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newPasswordInput = document.getElementById('newPassword');
     const newEmailInput = document.getElementById('newEmail');
     const cityElements = document.querySelectorAll('.city');
+    const regionInfoElement = document.getElementById('region-info');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 if (islogin) {
                     fetchVisitedCityData(islogin); // Geçmiş aramaları göstert
-                    updateVisitedCities(city); //Geçmiş aramaları güncelle
+                    updateVisitedCities(data.city_name); //Geçmiş aramaları güncelle
                 }
                 // HTML öğelerini güncelle
                 document.getElementById('city-name').textContent = data.city_name;
@@ -125,11 +126,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
+                    console.log(data.city_name);
+                    console.log(data.city_region);
+                // Region Info güncelleme
+                if (data.city_region) {
+                    regionInfoElement.textContent = data.city_region;
+                    regionInfoElement.style.display = 'block'; // Göster
+                } else {
+                    regionInfoElement.style.display = 'none'; // Gizle
+                }
+
                 updateHourlyChart(data); // saatlik grafiğe bilgileri gönderme
                 populateTable(data); // Saatlik tabloyu doldur
                 updateWeeklyForecast(data) //Haftalık tabloyu doldur
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
                 updateCityWeatherIconsAndTemperatures();
+
+            
             })
             .catch(error => console.error('Veri çekme hatası:', error));
     }

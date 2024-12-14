@@ -39,7 +39,13 @@ app.get('/update-weather', async (req, res) => {
         if (!weatherData || !(await isWeatherDataUpToDate(city))) {
             weatherData = await fetchAndSaveWeatherData(city); // Güncel değilse yenile
         }
-        res.json(weatherData); // JSON formatında döndür
+        res.json({
+            city_name: weatherData.city_name,
+            city_region: weatherData.city_region || null, // Null veya mevcut bölge bilgisi
+            current_weather: weatherData.current_weather,
+            hourly_weather: weatherData.hourly_weather,
+            weekly_weather: weatherData.weekly_weather,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Veri alınırken bir hata oluştu.' });
@@ -209,26 +215,6 @@ app.get('/', (req, res) => {
     res.render('index', { weatherData: null, error: null });
 });
 
-// Butona basıldığında şehre göre veri güncelle
-app.post('/update-weather', async (req, res) => {
-    const city = req.body.city_name;
-
-    if (!city) {
-        return res.render('index', { weatherData: null, error: 'Şehir adı giriniz.' });
-    }
-
-    let weatherData = await isWeatherDataUpToDate(city);
-
-    if (!weatherData) {
-        weatherData = await fetchAndSaveWeatherData(city);
-    }
-
-    if (weatherData) {
-        res.render('index', { weatherData: weatherData, error: null });
-    } else {
-        res.render('index', { weatherData: null, error: 'Veri alınamadı veya güncellenemedi.' });
-    }
-});
 
 // Kullanıcı koleksiyonuna bağlanma
 async function connectUserCollection() {

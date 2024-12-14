@@ -145,7 +145,16 @@ body {
     color: #F2EAE8;
 }
 
-
+/* Arama kutusu büyüteç ikonu*/
+.magnifier-icon {
+    font-size: 30px; /* Simgenin boyutunu ayarlar */
+    color: #ffffff; /* Simgenin rengini beyaz yapar */
+    background-color: #3b5671; /* Arka plan rengini ayarlar */
+    border-radius: 5px; /* Kenar yumuşatma */
+    padding: 10px; /* İç boşluk */
+    display: inline-block; /* Blok olarak görünmesini sağlar */
+    cursor: pointer; /* Üzerine gelindiğinde imleç değişir */
+}
 
 
 /* butonlar, dil, yan menü divi */
@@ -757,14 +766,6 @@ background-color: #495cc8;
     transform: scale(1.1);
 }
 
-.magnifier-icon {
-    font-size: 30px; /* Simgenin boyutunu ayarlar */
-    color: #ffffff; /* Simgenin rengini beyaz yapar */
-    background-color: #3b5671; /* Arka plan rengini ayarlar */
-    border-radius: 5px; /* Kenar yumuşatma */
-    padding: 10px; /* İç boşluk */
-    display: inline-block; /* Blok olarak görünmesini sağlar */
-    cursor: pointer; /* Üzerine gelindiğinde imleç değişir */
-}
+
 
 
