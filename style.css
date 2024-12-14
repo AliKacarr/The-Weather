@@ -102,41 +102,49 @@ body {
 
 /* arama kutusu ve arama butonu*/
 .search-city {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: 150px;
+    position: relative;
 }
 
-/* arama kutusu */
 .search-city input {
-    padding: 5px;
-    width: 200px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    padding: 10px 10px;
-    padding-right: 10px;
+    background-color: #355773;
+    color: #ffffff;
+    padding: 9px 10px;
+    padding-right: 40px; /* Büyüteç için sağ boşluk */
+    width: 300px;
+    text-align: center;
+    border-radius: 25px;
+    border: 1px solid #355773;
     font-size: 17px;
+}
+
+/* Placeholder görünürlüğü efekti */
+.search-city input::placeholder {
+    font-size: 17px;
+    color: #F2EAE8;
+    opacity: 1;
+    transition: opacity 0.3s ease; /* Opaklık geçişi */
+}
+
+.search-city input.placeholder-hidden::placeholder {
+    opacity: 0; /* Placeholder kaybolur */
+}
+
+.search-city .search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Tıklanamaz yap */
+    font-size: 18px;
+    color: #F2EAE8;
 }
 
 #city-input::placeholder{
     font-size: 17px;
+    color: #F2EAE8;
 }
 
-/* arama butonu */
-.search-btn {
-    background-color: #3a6fb5;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 17px;
-    cursor: pointer;
-    font-size: 18px;
-}
-.search-btn:hover{
-    background-color:  #4b51a9;
-    transition: background-color 0.1s ease;
-}
+
 
 
 /* butonlar, dil, yan menü divi */
@@ -155,7 +163,7 @@ body {
     background-color:#5a8bcb;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 9px;
     cursor: pointer;
     margin-right: 20px;
     transition: background-color 0.1s ease;
@@ -271,12 +279,6 @@ main {
     width: 35px; 
 }
 
-.city-weather-row{
-    display: flex;
-    flex-direction: row; /* Dikey yerleşim */
-    align-items: center; /* İçerikleri ortala */
-    font-size: 30px;
-}
 
 
 /* Mevcut Hava Durumu */
@@ -604,7 +606,7 @@ background-color: #495cc8;
 
 /* Şehir Adı */
 .city-name {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
@@ -622,14 +624,14 @@ background-color: #495cc8;
 }
 
 .city-icon {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     margin-bottom: 5px;
     object-fit: contain;
 }
 
 .city-temperature {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #fff;
     margin: 0;
@@ -754,6 +756,14 @@ background-color: #495cc8;
     transform: scale(1.1);
 }
 
-
+.magnifier-icon {
+    font-size: 30px; /* Simgenin boyutunu ayarlar */
+    color: #ffffff; /* Simgenin rengini beyaz yapar */
+    background-color: #3b5671; /* Arka plan rengini ayarlar */
+    border-radius: 5px; /* Kenar yumuşatma */
+    padding: 10px; /* İç boşluk */
+    display: inline-block; /* Blok olarak görünmesini sağlar */
+    cursor: pointer; /* Üzerine gelindiğinde imleç değişir */
+}
 
 

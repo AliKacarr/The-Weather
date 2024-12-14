@@ -1,6 +1,5 @@
 let islogin = "";
 document.addEventListener('DOMContentLoaded', () => {
-    const searchButton = document.getElementById('search-button');
     const cityInput = document.getElementById('city-input'); // Kullanıcıdan şehir adı alır
     const toggleButton = document.querySelector('.toggle-button');
     const weatherTbody = document.getElementById('weather-tbody');
@@ -53,21 +52,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Şehir arama butonuna tıklanınca veri güncelle
-    searchButton.addEventListener('click', () => {
-        const cityName = cityInput.value.trim();
-        if (cityName) {
-            fetchWeatherData(cityName);
-        }
-        cityInput.value = '';  
-        cityInput.blur();      
-    });
+
 
     // Kullanıcı Enter tuşuna bastığında da arama yapılacak
     cityInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault(); // Formun submit olmasını engelle
-            searchButton.click(); // Butona tıklanmış gibi işlem yap
+            const cityName = cityInput.value.trim(); // Arama kutusundaki değeri al
+            if (cityName) {
+                fetchWeatherData(cityName); // Şehir adına göre veri çekme işlemi
+            }
+            cityInput.value = ''; // Arama kutusunu temizle
+            cityInput.blur(); // Odaktan çıkar
+        }
+    });
+
+    cityInput.addEventListener("focus", function () {
+        // Placeholder'a kaydırma sınıfını ekle
+        if (!cityInput.value) {
+            cityInput.classList.add("placeholder-hidden");
+        }
+    });
+
+    cityInput.addEventListener("blur", function () {
+        // Odak dışı olduğunda placeholder sınıfını kaldır
+        if (!cityInput.value) {
+            cityInput.classList.remove("placeholder-hidden");
         }
     });
 
