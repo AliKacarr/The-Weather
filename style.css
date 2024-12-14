@@ -125,7 +125,7 @@ body {
 
 /* arama butonu */
 .search-btn {
-    background-color: #5a8bcb;
+    background-color: #3a6fb5;
     color: white;
     border: none;
     border-radius: 5px;
@@ -187,32 +187,9 @@ body {
     vertical-align: middle; /* Metinle hizalama */
 }
 
-/* dil seçimi*/
-.language-link{
-color: #ffffff;
-text-decoration: none;
-}
-
-/* yan menü */
-.menu-btn {
-    background-color: #5a8bcb;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 7px 12px;
+/* dil ve bayrağı */
+.language-selector{    
     cursor: pointer;
-    font-size: 18px;
-    margin-right: 30px;
-}
-
-#menu-btn-aside:hover{
-    background-color:  #8baad2;
-}
-
-.language-selector{
-    
-    cursor: pointer;
-    background-color: #5a8bcb;
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
@@ -220,7 +197,30 @@ text-decoration: none;
 }
 
 .language-selector:hover{
-    background-color: #8baad2;
+    background-color: #d9e0e93d;
+    text-decoration:underline;
+}
+
+/* dil seçimi*/
+.language-link{
+color: #ffffff;
+text-decoration: none;
+}
+
+/* yan menü */
+#menu-btn-aside {
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+#menu-btn-aside:hover{
+    background-color:  #d9e0e93d;
 }
 
 
