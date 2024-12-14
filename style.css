@@ -278,8 +278,6 @@ main {
     font-weight: bold;
 }
 
-
-/* Duyarlı */
 @media (max-width: 768px) {
     .daily-forecast {
         flex-direction: column;
@@ -321,66 +319,31 @@ main {
     width: 100%;
 }
 
-
+/* Tüm section ları etkiler */
 section {
     padding: 20px;
 }
 
 /* Saatlik tablo */
 .hourly-forecast{
-    background-color: #051894e3; /* Kutular için arka plan */
+    background-color: #051894e3; 
     border-radius: 10px;
     padding: 15px;
 }
 
+/* Tablo */
 .hourly-forecast table {
     width: 100%;
     border-collapse: collapse;
     margin: 30px 0;
 }
 
-.hourly-forecast th, .hourly-forecast td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-.hourly-forecast th {
-    background-color: #f4f4f4;
-    color: #333;
-}
-
-.hourly-forecast tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.hourly-forecast tr:hover {
-    background-color: #f1f1f1;
-}
-
+/* Başlık ve veri hücreleri*/
 .hourly-forecast th, .hourly-forecast td {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
+    border: 1px solid #A7C8E8; 
 }
-
-.hourly-forecast .toggle-button {
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.hourly-forecast .hidden {
-    display: none;
-}
-
-.hourly-forecast .toggle-button:hover {
-    background-color: #0056b3;
-}
-
 
 /* Tablo başlık hücreleri */
 .hourly-forecast th {
@@ -400,22 +363,27 @@ section {
     border: 1px solid #A7C8E8; 
 }
 
-
+/* Tablo çift numaralı satırlar*/
 .hourly-forecast tr:nth-child(even) td {
     background-color: #CBE4FF; 
 }
 
-/* Saatlik tablosu için satırları gizleme */
+/* Satırları gizle göstert butonu*/
+.hourly-forecast .toggle-button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Satırları gizleme */
 .hidden-row {
     display: none;
 }
 
-/* Tablonun genel kenarlığını düzelt */
-.hourly-forecast table,
-.hourly-forecast th,
-.hourly-forecast td {
-    border: 1px solid #A7C8E8; 
-}
 
 /*Saatlik grafiği */
 .hourly-forecast-graphic {
@@ -479,7 +447,6 @@ section {
     margin: auto;
 }
 
-/* Ekran küçüldüğünde Cumartesi ve Pazar'ı yan yana göstermek için */
 @media (max-width: 768px) {
     .weekly-forecast {
         grid-template-columns: repeat(3, 1fr); 
@@ -562,7 +529,7 @@ section {
     color: #fff;
 }
 
-/* Hava Durumu Bilgisi */
+/* İkon ve sıcaklık bilgisi */
 .city-data {
     display: flex;
     flex-direction: row;
@@ -588,8 +555,6 @@ section {
     white-space: nowrap;
 }
 
-
-/* Responsive Tasarım */
 @media (max-width: 600px) {
     #cities_table h1 {
         font-size: 20px;
