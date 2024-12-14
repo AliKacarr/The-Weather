@@ -129,9 +129,9 @@ body {
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 9px 17px;
+    padding: 10px 17px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
 }
 .search-btn:hover{
     background-color:  #4b51a9;
@@ -139,7 +139,7 @@ body {
 }
 
 
-/* giriş, kayıt, dil, yan menü divi */
+/* butonlar, dil, yan menü divi */
 .user-actions {
     display: flex;
     align-items: center;
@@ -147,35 +147,50 @@ body {
 }
 
 
-/* Giriş, profil ve kayıt butonları*/
-#submitbutton, #loginbutton, #profilbutton{
+/* Ayaralar, profil, giriş ve kayıt butonları*/
+.user-buttons button{
+    font-family: 'Segoe UI', sans-serif;
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 17px;
     background-color:#5a8bcb;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 20px;
     transition: background-color 0.1s ease;
 }
 
-#submitbutton:hover, #loginbutton:hover, #profilbutton:hover{
+.user-buttons button:hover{
     background-color:#4b51a9;
 }
 
 /* profil butonu*/
 #profilbutton{
     display: none;
+    font-size: 18px;
+    padding: 10px 27px;
 }
 
-/* kayıt butonu*/
-#submitbutton{
-    margin-right: 20px;
+/* ayarlar butonu*/
+#settingsbutton{
+    display: none;
+    font-size: 18px;
+    padding: 10px 27px;
 }
 
-/* profil butonu*/
-#profilbutton{
-    margin-right: 20px;
+/* bayrak */
+.flag-icon {
+    width: 25px; /* Bayrak boyutunu ayarla */
+    height: auto;
+    margin-right: 5px; 
+    vertical-align: middle; /* Metinle hizalama */
+}
+
+/* dil seçimi*/
+.language-link{
+color: #ffffff;
+text-decoration: none;
 }
 
 /* yan menü */
@@ -201,26 +216,13 @@ body {
     color: #fff;
     text-decoration: none;
     border-radius: 5px;
-    padding: 8px;
+    padding: 9px;
 }
 
 .language-selector:hover{
     background-color: #8baad2;
 }
 
-/* bayrak */
-.flag-icon {
-    width: 25px; /* Bayrak boyutunu ayarla */
-    height: auto;
-    margin-right: 5px; 
-    vertical-align: middle; /* Metinle hizalama */
-}
-
-/* dil seçimi*/
-.language-link{
-color: #ffffff;
-text-decoration: none;
-}
 
 
 /* Ana İçerik */
@@ -270,6 +272,9 @@ main {
 }
 
 .city-weather-row{
+    display: flex;
+    flex-direction: row; /* Dikey yerleşim */
+    align-items: center; /* İçerikleri ortala */
     font-size: 30px;
 }
 

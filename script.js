@@ -453,16 +453,19 @@ async function submitLogin() {
 /* Giriş yapılınca butonları ayarlama */
 function setVisibility(isLoggedIn) {
     const profilButton = document.getElementById('profilbutton');
+    const settingsButton = document.getElementById('settingsbutton');
     const loginButton = document.getElementById('loginbutton');
     const submitButton = document.getElementById('submitbutton');
     const cityWeatherStrip = document.querySelector('.city-weather-strip');
 
     if (isLoggedIn) {
         profilButton.style.display = 'inline-block'; // Profil butonu görünür
+        settingsButton.style.display = 'inline-block'; // Ayarlar butonu görünür
         loginButton.style.display = 'none'; // Giriş butonu gizli
         submitButton.style.display = 'none'; // Kayıt ol butonu gizli
     } else {
         profilButton.style.display = 'none'; // Profil butonu gizli
+        settingsButton.style.display = 'none'; // Ayarlar butonu görünür
         loginButton.style.display = 'inline-block'; // Giriş butonu görünür
         submitButton.style.display = 'inline-block'; // Kayıt ol butonu görünür
         cityWeatherStrip.style.display = 'none'; // Şehir hava durumu gizli
