@@ -298,8 +298,27 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         });
     }
 
+        //Başa dön butonu
+    document.getElementById('to_top').addEventListener('click', function () {
+        window.scrollTo({
+        top: 0,
+        behavior: 'smooth', // Yumuşak kaydırma
+        });
+    });
+
+    // Başa dön ikonu sayfa hareket kontrolü
+    window.addEventListener('scroll', function () {
+        const toTopButton = document.getElementById('to_top');
+        // Eğer sayfa 200px'lik kısımdan daha aşağıdaysa, butonu göster
+        if (window.scrollY > 200) {
+        toTopButton.style.display = 'flex'; // Butonu göster
+        } else {
+        toTopButton.style.display = 'none'; // Butonu gizle
+        }
+    });
+
 });
-/* -------------------Dom Bitişi------------------------ */
+/* --------------------------------DOMContentLoaded Bitişi--------------------------------- */
 
 
 /* Popup görünürlüğünü açma*/
@@ -505,4 +524,5 @@ async function updateVisitedCities(city) {
         console.error('Hata oluştu:', error);
     }
 }
+
 

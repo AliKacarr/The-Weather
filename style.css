@@ -578,6 +578,45 @@ background-color: #495cc8;
     }
 }
 
+/* Başa dön butonu */
+.to-top {
+    position: fixed;
+    bottom: 49px; /* Sayfanın altından mesafe */
+    right: 48px; /* Sağdan mesafe */
+    background-color: #1e4d7b; 
+    color: white;
+    border-radius: 20px; 
+    padding: 5px 8px;
+    display: none;
+    align-items: center;
+    cursor: pointer; /* Tıklanabilir işaretçi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    transition: background-color 0.3s ease;
+  }
+  
+  .to-top:hover {
+    background-color: #153a5c; /* Hover rengi */
+  }
+  
+  .to-top-content {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Simge ve yazı arasında boşluk */
+  }
+  
+  .up-white {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2px;
+  }
+  
+  .to-top-text {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;
+    margin-right: 5px;
+  }
+
 
 
 /* Footer */
@@ -593,27 +632,27 @@ background-color: #495cc8;
     margin-top: 30px;
 }
 
-.section2 h3 {
+.footer-categories h3 {
     font-weight: bold;
     text-decoration: underline;
 }
 
-.section2 ul {
+.footer-categories ul {
     list-style: none;
     padding: 0;
 }
 
-.section2 ul li {
+.footer-categories ul li {
     margin: 8px 0;
 }
 
-.section2 ul li a {
+.footer-categories ul li a {
     text-decoration: none;
     color: black;
     font-size: 18px;
 }
 
-.section2 ul li a:hover {
+.footer-categories ul li a:hover {
     color: rgb(90, 19, 144);
 }
 
