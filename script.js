@@ -508,6 +508,7 @@ function updateCityWeather(visitedCitiesData) {
     });
 }
 
+
 async function updateVisitedCities(city) {
     try {
         const response = await fetch('/update-visited-cities', {
