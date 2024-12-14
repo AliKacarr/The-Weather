@@ -22,7 +22,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html')); // Ana dizindeki index.html dosyasını gönderir
 });
 
-
 const mongoUri = process.env.MONGO_URI;
 const weatherApiKey = process.env.WEATHERAPI_API_KEY;
 const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
