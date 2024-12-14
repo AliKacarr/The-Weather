@@ -99,19 +99,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Sabah, öğle, akşam ve gece tahminlerini güncelle
                 document.getElementById('forecast-morning').innerHTML = `
-                    <h3>Sabah</h3>
+                    <h2>Sabah</h2>
                     <img src="${data.hourly_weather[6].hava_durumu_ikonu}" alt="Sabah İkonu">
                     <p>${data.hourly_weather[6].sıcaklık}°C</p>`;
                 document.getElementById('forecast-noon').innerHTML = `
-                    <h3>Öğle</h3>
+                    <h2>Öğle</h2>
                     <img src="${data.hourly_weather[12].hava_durumu_ikonu}" alt="Öğle İkonu">
                     <p>${data.hourly_weather[12].sıcaklık}°C</p>`;
                 document.getElementById('forecast-evening').innerHTML = `
-                    <h3>Akşam</h3>
+                    <h2>Akşam</h2>
                     <img src="${data.hourly_weather[18].hava_durumu_ikonu}" alt="Akşam İkonu">
                     <p>${data.hourly_weather[18].sıcaklık}°C</p>`;
                 document.getElementById('forecast-night').innerHTML = `
-                    <h3>Gece</h3>
+                    <h2>Gece</h2>
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
