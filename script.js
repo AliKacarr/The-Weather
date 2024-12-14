@@ -169,8 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             toggleButton.textContent = "Sonraki 24 Saat"; // Buton metnini değiştir
             toggleButton.dataset.expanded = "false"; // Durumu güncelle
+    
+            // Sayfayı yukarı kaydır
+            const tablePosition = weatherTbody.getBoundingClientRect().top + window.pageYOffset - 180; // Sayfa konumunu düzeltme
+            window.scrollTo({ top: tablePosition, behavior: 'smooth' }); // Yumuşak kaydırma
         }
     }
+    
 
     //Saatlik grafik güncelleme fonksiyonu
     function updateHourlyChart(data) {

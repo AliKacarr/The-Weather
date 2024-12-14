@@ -379,6 +379,10 @@ section {
     border-radius: 5px;
 }
 
+.hourly-forecast .toggle-button:hover {
+background-color: #495cc8;
+}
+
 /* Satırları gizleme */
 .hidden-row {
     display: none;
@@ -582,7 +586,7 @@ section {
     justify-content: space-around;
     text-align: center;
     background-color: #cbd7e4;
-    padding: 15px 0;
+    padding: 12px 0;
     border-top: 2px solid #000;
     width: 100%;
     color: black;
@@ -600,40 +604,38 @@ section {
 }
 
 .section2 ul li {
-    margin: 5px 0;
+    margin: 8px 0;
 }
 
 .section2 ul li a {
     text-decoration: none;
     color: black;
+    font-size: 18px;
 }
 
-.social-media {
-    display: flex;
-    gap: 23px;
-    flex-wrap: wrap;
-    justify-content: center;
+.section2 ul li a:hover {
+    color: rgb(90, 19, 144);
 }
 
 .social-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     text-align: center;
+    gap: 20px;
 }
 
 .social-item img {
     width: 40px;
     height: 40px;
     border-radius: 5px;
+    transition: transform 0.2s ease;
 }
 
-.social-item span {
-    margin-top: 5px;
-    font-size: 14px;
-    color: black;
-    text-decoration: none;
+.social-item img:hover{
+    transform: scale(1.1);
 }
+
 
 
 
