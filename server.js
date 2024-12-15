@@ -34,17 +34,28 @@ app.get('/update-weather', async (req, res) => {
     const city = req.query.city || 'Sivas'; // Varsayılan şehir
     try {
         const collection = await connectMongo();
-        let weatherData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
+        const existingData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
 
-        if (!weatherData || !(await isWeatherDataUpToDate(city))) {
-            weatherData = await fetchAndSaveWeatherData(city); // Güncel değilse yenile
+        // Mevcut veriyi kontrol et
+        if (existingData && isWeatherDataUpToDate(existingData)) {
+            return res.json({
+                city_name: existingData.city_name,
+                city_region: existingData.city_region || null,
+                current_weather: existingData.current_weather,
+                hourly_weather: existingData.hourly_weather,
+                weekly_weather: existingData.weekly_weather,
+            });
         }
+
+        // Yeni veriyi API'den çek ve kaydet
+        const updatedWeatherData = await fetchAndSaveWeatherData(city, existingData);
+
         res.json({
-            city_name: weatherData.city_name,
-            city_region: weatherData.city_region || null, // Null veya mevcut bölge bilgisi
-            current_weather: weatherData.current_weather,
-            hourly_weather: weatherData.hourly_weather,
-            weekly_weather: weatherData.weekly_weather,
+            city_name: updatedWeatherData.city_name,
+            city_region: updatedWeatherData.city_region || null,
+            current_weather: updatedWeatherData.current_weather,
+            hourly_weather: updatedWeatherData.hourly_weather,
+            weekly_weather: updatedWeatherData.weekly_weather,
         });
     } catch (error) {
         console.error(error);
@@ -144,7 +155,7 @@ async function isWeatherDataUpToDate(city) {
 }
 
 // WeatherAPI'den anlık ve saatlik veri, OpenWeatherMap'ten haftalık veri çekme ve kaydetme
-async function fetchAndSaveWeatherData(city) {
+async function fetchAndSaveWeatherData(city, existingData) {
     const weatherApiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${city}&days=1&aqi=no&alerts=no`;
     const openWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${openWeatherApiKey}&units=metric`;
     const collection = await connectMongo();
@@ -192,6 +203,7 @@ async function fetchAndSaveWeatherData(city) {
 
         const weatherDocument = {
             city_name: apiCityName,
+            city_region: existingData?.city_region || null,
             current_weather: currentWeather,
             hourly_weather: hourlyWeather,
             weekly_weather: weeklyWeather
