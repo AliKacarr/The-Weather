@@ -76,10 +76,47 @@
             <button type="button" id="loginbutton"  onclick="openPopup('girisPopup')" >Giriş Yap</button>
             <button type="button" id="submitbutton"  onclick="openPopup('kayitPopup')" >Kayıt Ol</button>
             </div>
+
             <!-- Türk Bayrağı ve dil seçimi -->
         <div class="language-selector">
             <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
-            <a href="#" class="language-link">TR</a>
+
+            <div class="additional-settings ">
+                  <div id="settings" class="button settings">
+                    <div class="inner">
+                        <a href="#" aria-label="Settings">
+                            TR
+                        </a>
+                </div>
+        
+                <div class="matches">
+                        <h2>Language</h2>
+                        <ul class="matches-group wide">
+                            <li style="direction: rtl;"><a hreflang="ar"  href="">عربي</a></li>
+                            <li> <a hreflang="bg"  href="">Български</a> </li>
+                            <li><a hreflang="cs"  href="">Čeština</a></li>
+                            <li> <a hreflang="de"  href="">Deutsch</a></li>
+                            <li> <a hreflang="en"  href="">English</a></li>
+                            <li class="selected"> <a hreflang="tr"  href="">Türkçe</a></li>
+                            <li> <a hreflang="es"  href="">Español</a></li>
+                            <li> <a hreflang="fr"  href="">Français</a></li>
+                            <li>  <a hreflang="hr" href="">Hrvatski</a></li>
+                            <li>  <a hreflang="hu" href="">Magyar</a></li>
+                            <li><a hreflang="it"   href="">Italiano</a></li>
+                            <li><a hreflang="ka"   href="">ქართული ენა</a> </li>
+                            <li> <a hreflang="nl"  href="">Nederlands</a> </li>
+                            <li> <a hreflang="pl"  href="">Polski</a>  </li>
+                            <li> <a hreflang="pt"  href="">Português</a> </li>
+                            <li> <a hreflang="ro"  href="">Română</a></li>
+                            <li> <a hreflang="ru"  href="">Pусский</a></li>
+                            <li> <a hreflang="sk"  href="">Slovenský</a></li>
+                            <li> <a hreflang="el"  href="">Ελληνικά</a></li>
+                            <li> <a hreflang="sr"  href="">Srpski</a></li>
+                            <li>  <a hreflang="uk" href="">Українська</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
             <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>
@@ -388,6 +425,7 @@ var hourlyChart = new Chart(ctxHourly, {
         </div>
     </div>
 
+    
     <!-- Footer -->
     <div class="footer">
         <div class="footer-categories">
