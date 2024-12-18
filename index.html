@@ -5,31 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hava Durumu Web Sitesi</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </head>
 <body>
     
+    <!-- Profil Popup -->
+    <div id="profilPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('profilPopup')">&times;</span>
+            <h2>Profil Ekranı</h2>
+            <form>
+                <p id="profilUserName">Kullanıcı adı</p>
+                <p id="profilUserEmail">Kullanıcı email</p>
+                <p><a href="#" id="exitProfil" class="exit-link">⮪ Çıkış Yap</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Giriş Yap Popup -->
+    <div id="girisPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('girisPopup')">&times;</span>
+            <h2>Giriş Yap</h2>
+            <form>
+                <label for="email">E-posta:</label>
+                <input type="email" id="email" name="email" placeholder="E-posta adresinizi girin">
+                <label for="password">Şifre:</label>
+                <input type="password" id="password" name="password" placeholder="Şifrenizi girin">
+                <button type="button" onclick="submitLogin()">Giriş Yap</button>
+            </form>
+            <p>Hesabınız yok mu? <a href="#" id="signupFromLogin" onclick="closePopup('girisPopup'); openPopup('kayitPopup');">Kayıt Ol</a></p>
+        </div>
+    </div>
+    
+    <!-- Kayıt Ol Popup -->
+    <div id="kayitPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup('kayitPopup')">&times;</span>
+            <h2>Kayıt Ol</h2>
+            <form>
+                <label for="newUsername">Kullanıcı Adı:</label>
+                <input type="text" id="newUsername" name="newUsername" placeholder="Kullanıcı adınızı girin ">
+                <label for="newPassword">Şifre:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="Şifrenizi girin">
+                <label for="newEmail">E-posta:</label>
+                <input type="email" id="newEmail" name="newEmail" placeholder="E-posta adresinizi girin">
+                <button type="button" onclick="submitRegistration()">Kayıt Ol</button>
+            </form>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="logo">
             <img src="images/unnamed.png" alt="Logo">
         </div>
+        <div>
+            <p id="logo-name">The Weather</p>
+        </div>
         <div class="search-city">
-            <input type="text" id="city-input" placeholder="Şehir Ara">
-            <button class="search-btn" id="search-button">Ara</button>
+            <input type="text" id="city-input" placeholder="Şehir Ara...">
+            <span class="search-icon"><i class="fas fa-search"></i></span>
         </div>
 
         <div class="user-actions">
-            <a href="#signup">Kayıt Ol</a>
-            <a href="#login">Giriş Yap</a>
+            <div class="user-buttons">
+            <button type="button" id="profilbutton"  onclick="openPopup('profilPopup')" >Profil</button>
+            <button type="button" id="settingsbutton"  onclick="openPopup('settingsPopup')" >Ayarlar</button>
+            <button type="button" id="loginbutton"  onclick="openPopup('girisPopup')" >Giriş Yap</button>
+            <button type="button" id="submitbutton"  onclick="openPopup('kayitPopup')" >Kayıt Ol</button>
+            </div>
 
             <!-- Türk Bayrağı ve dil seçimi -->
         <div class="language-selector">
             <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
-            <a href="#" class="language-link" onclick="showLanguageOptions()">TR</a>
+
+            <div class="additional-settings ">
+                  <div id="settings" class="button settings">
+                    <div class="inner">
+                        <a href="#" aria-label="Settings">
+                            TR
+                        </a>
+                </div>
+        
+                <div class="matches">
+                        <h2>Language</h2>
+                        <ul class="matches-group wide">
+                            <li style="direction: rtl;"><a hreflang="ar"  href="">عربي</a></li>
+                            <li> <a hreflang="bg"  href="">Български</a> </li>
+                            <li><a hreflang="cs"  href="">Čeština</a></li>
+                            <li> <a hreflang="de"  href="">Deutsch</a></li>
+                            <li> <a hreflang="en"  href="">English</a></li>
+                            <li class="selected"> <a hreflang="tr"  href="">Türkçe</a></li>
+                            <li> <a hreflang="es"  href="">Español</a></li>
+                            <li> <a hreflang="fr"  href="">Français</a></li>
+                            <li>  <a hreflang="hr" href="">Hrvatski</a></li>
+                            <li>  <a hreflang="hu" href="">Magyar</a></li>
+                            <li><a hreflang="it"   href="">Italiano</a></li>
+                            <li><a hreflang="ka"   href="">ქართული ენა</a> </li>
+                            <li> <a hreflang="nl"  href="">Nederlands</a> </li>
+                            <li> <a hreflang="pl"  href="">Polski</a>  </li>
+                            <li> <a hreflang="pt"  href="">Português</a> </li>
+                            <li> <a hreflang="ro"  href="">Română</a></li>
+                            <li> <a hreflang="ru"  href="">Pусский</a></li>
+                            <li> <a hreflang="sk"  href="">Slovenský</a></li>
+                            <li> <a hreflang="el"  href="">Ελληνικά</a></li>
+                            <li> <a hreflang="sr"  href="">Srpski</a></li>
+                            <li>  <a hreflang="uk" href="">Українська</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-            <button class="menu-btn">☰</button>
+            <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>
         </div>
         
     </nav>
@@ -37,34 +127,44 @@
     <!-- Ana İçerik -->
     <main>
         <!-- Üst Şerit - Diğer Şehirler Hava Durumu -->
-<section class="city-weather-strip">
-    <div class="city-weather" id="city1">
-        <p>Şehir 1</p>
-        <p>--°C</p>
-        <img src="" alt="Şehir 1 hava durumu ikonu">
-    </div>
-    <div class="city-weather" id="city2">
-        <p>Şehir 2</p>
-        <p>--°C</p>
-        <img src="" alt="Şehir 2 hava durumu ikonu">
-    </div>
-    <div class="city-weather" id="city3">
-        <p>Şehir 3</p>
-        <p>--°C</p>
-        <img src="" alt="Şehir 3 hava durumu ikonu">
-    </div>
-</section>
+        <section class="city-weather-strip"> 
+            <div class="city-weather" id="city1">
+                <p>Şehir 1</p>
+                <p>--°C</p>
+                <img src="" alt="Şehir 1 hava durumu ikonu">
+            </div>
+            <div class="city-weather" id="city2"">
+                <p>city2</p>
+                <p>--°C</p>
+                <img src="" alt="Şehir 2 hava durumu ikonu">
+            </div>
+            <div class="city-weather" id="city3" >
+                <p>Şehir 3</p>
+                <p>--°C</p>
+                <img src="" alt="Şehir 3 hava durumu ikonu" >
+            </div>
+            <div class="city-weather" id="city4">
+                <p>Şehir 4</p>
+                <p>--°C</p>
+                <img src="" alt="Şehir 4 hava durumu ikonu" >
+            </div>
+            <div class="city-weather" id="city5"">
+                <p>Şehir 5</p>
+                <p>--°C</p>
+                <img src="" alt="Şehir 5 hava durumu ikonu">
+            </div>
+        </section>
 
 <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
 <section class="current-weather">
-    <h2 id="city-name">Şehir İsmi</h2>
-    <p id="region-info">Bölge Bilgisi...</p>
+    <h1 id="city-name">Sivas</h1>
+    <p id="region-info" >Bölge Bilgisi...</p>
     <p id="date-time">Güncel Tarih ve Saat</p>
     <div class="weather-info">
-        <img id="weather-icon" src="" alt="Hava durumu ikonu">
         <p><span id="temperature">--°C</span></p>
-        <p id="description">Hava durumu açıklaması...</p>
+        <img id="weather-icon" src="" alt="Hava durumu ikonu">
     </div>
+    <p id="description">Hava durumu açıklaması...</p>
 </section>
 
         <!-- Günlük Tahmin -->
@@ -108,282 +208,42 @@
 </section>
 
     <!-- Alt Bilgi -->
-    <footer>
+    <footer id="last_update_footer">
         <p id="last-update">Son Güncelleme: --</p>
+          </svg>
     </footer>
 
 
 
     <section id="saatlik">
         <h1>Saatlik Hava Durumu</h1>
+        <!-- Saatlik hava durumu tablosu -->
         <div class="hourly-forecast">
-
-            <!--  saatlik hava durumu verisi -->
-            <div class="weather-table">
-                
-            
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Zaman</th>
-                            <th>Sıcaklık</th>
-                            <th>Yağış İhtimali</th>
-                            <th>Yağış</th>
-                            <th>Basınç</th>
-                            <th>Nem</th>
-                            <th>Rüzgar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="weather-tbody">
-                        
-                        <!-- İlk 8 saatlik veriler -->
-                        <tr>
-                            <td>00:00</td>
-                            <td>-13°C</td>
-                            <td>0%</td>
-                            <td>0.07 mm</td>
-                            <td>737 mmHg</td>
-                            <td>80%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>01:00</td>
-                            <td>-13°C</td>
-                            <td>0%</td>
-                            <td>0.07 mm</td>
-                            <td>737 mmHg</td>
-                            <td>80%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>02:00</td>
-                            <td>-12°C</td>
-                            <td>0%</td>
-                            <td>0 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>03:00</td>
-                            <td>-12°C</td>
-                            <td>0%</td>
-                            <td>0.08 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>04:00</td>
-                            <td>-11°C</td>
-                            <td>0%</td>
-                            <td>0.08 mm</td>
-                            <td>736 mmHg</td>
-                            <td>82%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>05:00</td>
-                            <td>-12°C</td>
-                            <td>6%</td>
-                            <td>0.07 mm</td>
-                            <td>738 mmHg</td>
-                            <td>78%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>06:00</td>
-                            <td>-12°C</td>
-                            <td>6%</td>
-                            <td>0.09 mm</td>
-                            <td>738 mmHg</td>
-                            <td>76%</td>
-                            <td>2 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>07:00</td>
-                            <td>-14°C</td>
-                            <td>20%</td>
-                            <td>0.09 mm</td>
-                            <td>737 mmHg</td>
-                            <td>75%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                        <tr>
-                            <td>08:00</td>
-                            <td>-15°C</td>
-                            <td>20%</td>
-                            <td>0.16 mm</td>
-                            <td>739 mmHg</td>
-                            <td>71%</td>
-                            <td>3 m/s</td>
-                        </tr>
-                    </tbody>
-                </table>
-            
-            
-                <!-- Gizli 16 saatlik veriler -->
-                <div id="hidden-data" class="hidden">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>09:00</td>
-                                <td>-16°C</td>
-                                <td>25%</td>
-                                <td>0.18 mm</td>
-                                <td>740 mmHg</td>
-                                <td>69%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>10:00</td>
-                                <td>-16°C</td>
-                                <td>25%</td>
-                                <td>0.18 mm</td>
-                                <td>740 mmHg</td>
-                                <td>67%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>11:00</td>
-                                <td>-15°C</td>
-                                <td>30%</td>
-                                <td>0.20 mm</td>
-                                <td>741 mmHg</td>
-                                <td>65%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>12:00</td>
-                                <td>-14°C</td>
-                                <td>40%</td>
-                                <td>0.25 mm</td>
-                                <td>741 mmHg</td>
-                                <td>63%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>13:00</td>
-                                <td>-13°C</td>
-                                <td>35%</td>
-                                <td>0.22 mm</td>
-                                <td>742 mmHg</td>
-                                <td>62%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>14:00</td>
-                                <td>-12°C</td>
-                                <td>40%</td>
-                                <td>0.23 mm</td>
-                                <td>742 mmHg</td>
-                                <td>60%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>15:00</td>
-                                <td>-11°C</td>
-                                <td>45%</td>
-                                <td>0.25 mm</td>
-                                <td>743 mmHg</td>
-                                <td>58%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>16:00</td>
-                                <td>-10°C</td>
-                                <td>50%</td>
-                                <td>0.27 mm</td>
-                                <td>743 mmHg</td>
-                                <td>55%</td>
-                                <td>3 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>17:00</td>
-                                <td>-9°C</td>
-                                <td>55%</td>
-                                <td>0.30 mm</td>
-                                <td>744 mmHg</td>
-                                <td>53%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>18:00</td>
-                                <td>-8°C</td>
-                                <td>60%</td>
-                                <td>0.32 mm</td>
-                                <td>744 mmHg</td>
-                                <td>50%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>19:00</td>
-                                <td>-7°C</td>
-                                <td>65%</td>
-                                <td>0.35 mm</td>
-                                <td>745 mmHg</td>
-                                <td>48%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>20:00</td>
-                                <td>-6°C</td>
-                                <td>70%</td>
-                                <td>0.38 mm</td>
-                                <td>745 mmHg</td>
-                                <td>45%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>21:00</td>
-                                <td>-5°C</td>
-                                <td>75%</td>
-                                <td>0.40 mm</td>
-                                <td>746 mmHg</td>
-                                <td>43%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>22:00</td>
-                                <td>-4°C</td>
-                                <td>80%</td>
-                                <td>0.42 mm</td>
-                                <td>746 mmHg</td>
-                                <td>40%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            <tr>
-                                <td>23:00</td>
-                                <td>-3°C</td>
-                                <td>85%</td>
-                                <td>0.45 mm</td>
-                                <td>747 mmHg</td>
-                                <td>38%</td>
-                                <td>4 m/s</td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                </div>
-            
-                <!-- Gizli veriler için buton -->
-                <button class="toggle-button" onclick="toggleMoreData()">Gizli Verileri Göster</button>
-
-                <script>
-                    function toggleMoreData() {
-                        const hiddenData = document.getElementById("hidden-data");
-                        hiddenData.classList.toggle("hidden");
-                        const button = document.querySelector(".toggle-button");
-                        button.textContent = hiddenData.classList.contains("hidden") ? "Gizli Verileri Göster" : "Gizli Verileri Gizle";
-                    }
-                </script>
-            </div>
-        
+            <table>
+                <thead>
+                    <tr>
+                        <th>Zaman</th>
+                        <th>Sıcaklık</th>
+                        <th>Yağış İhtimali</th>
+                        <th>Yağış</th>
+                        <th>Basınç</th>
+                        <th>Nem</th>
+                        <th>Rüzgar</th>
+                    </tr>
+                </thead>
+                <tbody id="weather-tbody">
+                    <!-- JS ile doldurulacak -->
+                </tbody>
+            </table>
+    
+            <!-- Gizli veriler için buton -->
+            <button class="toggle-button">Sonraki 24 Saat</button>
+        </div>
     </section>
 
     <section id="hourly-graphic">
         <h1>Saatlik Grafiği</h1>
-    <div class="hourly-forecast">
+    <div class="hourly-forecast-graphic">
         <!-- Saatlik hava durumu grafiği -->
         <div class="chart-container">
             <canvas id="hourly-chart"></canvas>
@@ -399,7 +259,7 @@
                 <p class="day-name">Pazartesi</p>
                 <p class="date">02 Aralık</p>
                 <div class="temp-icon">
-                    <img src="rain-icon.png" alt="Yağmurlu">
+                    <img src="images/icon.png" alt="Yağmurlu">
                     <p class="temp">20°C / 14°C</p>
                 </div>
                 <p class="weather-condition">Yağmurlu</p>
@@ -408,7 +268,7 @@
                 <p class="day-name">Salı</p>
                 <p class="date">03 Aralık</p>
                 <div class="temp-icon">
-                    <img src="cloud-icon.png" alt="Bulutlu">
+                    <img src="images/icon.png" alt="Bulutlu">
                     <p class="temp">22°C / 15°C</p>
                 </div>
                 <p class="weather-condition">Bulutlu</p>
@@ -417,7 +277,7 @@
                 <p class="day-name">Çarşamba</p>
                 <p class="date">04 Aralık</p>
                 <div class="temp-icon">
-                    <img src="sun-icon.png" alt="Güneşli">
+                    <img src="images/icon.png" alt="Güneşli">
                     <p class="temp">24°C / 17°C</p>
                 </div>
                 <p class="weather-condition">Güneşli</p>
@@ -426,7 +286,7 @@
                 <p class="day-name">Perşembe</p>
                 <p class="date">05 Aralık</p>
                 <div class="temp-icon">
-                    <img src="rain-icon.png" alt="Yağmurlu">
+                    <img src="images/icon.png" alt="Yağmurlu">
                     <p class="temp">19°C / 12°C</p>
                 </div>
                 <p class="weather-condition">Yağmurlu</p>
@@ -435,35 +295,19 @@
                 <p class="day-name">Cuma</p>
                 <p class="date">06 AralıK</p>
                 <div class="temp-icon">
-                    <img src="cloud-icon.png" alt="Bulutlu">
+                    <img src="images/icon.png" alt="Bulutlu">
                     <p class="temp">18°C / 11°C</p>
                 </div>
                 <p class="weather-condition">Bulutlu</p>
             </div>
-            <div class="day">
-                <p class="day-name">Cumartesi</p>
-                <p class="date">07 Aralık</p>
-                <div class="temp-icon">
-                    <img src="sun-icon.png" alt="Güneşli">
-                    <p class="temp">23°C / 16°C</p>
-                </div>
-                <p class="weather-condition">Güneşli</p>
-            </div>
-            <div class="day">
-                <p class="day-name">Pazar</p>
-                <p class="date">08 Aralık</p>
-                <div class="temp-icon">
-                    <img src="rain-icon.png" alt="Yağmurlu">
-                    <p class="temp">21°C / 14°C</p>
-                </div>
-                <p class="weather-condition">Yağmurlu</p>
-            </div>
         </div>
     </section>
+
+
     <section id="weekly-graphic">
         <!-- Haftalık hava durumu grafiği -->
-        <div class="weekly-forecast-graphic">
         <h1>Haftalık Grafiği</h1>
+        <div class="weekly-forecast-graphic">
         <div class="chart-container">
             <canvas id="weekly-chart"></canvas>
         </div>
@@ -514,10 +358,10 @@ var hourlyChart = new Chart(ctxHourly, {
         var weeklyChart = new Chart(ctxWeekly, {
             type: 'bar',
             data: {
-                labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi', 'Pazar'],
+                labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'],
                 datasets: [{
                     label: 'Günlük Ortalama Sıcaklık (°C)',
-                    data: [20, 22, 24, 19, 18, 23, 21],
+                    data: [20, 22, 24, 19, 18],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -540,5 +384,82 @@ var hourlyChart = new Chart(ctxHourly, {
             }
         });
     </script>
+
+
+    <!-- İller Tablosu -->
+    <section id="cities_table">
+    <h1>Türkiye Çevresinde Hava Durumu</h1>
+  <div class="weather-container">
+      <a href="#" class="city"><div class="city-name">Istanbul</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p  class="city-temperature">-10°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Izmir</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-19°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Ankara</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-10°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Bursa</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-5°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Elazığ</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-8°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Malatya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">4°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Diyarbakır</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">10°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Erzincan</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">5-°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Rize</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">7-°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Mardin</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">9°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Sivas</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-3°C</p></div></a>   
+      <a href="#" class="city"><div class="city-name">Antalya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-5°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Tokat</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">8°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Trabzon</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">4°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Konya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-3°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Sinop</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-10°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Ordu</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">20°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Muş</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">14°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Hatay</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">3°C</p></div></a>
+      <a href="#" class="city"><div class="city-name">Erzurum</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">5°C</p></div></a>
+  </div>
+    </section>
+
+    <!-- Başa dön butonu -->
+    <div id="to_top" class="to-top">
+        <div class="to-top-content">
+            <span class="up-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -4 24 24" fill="white" stroke="none">
+                    <polygon points="12,4 4,12 6.5,12 12,6.5 17.5,12 20,12" />
+                  </svg>
+            </span>
+            <span class="to-top-text">Back to top</span>
+        </div>
+    </div>
+
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-categories">
+            <h3>KURUMSAL</h3>
+            <ul>
+                <li><a href="mailto:alikacar2361@gmail.com">Bize Ulaşın</a></li>
+                <li><a href="images/Hakkımızda.html">Hakkımızda</a></li>
+                <li><a href="images/GizlilikPolitikası.html">Gizlilik Politikası</a></li>
+                <li><a href="images/ÇerezPolitikası.html">Çerez Politikası</a></li>
+            </ul>
+        </div>
+        <div class="footer-categories">
+            <h3>SOSYAL MEDYA</h3>
+            <div class="social-media">
+                <div class="social-item">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="images/facebook_icon.jpg" alt="Facebook">
+                    </a>
+                    <a href="https://www.instagram.com" target="_blank">
+                        <img src="images/instagram_icon.jpg" alt="Instagram">      
+                    </a>   
+                    <a href="https://www.github.com" target="_blank">
+                        <img src="images/github_icon.jpg" alt="GitHub">
+                    </a>
+                    <a href="https://www.linkedin.com" target="_blank">
+                        <img src="images/linkedln_icon.jpg" alt="LinkedIn">
+                    </a>
+                    <a href="https://www.twitter.com" target="_blank">
+                        <img src="images/X.png" alt="Twitter">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

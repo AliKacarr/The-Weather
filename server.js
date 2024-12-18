@@ -1,8 +1,10 @@
 require('dotenv').config();
 const express = require('express');
+const bcrypt = require('bcrypt');
 const axios = require('axios');
 const { MongoClient } = require('mongodb');
 const path = require('path');
+
 
 const app = express();
 app.use('/icons', express.static(path.join(__dirname, 'icons')));
@@ -20,26 +22,41 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html')); // Ana dizindeki index.html dosyasını gönderir
 });
 
-
 const mongoUri = process.env.MONGO_URI;
 const weatherApiKey = process.env.WEATHERAPI_API_KEY;
 const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
 
 app.get('/', (req, res) => {
-    res.redirect('/update-weather?city=İstanbul');
+    res.redirect('/update-weather?city=Sivas');
 });
 
 app.get('/update-weather', async (req, res) => {
-    const city = req.query.city || 'İstanbul'; // Varsayılan şehir
-    try {console.log("Fetching data for:", city);
+    const city = req.query.city || 'Sivas'; // Varsayılan şehir
+    try {
         const collection = await connectMongo();
-        let weatherData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
+        const existingData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
 
-        if (!weatherData || !(await isWeatherDataUpToDate(city))) {
-            weatherData = await fetchAndSaveWeatherData(city); // Güncel değilse yenile
+        // Mevcut veriyi kontrol et
+        if (existingData && isWeatherDataUpToDate(existingData)) {
+            return res.json({
+                city_name: existingData.city_name,
+                city_region: existingData.city_region || null,
+                current_weather: existingData.current_weather,
+                hourly_weather: existingData.hourly_weather,
+                weekly_weather: existingData.weekly_weather,
+            });
         }
 
-        res.json(weatherData); // JSON formatında döndür
+        // Yeni veriyi API'den çek ve kaydet
+        const updatedWeatherData = await fetchAndSaveWeatherData(city, existingData);
+
+        res.json({
+            city_name: updatedWeatherData.city_name,
+            city_region: updatedWeatherData.city_region || null,
+            current_weather: updatedWeatherData.current_weather,
+            hourly_weather: updatedWeatherData.hourly_weather,
+            weekly_weather: updatedWeatherData.weekly_weather,
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Veri alınırken bir hata oluştu.' });
@@ -138,7 +155,7 @@ async function isWeatherDataUpToDate(city) {
 }
 
 // WeatherAPI'den anlık ve saatlik veri, OpenWeatherMap'ten haftalık veri çekme ve kaydetme
-async function fetchAndSaveWeatherData(city) {
+async function fetchAndSaveWeatherData(city, existingData) {
     const weatherApiUrl = `http://api.weatherapi.com/v1/forecast.json?key=${weatherApiKey}&q=${city}&days=1&aqi=no&alerts=no`;
     const openWeatherUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${openWeatherApiKey}&units=metric`;
     const collection = await connectMongo();
@@ -186,6 +203,7 @@ async function fetchAndSaveWeatherData(city) {
 
         const weatherDocument = {
             city_name: apiCityName,
+            city_region: existingData?.city_region || null,
             current_weather: currentWeather,
             hourly_weather: hourlyWeather,
             weekly_weather: weeklyWeather
@@ -209,26 +227,190 @@ app.get('/', (req, res) => {
     res.render('index', { weatherData: null, error: null });
 });
 
-// Butona basıldığında şehre göre veri güncelle
-app.post('/update-weather', async (req, res) => {
-    const city = req.body.city_name;
 
-    if (!city) {
-        return res.render('index', { weatherData: null, error: 'Şehir adı giriniz.' });
-    }
+// Kullanıcı koleksiyonuna bağlanma
+async function connectUserCollection() {
+    const client = new MongoClient(process.env.MONGO_URI);
+    await client.connect();
+    return client.db('weatherDB').collection('user');
+}
 
-    let weatherData = await isWeatherDataUpToDate(city);
+// Kullanıcı kaydı
+app.post('/register', async (req, res) => {
+    const { user_name, password, e_mail } = req.body;
+    try {
+        const collection = await connectUserCollection();
+        const existingUser = await collection.findOne({ e_mail });
 
-    if (!weatherData) {
-        weatherData = await fetchAndSaveWeatherData(city);
-    }
+        if (existingUser) {
+            return res.status(400).json({ error: 'Bu e-posta zaten kayıtlı.' });
+        }
 
-    if (weatherData) {
-        res.render('index', { weatherData: weatherData, error: null });
-    } else {
-        res.render('index', { weatherData: null, error: 'Veri alınamadı veya güncellenemedi.' });
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = {
+            user_name,
+            password: hashedPassword,
+            e_mail,
+            visited_city_1: null,
+            visited_city_2: null,
+            visited_city_3: null,
+            visited_city_4: null,
+            visited_city_5: null
+        };
+
+        await collection.insertOne(newUser);
+        res.status(201).json({  });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Bir hata oluştu.' });
     }
 });
+
+// Kullanıcı girişi
+app.post('/login', async (req, res) => {
+    const { e_mail, password } = req.body;
+    try {
+        const collection = await connectUserCollection();
+        const user = await collection.findOne({ e_mail });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) {
+            return res.status(400).json({ error: 'Hatalı şifre.' });
+        }
+
+        res.status(200).json({  user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Bir hata oluştu.' });
+    }
+});
+
+app.get('/get-user-weather', async (req, res) => {
+    const { email } = req.query;
+    if (!email) {
+        return res.status(400).json({ error: 'E-posta gerekli.' });
+    }
+
+    try {
+        const userCollection = await connectUserCollection();
+        const weatherCollection = await connectMongo();
+
+        const user = await userCollection.findOne({ e_mail: email });
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        // Şehir isimlerini normalize et
+        const visitedCities = [
+            user.visited_city_1,
+            user.visited_city_2,
+            user.visited_city_3,
+            user.visited_city_4,
+            user.visited_city_5
+        ]
+            .filter(Boolean) // Null veya undefined değerleri filtrele
+            .map(city => city.trim().toLowerCase()); // Şehir isimlerini normalize et
+
+        const cityWeatherData = [];
+        for (const city of visitedCities) {
+            const weatherData = await weatherCollection.findOne({
+                city_name: { $regex: `^${city}$`, $options: 'i' } // Case insensitive eşleştirme
+            });
+
+            if (weatherData) {
+                cityWeatherData.push({
+                    city_name: weatherData.city_name,
+                    current_weather: weatherData.current_weather
+                });
+            }
+        }
+        res.status(200).json(cityWeatherData);
+    } catch (error) {
+        console.error('Hata oluştu:', error);
+        res.status(500).json({ error: 'Sunucu hatası.' });
+    }
+});
+
+
+app.post('/update-visited-cities', async (req, res) => {
+    const { email, newCity } = req.body;
+
+    if (!email || !newCity) {
+        return res.status(400).json({ error: 'Email ve yeni şehir bilgisi gerekli.' });
+    }
+
+    try {
+        const userCollection = await connectUserCollection();
+
+        // Kullanıcının mevcut verilerini al
+        const user = await userCollection.findOne({ e_mail: email });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+        }
+
+        // Kullanıcının mevcut visited_city verilerini al
+        const visitedCities = [
+            user.visited_city_1,
+            user.visited_city_2,
+            user.visited_city_3,
+            user.visited_city_4,
+            user.visited_city_5,
+        ];
+
+        // Eğer yeni şehir mevcut visited_city'lerde varsa, onu kaldır
+        const filteredCities = visitedCities.filter(city => city && city !== newCity);
+
+        // Yeni visited_city listesini oluştur
+        const updatedCities = [newCity, ...filteredCities.slice(0, 4)];
+
+        // Kullanıcı verilerini güncelle
+        await userCollection.updateOne(
+            { e_mail: email },
+            {
+                $set: {
+                    visited_city_1: updatedCities[0] || null,
+                    visited_city_2: updatedCities[1] || null,
+                    visited_city_3: updatedCities[2] || null,
+                    visited_city_4: updatedCities[3] || null,
+                    visited_city_5: updatedCities[4] || null,
+                },
+            }
+        );
+
+        res.status(200).json({ message: 'Visited cities güncellendi.' });
+    } catch (error) {
+        console.error('Hata:', error);
+        res.status(500).json({ error: 'Sunucu hatası.' });
+    }
+});
+
+app.get('/get-user-info', async (req, res) => {
+    const { email } = req.query;
+
+    if (!email) {
+        return res.status(400).json({ error: "E-posta bilgisi gerekli." });
+    }
+
+    try {
+        const userCollection = await connectUserCollection();
+        const user = await userCollection.findOne({ e_mail: email });
+
+        if (user) {
+            res.status(200).json({ user_name: user.user_name, e_mail: user.e_mail });
+        } else {
+            res.status(404).json({ error: "Kullanıcı bulunamadı." });
+        }
+    } catch (error) {
+        console.error("Kullanıcı bilgisi alınırken hata oluştu:", error);
+        res.status(500).json({ error: "Sunucu hatası." });
+    }
+});
+
 
 app.listen(3000, () => {
     console.log('Sunucu localhost:3000 üzerinde çalışıyor.');
