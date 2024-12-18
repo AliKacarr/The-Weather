@@ -1,8 +1,11 @@
 body {
-    background-color: #043db9fd; /* Koyu mavi arka plan rengi */
+    background-color: #043db9fd;
+    /* Koyu mavi arka plan rengi */
     background-image: url('images/dark123.jpg');
-    color: #ffffff; /* Beyaz metin rengi */
-    font-family: Arial, sans-serif; /* Yazı tipi */
+    color: #ffffff;
+    /* Beyaz metin rengi */
+    font-family: Arial, sans-serif;
+    /* Yazı tipi */
     margin: 0;
     padding: 0;
 }
@@ -18,9 +21,9 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
-  }
-  
-  .popup-content {
+}
+
+.popup-content {
     background: rgb(255, 255, 255);
     border-radius: 10px;
     padding: 20px;
@@ -30,24 +33,24 @@ body {
     position: relative;
     text-align: center;
     color: #000000;
-  }
-  
-  .popup-content h2 {
+}
+
+.popup-content h2 {
     padding-top: 5px;
     margin-bottom: 30px;
     margin-top: -5px;
     font-size: 24px;
-  }
-  
-  .popup-content input {
+}
+
+.popup-content input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  
-  .popup-content button {
+}
+
+.popup-content button {
     padding: 10px 20px;
     background-color: #4CAF50;
     font-size: 17px;
@@ -55,26 +58,27 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .popup-content button:hover {
+}
+
+.popup-content button:hover {
     background-color: #45a049;
-  }
-  
-  .close {
+}
+
+.close {
     position: absolute;
     top: 10px;
     right: 15px;
     font-size: 40px;
     cursor: pointer;
-  }
+}
 
-  .exit-link {
+.exit-link {
     color: blue;
     text-decoration: none;
     cursor: pointer;
     font-size: 16px;
 }
+
 .exit-link:hover {
     color: darkblue;
 }
@@ -84,20 +88,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #021358; /* Daha koyu mavi navbar arka planı */
+    background-color: #021358;
+    /* Daha koyu mavi navbar arka planı */
     padding: 2px 20px;
 }
 
 /*logo resmi */
 .logo img {
-    height: 50px; /* Logo yüksekliği */
+    height: 50px;
+    /* Logo yüksekliği */
     width: 55px;
     margin-left: 100px;
     margin-right: -200px;
 }
 
 /* logo yazısı */
-#logo-name{
+#logo-name {
     font-size: 20px;
 }
 
@@ -110,7 +116,8 @@ body {
     background-color: #355773;
     color: #ffffff;
     padding: 9px 10px;
-    padding-right: 40px; /* Büyüteç için sağ boşluk */
+    padding-right: 40px;
+    /* Büyüteç için sağ boşluk */
     width: 300px;
     text-align: center;
     border-radius: 25px;
@@ -123,11 +130,13 @@ body {
     font-size: 17px;
     color: #F2EAE8;
     opacity: 1;
-    transition: opacity 0.3s ease; /* Opaklık geçişi */
+    transition: opacity 0.3s ease;
+    /* Opaklık geçişi */
 }
 
 .search-city input.placeholder-hidden::placeholder {
-    opacity: 0; /* Placeholder kaybolur */
+    opacity: 0;
+    /* Placeholder kaybolur */
 }
 
 .search-city .search-icon {
@@ -135,25 +144,33 @@ body {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    pointer-events: none; /* Tıklanamaz yap */
+    pointer-events: none;
+    /* Tıklanamaz yap */
     font-size: 18px;
     color: #F2EAE8;
 }
 
-#city-input::placeholder{
+#city-input::placeholder {
     font-size: 17px;
     color: #F2EAE8;
 }
 
 /* Arama kutusu büyüteç ikonu*/
 .magnifier-icon {
-    font-size: 30px; /* Simgenin boyutunu ayarlar */
-    color: #ffffff; /* Simgenin rengini beyaz yapar */
-    background-color: #3b5671; /* Arka plan rengini ayarlar */
-    border-radius: 5px; /* Kenar yumuşatma */
-    padding: 10px; /* İç boşluk */
-    display: inline-block; /* Blok olarak görünmesini sağlar */
-    cursor: pointer; /* Üzerine gelindiğinde imleç değişir */
+    font-size: 30px;
+    /* Simgenin boyutunu ayarlar */
+    color: #ffffff;
+    /* Simgenin rengini beyaz yapar */
+    background-color: #3b5671;
+    /* Arka plan rengini ayarlar */
+    border-radius: 5px;
+    /* Kenar yumuşatma */
+    padding: 10px;
+    /* İç boşluk */
+    display: inline-block;
+    /* Blok olarak görünmesini sağlar */
+    cursor: pointer;
+    /* Üzerine gelindiğinde imleç değişir */
 }
 
 
@@ -166,11 +183,11 @@ body {
 
 
 /* Ayaralar, profil, giriş ve kayıt butonları*/
-.user-buttons button{
+.user-buttons button {
     font-family: 'Segoe UI', sans-serif;
     padding: 10px 20px;
     font-size: 17px;
-    background-color:#5a8bcb;
+    background-color: #5a8bcb;
     color: white;
     border: none;
     border-radius: 9px;
@@ -179,19 +196,19 @@ body {
     transition: background-color 0.1s ease;
 }
 
-.user-buttons button:hover{
-    background-color:#4b51a9;
+.user-buttons button:hover {
+    background-color: #4b51a9;
 }
 
 /* profil butonu*/
-#profilbutton{
+#profilbutton {
     display: none;
     font-size: 18px;
     padding: 10px 27px;
 }
 
 /* ayarlar butonu*/
-#settingsbutton{
+#settingsbutton {
     display: none;
     font-size: 18px;
     padding: 10px 27px;
@@ -199,14 +216,16 @@ body {
 
 /* bayrak */
 .flag-icon {
-    width: 25px; /* Bayrak boyutunu ayarla */
+    width: 25px;
+    /* Bayrak boyutunu ayarla */
     height: auto;
-    margin-right: 5px; 
-    vertical-align: middle; /* Metinle hizalama */
+    margin-right: 5px;
+    vertical-align: middle;
+    /* Metinle hizalama */
 }
 
 /* dil ve bayrağı */
-.language-selector{    
+.language-selector {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -217,9 +236,9 @@ body {
     padding: 0px 9px;
 }
 
-.language-selector:hover{
+.language-selector:hover {
     background-color: #d9e0e93d;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 
@@ -235,8 +254,8 @@ body {
     text-decoration: none;
 }
 
-#menu-btn-aside:hover{
-    background-color:  #d9e0e93d;
+#menu-btn-aside:hover {
+    background-color: #d9e0e93d;
 }
 
 
@@ -248,9 +267,9 @@ main {
 
 /* Üst Şerit Geçmiş Aramalar */
 .city-weather-strip {
-    display: none; 
+    display: none;
     justify-content: space-around;
-    padding: 10px 8px; 
+    padding: 10px 8px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #08468d84;
@@ -264,27 +283,36 @@ main {
 
 .city-weather {
     display: flex;
-    flex-direction: column; /* Dikey yerleşim */
-    align-items: center; /* İçerikleri ortala */
-    background-color: rgba(255, 255, 255, 0.1); /* Hafif şeffaf arka plan */
-    border-radius: 10px; /* Yuvarlatılmış köşeler */
-    text-align: center; /* Yazıları ortala */
-    width: 100px; /* Kutu genişliği */
-    cursor: pointer; /* Tıklanabilir göstermek için */
-    transition: transform 0.3s ease; /* Hover efekti */
+    flex-direction: column;
+    /* Dikey yerleşim */
+    align-items: center;
+    /* İçerikleri ortala */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Hafif şeffaf arka plan */
+    border-radius: 10px;
+    /* Yuvarlatılmış köşeler */
+    text-align: center;
+    /* Yazıları ortala */
+    width: 100px;
+    /* Kutu genişliği */
+    cursor: pointer;
+    /* Tıklanabilir göstermek için */
+    transition: transform 0.3s ease;
+    /* Hover efekti */
 }
 
 .city-weather:hover {
-    transform: scale(1.05); /* Hover durumunda büyüme efekti */
+    transform: scale(1.05);
+    /* Hover durumunda büyüme efekti */
 }
 
-.city-weather p{
+.city-weather p {
     font-size: 17px;
 }
 
 .city-weather img {
     height: 35px;
-    width: 35px; 
+    width: 35px;
 }
 
 
@@ -315,12 +343,12 @@ main {
     font-size: 28px;
 }
 
-#date-time{
+#date-time {
     font-size: 16px;
     color: #d1c1c1;
 }
 
-#description{
+#description {
     font-size: 18px;
 }
 
@@ -348,7 +376,7 @@ main {
 }
 
 
-.forecast-box p{
+.forecast-box p {
     font-size: 20px;
 }
 
@@ -383,7 +411,7 @@ main {
 }
 
 .info-box {
-    background-color:#28469283;
+    background-color: #28469283;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -393,7 +421,7 @@ main {
 }
 
 
-#last-update{
+#last-update {
     margin-left: 50px;
 }
 
@@ -413,8 +441,8 @@ section {
 }
 
 /* Saatlik tablo */
-.hourly-forecast{
-    background-color: #051894e3; 
+.hourly-forecast {
+    background-color: #051894e3;
     border-radius: 10px;
     padding: 15px;
 }
@@ -427,16 +455,17 @@ section {
 }
 
 /* Başlık ve veri hücreleri*/
-.hourly-forecast th, .hourly-forecast td {
+.hourly-forecast th,
+.hourly-forecast td {
     font-family: 'Arial', sans-serif;
     font-size: 14px;
-    border: 1px solid #A7C8E8; 
+    border: 1px solid #A7C8E8;
 }
 
 /* Tablo başlık hücreleri */
 .hourly-forecast th {
-    background-color: #4A90E2; 
-    color: white; 
+    background-color: #4A90E2;
+    color: white;
     text-align: center;
     padding: 10px;
     border: 1px solid #3B7ABD;
@@ -444,16 +473,17 @@ section {
 
 /* Tablo veri hücreleri */
 .hourly-forecast td {
-    background-color: #D9ECFF; 
-    color: black; /* Veri hücreleri metin rengi */
+    background-color: #D9ECFF;
+    color: black;
+    /* Veri hücreleri metin rengi */
     text-align: center;
     padding: 8px;
-    border: 1px solid #A7C8E8; 
+    border: 1px solid #A7C8E8;
 }
 
 /* Tablo çift numaralı satırlar*/
 .hourly-forecast tr:nth-child(even) td {
-    background-color: #CBE4FF; 
+    background-color: #CBE4FF;
 }
 
 /* Satırları gizle göstert butonu*/
@@ -468,7 +498,7 @@ section {
 }
 
 .hourly-forecast .toggle-button:hover {
-background-color: #495cc8;
+    background-color: #495cc8;
 }
 
 /* Satırları gizleme */
@@ -483,12 +513,13 @@ background-color: #495cc8;
     position: relative;
     margin: auto;
     width: 70%;
-    background-color: #051894e3; /* Kutular için arka plan */
+    background-color: #051894e3;
+    /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
 }
 
-#hourly-graphic h1{
+#hourly-graphic h1 {
     margin-left: 220px;
 }
 
@@ -497,10 +528,11 @@ background-color: #495cc8;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-    margin:auto;
+    margin: auto;
     width: 80%;
     position: relative;
-    background-color: #051894e3; /* Kutular için arka plan */
+    background-color: #051894e3;
+    /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
 }
@@ -511,26 +543,27 @@ background-color: #495cc8;
 
 .day {
     background-color: #2f468b;
-    color: #fff; 
-    padding: 20px 10px; 
+    color: #fff;
+    padding: 20px 10px;
     text-align: center;
-    border-radius: 5px; 
+    border-radius: 5px;
     position: relative;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
 .day-name {
-    display: block; 
+    display: block;
     position: absolute;
-    top: -30px; /* Üst kısmına kaydır */
+    top: -30px;
+    /* Üst kısmına kaydır */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #3a3b3cd2; 
-    color: #fff; 
-    padding: 5px 10px; 
-    border-radius: 5px; 
-    font-weight: bold; 
-    box-shadow: 0 3px 5px rgba(54, 56, 171, 0.911); 
+    background-color: #3a3b3cd2;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 3px 5px rgba(54, 56, 171, 0.911);
 }
 
 .temp-icon img {
@@ -541,25 +574,27 @@ background-color: #495cc8;
 
 @media (max-width: 768px) {
     .weekly-forecast {
-        grid-template-columns: repeat(3, 1fr); 
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .day:nth-child(6), .day:nth-child(7) {
-        grid-column: span 2; 
+    .day:nth-child(6),
+    .day:nth-child(7) {
+        grid-column: span 2;
     }
 }
 
 
 /* Haftalık Grafiği */
-.weekly-forecast-graphic{
+.weekly-forecast-graphic {
     margin: auto;
     width: 70%;
-    background-color: #051894e3; /* Kutular için arka plan */
+    background-color: #051894e3;
+    /* Kutular için arka plan */
     border-radius: 10px;
     padding: 15px;
 }
 
-#weekly-graphic h1{
+#weekly-graphic h1 {
     margin-left: 210px;
 }
 
@@ -569,10 +604,11 @@ background-color: #495cc8;
     background-color: #022571e9;
     border-radius: 10px;
     padding: 15px 0;
-    width: 100%; /* Ekranın tamamını kullanır */
-    max-width: 100%; 
-    height: 500px; 
-    margin: auto; 
+    width: 100%;
+    /* Ekranın tamamını kullanır */
+    max-width: 100%;
+    height: 500px;
+    margin: auto;
 }
 
 
@@ -643,7 +679,7 @@ background-color: #495cc8;
     font-weight: bold;
     color: #fff;
     margin: 0;
-    text-align: right; 
+    text-align: right;
     white-space: nowrap;
 }
 
@@ -651,16 +687,20 @@ background-color: #495cc8;
     #cities_table h1 {
         font-size: 20px;
     }
+
     .city {
         padding: 8px;
     }
+
     .city-name {
         font-size: 14px;
     }
+
     .city-icon {
         width: 30px;
         height: 30px;
     }
+
     .city-temperature {
         font-size: 16px;
     }
@@ -669,41 +709,79 @@ background-color: #495cc8;
 /* Başa dön butonu */
 .to-top {
     position: fixed;
-    bottom: 49px; /* Sayfanın altından mesafe */
-    right: 48px; /* Sağdan mesafe */
-    background-color: #1e4d7b; 
+    bottom: 49px;
+    /* Sayfanın altından mesafe */
+    right: 48px;
+    /* Sağdan mesafe */
+    background-color: #1e4d7b;
     color: white;
-    border-radius: 20px; 
+    border-radius: 20px;
     padding: 5px 8px;
     display: none;
     align-items: center;
-    cursor: pointer; /* Tıklanabilir işaretçi */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+    cursor: pointer;
+    /* Tıklanabilir işaretçi */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Hafif gölge */
     transition: background-color 0.3s ease;
-  }
-  
-  .to-top:hover {
-    background-color: #153a5c; /* Hover rengi */
-  }
-  
-  .to-top-content {
+}
+
+.to-top:hover {
+    background-color: #153a5c;
+    /* Hover rengi */
+}
+
+.to-top-content {
     display: flex;
     align-items: center;
-    gap: 5px; /* Simge ve yazı arasında boşluk */
-  }
-  
-  .up-white {
+    gap: 5px;
+    /* Simge ve yazı arasında boşluk */
+}
+
+.up-white {
     display: flex;
     align-items: center;
     justify-content: center;
     padding-bottom: 2px;
-  }
-  
-  .to-top-text {
+}
+
+.to-top-text {
     font-family: 'Segoe UI', sans-serif;
     font-size: 15px;
     margin-right: 5px;
-  }
+}
+
+
+.map {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+#map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.map-body {
+    display: flex;
+    gap: 15px;
+    width: 90vw;
+    height: 80vh;
+    padding: 10px;
+    /* background-color: #cbd7e4; */
+    background-color: #051894e3;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    align-items: center;
+    justify-items: center;
+}
 
 
 
@@ -760,7 +838,7 @@ background-color: #495cc8;
     transition: transform 0.2s ease;
 }
 
-.social-item img:hover{
+.social-item img:hover {
     transform: scale(1.1);
 }
 
@@ -775,11 +853,12 @@ background-color: #495cc8;
 
 @media only screen and (max-width: 840px) {
     .additional-settings {
-        margin-left:unset
+        margin-left: unset
     }
 }
 
-.additional-settings .inner,.additional-settings a {
+.additional-settings .inner,
+.additional-settings a {
     align-items: center;
     color: #ffffff;
     border-radius: 4px;
@@ -833,19 +912,19 @@ background-color: #495cc8;
 }
 
 .additional-settings .matches ul.matches-group.wide {
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: space-between; 
-    padding: 0; 
-    margin: 0; 
-    list-style: none; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 .additional-settings .matches ul.matches-group.wide li {
-    width: 48%; 
-    margin-bottom: 1em; 
-    text-align: left; 
-    display: block; 
+    width: 48%;
+    margin-bottom: 1em;
+    text-align: left;
+    display: block;
 }
 
 
@@ -854,7 +933,7 @@ background-color: #495cc8;
     background: #f8f8f8;
     border-radius: 0;
     border-radius: 10px;
-    box-shadow: .05em .05em .2em rgba(0,0,0,.3);
+    box-shadow: .05em .05em .2em rgba(0, 0, 0, .3);
     box-sizing: border-box;
     color: #231f20;
     line-height: 1em;
@@ -895,7 +974,7 @@ background-color: #495cc8;
 
 @media only screen and (max-width: 840px) {
     .additional-settings .matches li a {
-        padding-bottom:2px;
+        padding-bottom: 2px;
         padding-top: 2px
     }
 }
@@ -903,9 +982,3 @@ background-color: #495cc8;
 .additional-settings .matches li a:hover {
     text-decoration: underline
 }
-
-
-
-
-
-

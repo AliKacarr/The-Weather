@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </head>
+
 <body>
-    
+
     <!-- Profil Popup -->
     <div id="profilPopup" class="popup">
         <div class="popup-content">
@@ -36,10 +38,11 @@
                 <input type="password" id="password" name="password" placeholder="Şifrenizi girin">
                 <button type="button" onclick="submitLogin()">Giriş Yap</button>
             </form>
-            <p>Hesabınız yok mu? <a href="#" id="signupFromLogin" onclick="closePopup('girisPopup'); openPopup('kayitPopup');">Kayıt Ol</a></p>
+            <p>Hesabınız yok mu? <a href="#" id="signupFromLogin"
+                    onclick="closePopup('girisPopup'); openPopup('kayitPopup');">Kayıt Ol</a></p>
         </div>
     </div>
-    
+
     <!-- Kayıt Ol Popup -->
     <div id="kayitPopup" class="popup">
         <div class="popup-content">
@@ -71,63 +74,63 @@
 
         <div class="user-actions">
             <div class="user-buttons">
-            <button type="button" id="profilbutton"  onclick="openPopup('profilPopup')" >Profil</button>
-            <button type="button" id="settingsbutton"  onclick="openPopup('settingsPopup')" >Ayarlar</button>
-            <button type="button" id="loginbutton"  onclick="openPopup('girisPopup')" >Giriş Yap</button>
-            <button type="button" id="submitbutton"  onclick="openPopup('kayitPopup')" >Kayıt Ol</button>
+                <button type="button" id="profilbutton" onclick="openPopup('profilPopup')">Profil</button>
+                <button type="button" id="settingsbutton" onclick="openPopup('settingsPopup')">Ayarlar</button>
+                <button type="button" id="loginbutton" onclick="openPopup('girisPopup')">Giriş Yap</button>
+                <button type="button" id="submitbutton" onclick="openPopup('kayitPopup')">Kayıt Ol</button>
             </div>
 
             <!-- Türk Bayrağı ve dil seçimi -->
-        <div class="language-selector">
-            <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
+            <div class="language-selector">
+                <img src="images/tr.png" alt="Türk Bayrağı" class="flag-icon">
 
-            <div class="additional-settings ">
-                  <div id="settings" class="button settings">
-                    <div class="inner">
-                        <a href="#" aria-label="Settings">
-                            TR
-                        </a>
-                </div>
-        
-                <div class="matches">
-                        <h2>Language</h2>
-                        <ul class="matches-group wide">
-                            <li style="direction: rtl;"><a hreflang="ar"  href="">عربي</a></li>
-                            <li> <a hreflang="bg"  href="">Български</a> </li>
-                            <li><a hreflang="cs"  href="">Čeština</a></li>
-                            <li> <a hreflang="de"  href="">Deutsch</a></li>
-                            <li> <a hreflang="en"  href="">English</a></li>
-                            <li class="selected"> <a hreflang="tr"  href="">Türkçe</a></li>
-                            <li> <a hreflang="es"  href="">Español</a></li>
-                            <li> <a hreflang="fr"  href="">Français</a></li>
-                            <li>  <a hreflang="hr" href="">Hrvatski</a></li>
-                            <li>  <a hreflang="hu" href="">Magyar</a></li>
-                            <li><a hreflang="it"   href="">Italiano</a></li>
-                            <li><a hreflang="ka"   href="">ქართული ენა</a> </li>
-                            <li> <a hreflang="nl"  href="">Nederlands</a> </li>
-                            <li> <a hreflang="pl"  href="">Polski</a>  </li>
-                            <li> <a hreflang="pt"  href="">Português</a> </li>
-                            <li> <a hreflang="ro"  href="">Română</a></li>
-                            <li> <a hreflang="ru"  href="">Pусский</a></li>
-                            <li> <a hreflang="sk"  href="">Slovenský</a></li>
-                            <li> <a hreflang="el"  href="">Ελληνικά</a></li>
-                            <li> <a hreflang="sr"  href="">Srpski</a></li>
-                            <li>  <a hreflang="uk" href="">Українська</a> </li>
-                        </ul>
+                <div class="additional-settings ">
+                    <div id="settings" class="button settings">
+                        <div class="inner">
+                            <a href="#" aria-label="Settings">
+                                TR
+                            </a>
+                        </div>
+
+                        <div class="matches">
+                            <h2>Language</h2>
+                            <ul class="matches-group wide">
+                                <li style="direction: rtl;"><a hreflang="ar" href="">عربي</a></li>
+                                <li> <a hreflang="bg" href="">Български</a> </li>
+                                <li><a hreflang="cs" href="">Čeština</a></li>
+                                <li> <a hreflang="de" href="">Deutsch</a></li>
+                                <li> <a hreflang="en" href="">English</a></li>
+                                <li class="selected"> <a hreflang="tr" href="">Türkçe</a></li>
+                                <li> <a hreflang="es" href="">Español</a></li>
+                                <li> <a hreflang="fr" href="">Français</a></li>
+                                <li> <a hreflang="hr" href="">Hrvatski</a></li>
+                                <li> <a hreflang="hu" href="">Magyar</a></li>
+                                <li><a hreflang="it" href="">Italiano</a></li>
+                                <li><a hreflang="ka" href="">ქართული ენა</a> </li>
+                                <li> <a hreflang="nl" href="">Nederlands</a> </li>
+                                <li> <a hreflang="pl" href="">Polski</a> </li>
+                                <li> <a hreflang="pt" href="">Português</a> </li>
+                                <li> <a hreflang="ro" href="">Română</a></li>
+                                <li> <a hreflang="ru" href="">Pусский</a></li>
+                                <li> <a hreflang="sk" href="">Slovenský</a></li>
+                                <li> <a hreflang="el" href="">Ελληνικά</a></li>
+                                <li> <a hreflang="sr" href="">Srpski</a></li>
+                                <li> <a hreflang="uk" href="">Українська</a> </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
             <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>
         </div>
-        
+
     </nav>
 
     <!-- Ana İçerik -->
     <main>
         <!-- Üst Şerit - Diğer Şehirler Hava Durumu -->
-        <section class="city-weather-strip"> 
+        <section class="city-weather-strip">
             <div class="city-weather" id="city1">
                 <p>Şehir 1</p>
                 <p>--°C</p>
@@ -136,39 +139,39 @@
             <div class="city-weather" id="city2"">
                 <p>city2</p>
                 <p>--°C</p>
-                <img src="" alt="Şehir 2 hava durumu ikonu">
+                <img src="" alt=" Şehir 2 hava durumu ikonu">
             </div>
-            <div class="city-weather" id="city3" >
+            <div class="city-weather" id="city3">
                 <p>Şehir 3</p>
                 <p>--°C</p>
-                <img src="" alt="Şehir 3 hava durumu ikonu" >
+                <img src="" alt="Şehir 3 hava durumu ikonu">
             </div>
             <div class="city-weather" id="city4">
                 <p>Şehir 4</p>
                 <p>--°C</p>
-                <img src="" alt="Şehir 4 hava durumu ikonu" >
+                <img src="" alt="Şehir 4 hava durumu ikonu">
             </div>
             <div class="city-weather" id="city5"">
                 <p>Şehir 5</p>
                 <p>--°C</p>
-                <img src="" alt="Şehir 5 hava durumu ikonu">
+                <img src="" alt=" Şehir 5 hava durumu ikonu">
             </div>
         </section>
 
-<!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
-<section class="current-weather">
-    <h1 id="city-name">Sivas</h1>
-    <p id="region-info" >Bölge Bilgisi...</p>
-    <p id="date-time">Güncel Tarih ve Saat</p>
-    <div class="weather-info">
-        <p><span id="temperature">--°C</span></p>
-        <img id="weather-icon" src="" alt="Hava durumu ikonu">
-    </div>
-    <p id="description">Hava durumu açıklaması...</p>
-</section>
+        <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
+        <section class="current-weather">
+            <h1 id="city-name">Sivas</h1>
+            <p id="region-info">Bölge Bilgisi...</p>
+            <p id="date-time">Güncel Tarih ve Saat</p>
+            <div class="weather-info">
+                <p><span id="temperature">--°C</span></p>
+                <img id="weather-icon" src="" alt="Hava durumu ikonu">
+            </div>
+            <p id="description">Hava durumu açıklaması...</p>
+        </section>
 
         <!-- Günlük Tahmin -->
-         
+
         <section class="daily-forecast">
             <div class="forecast-box" id="forecast-morning">
                 <h3>Sabah</h3>
@@ -192,25 +195,25 @@
             </div>
         </section>
     </main>
-    
+
     <!-- Ekstra Bilgiler -->
-     
-<section class="extra-info">
-    <div class="info-box" id="humidity">
-        <p>Nem: --%</p>
-    </div>
-    <div class="info-box" id="wind-speed">
-        <p>Rüzgar: -- m/s</p>
-    </div>
-    <div class="info-box" id="pressure">
-        <p>Basınç: -- hPa</p>
-    </div>
-</section>
+
+    <section class="extra-info">
+        <div class="info-box" id="humidity">
+            <p>Nem: --%</p>
+        </div>
+        <div class="info-box" id="wind-speed">
+            <p>Rüzgar: -- m/s</p>
+        </div>
+        <div class="info-box" id="pressure">
+            <p>Basınç: -- hPa</p>
+        </div>
+    </section>
 
     <!-- Alt Bilgi -->
     <footer id="last_update_footer">
         <p id="last-update">Son Güncelleme: --</p>
-          </svg>
+        </svg>
     </footer>
 
 
@@ -235,7 +238,7 @@
                     <!-- JS ile doldurulacak -->
                 </tbody>
             </table>
-    
+
             <!-- Gizli veriler için buton -->
             <button class="toggle-button">Sonraki 24 Saat</button>
         </div>
@@ -243,15 +246,15 @@
 
     <section id="hourly-graphic">
         <h1>Saatlik Grafiği</h1>
-    <div class="hourly-forecast-graphic">
-        <!-- Saatlik hava durumu grafiği -->
-        <div class="chart-container">
-            <canvas id="hourly-chart"></canvas>
+        <div class="hourly-forecast-graphic">
+            <!-- Saatlik hava durumu grafiği -->
+            <div class="chart-container">
+                <canvas id="hourly-chart"></canvas>
+            </div>
         </div>
-    </div>
     </section>
 
-     <!-- haftalık hava durumu -->
+    <!-- haftalık hava durumu -->
     <section id="haftalik">
         <h1>Haftalık Hava Durumu</h1>
         <div class="weekly-forecast">
@@ -308,51 +311,51 @@
         <!-- Haftalık hava durumu grafiği -->
         <h1>Haftalık Grafiği</h1>
         <div class="weekly-forecast-graphic">
-        <div class="chart-container">
-            <canvas id="weekly-chart"></canvas>
-        </div>
+            <div class="chart-container">
+                <canvas id="weekly-chart"></canvas>
+            </div>
         </div>
     </section>
     <script>
 
         //  saatlik grafik
-var ctxHourly = document.getElementById('hourly-chart').getContext('2d');
-var hourlyChart = new Chart(ctxHourly, {
-    type: 'line',
-    data: {
-        labels: [
-            '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
-            '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', 
-            '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
-        ],
-        datasets: [{
-            label: 'Sıcaklık (°C)',
-            data: [11, 10, 8, 8, 9, 11, 13, 13, 14, 14 ,15, 17, 19, 21, 23, 24, 25, 24, 23, 21, 19, 17, 15, 13, 12, 11], 
-            borderColor: 'rgba(255, 159, 64, 1)',
-            borderWidth: 2,
-            fill: false
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            x: {
-                beginAtZero: false,
-                title: {
-                    display: true,
-                    text: 'Saat'
-                }
+        var ctxHourly = document.getElementById('hourly-chart').getContext('2d');
+        var hourlyChart = new Chart(ctxHourly, {
+            type: 'line',
+            data: {
+                labels: [
+                    '00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00',
+                    '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
+                    '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'
+                ],
+                datasets: [{
+                    label: 'Sıcaklık (°C)',
+                    data: [11, 10, 8, 8, 9, 11, 13, 13, 14, 14, 15, 17, 19, 21, 23, 24, 25, 24, 23, 21, 19, 17, 15, 13, 12, 11],
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
             },
-            y: {
-                beginAtZero: true,
-                title: {
-                    display: true,
-                    text: 'Sıcaklık (°C)'
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Saat'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Sıcaklık (°C)'
+                        }
+                    }
                 }
             }
-        }
-    }
-});
+        });
         // haftalık grafik
         var ctxWeekly = document.getElementById('weekly-chart').getContext('2d');
         var weeklyChart = new Chart(ctxWeekly, {
@@ -388,44 +391,149 @@ var hourlyChart = new Chart(ctxHourly, {
 
     <!-- İller Tablosu -->
     <section id="cities_table">
-    <h1>Türkiye Çevresinde Hava Durumu</h1>
-  <div class="weather-container">
-      <a href="#" class="city"><div class="city-name">Istanbul</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p  class="city-temperature">-10°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Izmir</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-19°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Ankara</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-10°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Bursa</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-5°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Elazığ</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-8°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Malatya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">4°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Diyarbakır</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">10°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Erzincan</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">5-°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Rize</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">7-°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Mardin</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">9°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Sivas</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-3°C</p></div></a>   
-      <a href="#" class="city"><div class="city-name">Antalya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-5°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Tokat</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">8°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Trabzon</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">4°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Konya</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-3°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Sinop</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">-10°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Ordu</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">20°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Muş</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">14°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Hatay</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">3°C</p></div></a>
-      <a href="#" class="city"><div class="city-name">Erzurum</div><div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon"><p class="city-temperature">5°C</p></div></a>
-  </div>
+        <h1>Türkiye Çevresinde Hava Durumu</h1>
+        <div class="weather-container">
+            <a href="#" class="city">
+                <div class="city-name">Istanbul</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-10°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Izmir</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-19°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Ankara</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-10°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Bursa</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-5°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Elazığ</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-8°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Malatya</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">4°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Diyarbakır</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">10°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Erzincan</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">5-°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Rize</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">7-°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Mardin</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">9°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Sivas</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-3°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Antalya</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-5°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Tokat</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">8°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Trabzon</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">4°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Konya</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-3°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Sinop</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">-10°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Ordu</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">20°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Muş</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">14°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Hatay</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">3°C</p>
+                </div>
+            </a>
+            <a href="#" class="city">
+                <div class="city-name">Erzurum</div>
+                <div class="city-data"> <img src="images/icon.png" alt="ikon" class="city-icon">
+                    <p class="city-temperature">5°C</p>
+                </div>
+            </a>
+        </div>
     </section>
 
     <!-- Başa dön butonu -->
     <div id="to_top" class="to-top">
         <div class="to-top-content">
             <span class="up-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -4 24 24" fill="white" stroke="none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 -4 24 24" fill="white"
+                    stroke="none">
                     <polygon points="12,4 4,12 6.5,12 12,6.5 17.5,12 20,12" />
-                  </svg>
+                </svg>
             </span>
             <span class="to-top-text">Back to top</span>
         </div>
     </div>
 
-    
+    <div class="map">
+        <div class="map-body">
+            <div id="map"></div>
+        </div>
+    </div>
     <!-- Footer -->
     <div class="footer">
         <div class="footer-categories">
@@ -445,8 +553,8 @@ var hourlyChart = new Chart(ctxHourly, {
                         <img src="images/facebook_icon.jpg" alt="Facebook">
                     </a>
                     <a href="https://www.instagram.com" target="_blank">
-                        <img src="images/instagram_icon.jpg" alt="Instagram">      
-                    </a>   
+                        <img src="images/instagram_icon.jpg" alt="Instagram">
+                    </a>
                     <a href="https://www.github.com" target="_blank">
                         <img src="images/github_icon.jpg" alt="GitHub">
                     </a>
@@ -460,6 +568,23 @@ var hourlyChart = new Chart(ctxHourly, {
             </div>
         </div>
     </div>
-
+    <script>
+        const getMapScreenData = async () => {
+            const mapContainer = document.getElementById('map');
+            try {
+                const response = await fetch('turkiye_haritasi.html');
+                if (!response.ok) {
+                    console.log("🚀 ~ file: index2.html:193 ~ Hata kodu:", response.status)
+                }
+                const mapHtml = await response.text();
+                console.log("🚀 ~ Harita HTML içeriği:", mapHtml);
+                mapContainer.innerHTML = mapHtml;
+            } catch (error) {
+                console.error("🚀 ~ HTML dosyası yüklenemedi:", error);
+            }
+        };
+        getMapScreenData()
+    </script>
 </body>
+
 </html>
