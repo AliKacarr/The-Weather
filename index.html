@@ -122,7 +122,30 @@
                 </div>
             </div>
 
-            <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>
+           <!-- <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>-->
+
+
+<!-- Yan Menü -->
+<aside id="sideMenu" class="side-menu">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">&times;</a>
+
+    <H2 id="menu_id"> MENÜ</H2>
+    <div class="city-data">
+      <ul>
+      <a href="#gun">BUGÜN</a>
+      <a href="#haftalik">HAFTALIK</a>
+      <a href="#saatlik">SAATLİK</a>
+      <a href="#har">TÜRKİYE GENELİ</a>
+      <a href="#cities_table">İLLER TABLOSU</a>
+      </ul>
+  </div>
+   
+</aside>
+
+<div class="menu-toggle" onclick="openMenu()">☰</div>
+
+
+
         </div>
 
     </nav>
@@ -172,7 +195,7 @@
 
         <!-- Günlük Tahmin -->
 
-        <section class="daily-forecast">
+        <section class="daily-forecast" id="gun">
             <div class="forecast-box" id="forecast-morning">
                 <h3>Sabah</h3>
                 <img src="" alt="Sabah ikonu" class="forecast-icon">
@@ -529,7 +552,7 @@
         </div>
     </div>
 
-    <div class="map">
+    <div class="map" id="har">
         <div class="map-body">
             <div id="map"></div>
         </div>

@@ -257,8 +257,85 @@ body {
 #menu-btn-aside:hover {
     background-color: #d9e0e93d;
 }
+/*---------------------------------*/
+/* yan menü */
+#menu-btn-aside {
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+#menu-btn-aside:hover {
+    background-color: #d9e0e93d;
+}
+/*---------------------------------------------------------------*/
 
 
+
+/* Yan Menü */
+.side-menu {
+    height: 100%;
+    width: 240px; /* Başlangıç genişliği */
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: #5f9fdf;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    display: none;
+  }
+  
+  .side-menu a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  
+  .side-menu .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 50px;
+    color: white;
+  }
+  
+ 
+  
+  /* Menü Açma Butonu */
+  .menu-toggle {
+    position: absolute;
+    top: 15px;
+    left: 35px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+    z-index: 1100;
+    display: block;
+    opacity: 1; /* Başlangıçta tamamen görünür */
+    transition: opacity 1s ease; 
+  }
+  
+  .menu-toggle.hidden {
+    opacity: 0; /* Gizlendiğinde tamamen görünmez */
+  }
+  
+  #menu_id{
+    margin-left: 20px;
+    margin-top: -12px;
+  }
+
+/*---------------------------------*/
 
 /* Ana İçerik */
 main {
