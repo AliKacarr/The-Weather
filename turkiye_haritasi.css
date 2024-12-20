@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #9bb5d0;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.btn-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.btn {
+    background-color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+.btn.active {
+    background-color: #007BFF;
+    color: #fff;
+}
+.btn:hover {
+    background-color: #007BFF;
+    color: #fff;
+}
+.map-container {
+    position: relative;
+    width: 1000%; /* Tüm genişliği kapsar */
+    max-width: 1000px; /* Haritanın maksimum genişliği */
+    aspect-ratio: 16 / 9; /* En-boy oranı koruma */
+    background-image: url(resimler/map.png); /* Türkiye haritası resmi */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+}
+.city {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+}
+.city .weather-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #a29c9c;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5); /* Hafif şeffaf arka plan */
+    margin-bottom: 5px;
+}
+.city .weather-info img {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+}
+.city .weather-info span {
+    font-size: 16px;
+    font-weight: bold;
+}
+.city img.location {
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+}
+/* Şehirlerin haritadaki konumları */
+.istanbul { top: 15%; left: 17%; }
+.samsun { top: 8%; left: 50%; }
+.konya { top: 41%; left: 37%; }
+.antalya { top: 60%; left: 28%; }
+.elazig { top: 42%; left: 65%; }
+.van { top: 37%; left: 85%; }
+.mardin { top: 55%; left: 75%; }
