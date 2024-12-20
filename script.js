@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const newEmailInput = document.getElementById('newEmail');
     const cityElements = document.querySelectorAll('.city');
     const regionInfoElement = document.getElementById('region-info');
+    const languageSelector = document.querySelector('.language-selector');
+    const matches = document.querySelector('.additional-settings .matches');
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
@@ -126,8 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
-                    console.log(data.city_name);
-                    console.log(data.city_region);
                 // Region Info güncelleme
                 if (data.city_region) {
                     regionInfoElement.textContent = data.city_region;
@@ -337,6 +337,19 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         toTopButton.style.display = 'flex'; // Butonu göster
         } else {
         toTopButton.style.display = 'none'; // Butonu gizle
+        }
+    });
+
+    // Dil kutusuna tıklanınca matches görünürlüğünü aç/kapat
+    languageSelector.addEventListener('click', function (event) {
+        event.preventDefault(); // Sayfa yenilenmesini engelle
+        matches.style.display = matches.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Dil ekranı dışında bir yere tıklanırsa matches'i kapat
+    document.addEventListener('click', function (event) {
+        if (matches.style.display === 'block' && !matches.contains(event.target) && !languageSelector.contains(event.target)) {
+            matches.style.display = 'none';
         }
     });
 
