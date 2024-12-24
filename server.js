@@ -37,7 +37,7 @@ app.get('/update-weather', async (req, res) => {
         const existingData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
 
         // Mevcut veriyi kontrol et
-        if (existingData && isWeatherDataUpToDate(existingData)) {
+        if (existingData && await isWeatherDataUpToDate(existingData.city_name)) { 
             return res.json({
                 city_name: existingData.city_name,
                 city_region: existingData.city_region || null,
@@ -49,7 +49,6 @@ app.get('/update-weather', async (req, res) => {
 
         // Yeni veriyi API'den çek ve kaydet
         const updatedWeatherData = await fetchAndSaveWeatherData(city, existingData);
-
         res.json({
             city_name: updatedWeatherData.city_name,
             city_region: updatedWeatherData.city_region || null,
@@ -138,20 +137,22 @@ async function connectMongo() {
 }
 
 // Veri güncelliğini kontrol etme
-async function isWeatherDataUpToDate(city) {
+async function isWeatherDataUpToDate(city_name) {
     const collection = await connectMongo();
-    const cityData = await collection.findOne({ city_name: { $regex: `^${city}$`, $options: 'i' } });
+    
+    const cityData = await collection.findOne({ city_name: { $regex: `^${city_name}$`, $options: 'i' } });
     
     if (cityData && cityData.current_weather && cityData.current_weather.güncelleme_zamanı) {
-        const lastUpdateTime = new Date(cityData.current_weather.güncelleme_zamanı);
-        const currentTime = new Date();
-        const timeDifference = (currentTime - lastUpdateTime) / (1000 * 60);
+        const lastUpdateTime = new Date(cityData.current_weather.güncelleme_zamanı); // Son güncelleme zamanı
+        const currentTime = new Date(); // Şu anki zaman
+        const timeDifference = (currentTime - lastUpdateTime) / (1000 * 60); // Fark, dakika cinsinden
+
 
         if (timeDifference < 15) {
             return cityData;
         }
     }
-    return null;
+    return false;
 }
 
 // WeatherAPI'den anlık ve saatlik veri, OpenWeatherMap'ten haftalık veri çekme ve kaydetme
