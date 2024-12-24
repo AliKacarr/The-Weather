@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('humidity').textContent = `Nem: ${data.current_weather.nem}%`;
                 document.getElementById('wind-speed').textContent = `Rüzgar: ${data.current_weather.rüzgar} m/s`;
                 document.getElementById('pressure').textContent = `Basınç: ${data.current_weather.basınç} hPa`;
-                document.getElementById('last-update').textContent = `Son Güncelleme: ${new Date(data.current_weather.güncelleme_zamanı).toLocaleString('tr-TR')}`;
+                document.getElementById('last-update').textContent = ` ${new Date(data.current_weather.güncelleme_zamanı).toLocaleString('tr-TR')}`;
 
                 // Sabah, öğle, akşam ve gece tahminlerini güncelle
                 document.getElementById('forecast-morning').innerHTML = `
@@ -139,11 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCityWeatherIconsAndTemperatures();
 
                 const selectedElement = document.querySelector('.matches-group .selected a');
-                const targetLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto'; // Seçili dil veya varsayılan 'auto'
+                const targetLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'en';
                 
                 const description = document.getElementById('description');
                 if (description) {
-                    translateElementText(description, 'auto', targetLang); // 'auto' kaynak dil olarak kullanılıyor
+                    translateElementText(description, 'auto', targetLang); 
                 }
     
                 const regioninfo = document.getElementById('region-info');
@@ -366,6 +366,8 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
             matches.style.display = 'none';
         }
     });
+
+    //---Sayfa Çevirisi
     function translatePage(sourceLang, targetLang) {
         // Tüm metin düğümlerini bul
         const textNodes = [];
@@ -397,6 +399,7 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
                 .catch(error => {
                     console.error(`"${text}" metni çevrilemedi:`, error);
                 });
+                updateSettingElement(targetLang);
         });
 
         //  popup sınıfındaki placeholder'ları çevir
@@ -450,13 +453,14 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
             const targetLang = link.getAttribute('hreflang'); // Seçilen dil
             const selectedElement = document.querySelector('.matches-group .selected a');
             const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
-
+            
             translatePage(sourceLang, targetLang);
             updateSelectedClass(targetLang);
         });
     });
 
-    function updateSelectedClass(targetLang) {
+    function updateSelectedClass(targetLang) { //dil değişiminde selected sınıfı
+
         // Mevcut 'selected' sınıfını kaldır
         const currentSelected = document.querySelector('.matches-group .selected');
         if (currentSelected) {
@@ -470,11 +474,19 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         }
     }
 
+    function updateSettingElement(targetLang) { //seçili dilin butonda gözükmesi
+        const settingElement = document.getElementById('setting');
+        if (settingElement) {
+            settingElement.textContent = targetLang.toUpperCase(); // Dil kodunu büyük harflerle yaz
+        }
+    }
+
     const browserLang = navigator.language.split('-')[0]; // Tarayıcı dili (ör. "en-US" → "en")
     const selectedElement = document.querySelector('.matches-group .selected a');
     const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
     translatePage(sourceLang, browserLang);
     updateSelectedClass(browserLang);
+    updateSettingElement(browserLang);
     
 });
 /* --------------------------------DOMContentLoaded Bitişi--------------------------------- */
