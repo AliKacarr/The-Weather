@@ -192,14 +192,27 @@ async function fetchAndSaveWeatherData(city, existingData) {
 
         
         
-        const weeklyWeather = weeklyData.list
-        .filter((item, index) => index % 8 === 0) 
+    // Günlük en düşük ve en yüksek sıcaklıkları hesaplama
+    const dailyData = weeklyData.list.reduce((groupedData, item) => {
+        const dateKey = item.dt_txt.split(" ")[0]; // Tarih kısmını al
+        if (!groupedData[dateKey]) groupedData[dateKey] = []; // Eğer tarih yoksa başlat
+        groupedData[dateKey].push(item); // Günün saatlik verilerini ekle
+        return groupedData;
+    }, {});
+    
+    const weeklyWeather = Object.values(dailyData) // Sadece verilerle ilgileniyoruz
         .slice(0, 5) // İlk 5 günü al
-        .map(day => ({
-            sabah_sıcaklık: day.main.temp_max,
-            gece_sıcaklık: day.main.temp_min,
-            hava_durumu_ikonu: day.weather[0].icon
-        }));
+        .map(dayValues => {
+            const minTemp = Math.min(...dayValues.map(v => v.main.temp_min));
+            const maxTemp = Math.max(...dayValues.map(v => v.main.temp_max));
+            const weatherIcon = dayValues[0]?.weather[0]?.icon || ""; // Hata kontrolü ekledik
+    
+            return {
+                gece_sıcaklık: minTemp,
+                sabah_sıcaklık: maxTemp,
+                hava_durumu_ikonu: weatherIcon
+            };
+        });
 
         const weatherDocument = {
             city_name: apiCityName,

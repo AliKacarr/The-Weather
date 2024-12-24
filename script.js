@@ -289,7 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
                 <div class="temp-icon">
                     <img src="${iconPath}" alt="Hava Durumu İkonu">
-                    <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
+                    <p class="temp">${day.gece_sıcaklık}°C / ${day.sabah_sıcaklık}°C</p>
                 </div>
             </div>
         `;
