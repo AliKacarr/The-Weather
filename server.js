@@ -57,7 +57,6 @@ app.get('/update-weather', async (req, res) => {
             weekly_weather: updatedWeatherData.weekly_weather,
         });
     } catch (error) {
-        console.error(error);
         res.status(500).json({ error: 'Veri alınırken bir hata oluştu.' });
     }
 });

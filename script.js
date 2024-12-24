@@ -15,8 +15,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
-    // Varsayılan olarak Sivas verisini yükle
-    fetchWeatherData('Sivas');
+    const defaultCity = 'Sivas'; 
+    const openCageApiKey = '68f14cb81c9d4c1aa74af624b79baade'; 
+
+    async function getUserCity(latitude, longitude) {
+        try {
+            const response = await fetch(
+                `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${openCageApiKey}`
+            );
+            const data = await response.json();
+
+            if (data.results.length > 0) {
+                // Öncelikle 'state' bilgisini kontrol et
+                const components = data.results[0].components;
+                return (
+                    components.state || // Öncelikli 'state' bilgisini al
+                    components.city || // Şehir bilgisini al
+                    components.town || // Kasaba bilgisini al
+                    components.village || // Köy bilgisini al
+                    defaultCity // Hiçbiri yoksa varsayılan şehir
+                );
+            }
+        } catch (error) {
+            console.error('Şehir bilgisi alınırken hata:', error);
+        }
+        return defaultCity; // Hata durumunda
+    }
+
+    function requestLocation() {
+        if (!navigator.geolocation) {
+            console.warn('Tarayıcı konum izni desteklemiyor.');
+            fetchWeatherData(defaultCity); // Geolocation desteklenmezse
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                const city = await getUserCity(latitude, longitude);
+                console.log(`Bulunduğunuz şehir: ${city}`);
+                fetchWeatherData(city); // Şehirle hava durumunu getir
+            },
+            () => {
+                fetchWeatherData(defaultCity); // Konum izni reddedilirse
+            }
+        );
+    }
+
+    // Sayfa yüklendiğinde konumu kontrol et
+    requestLocation();
 
     // Giriş ekranındaki Enter tuşu davranışı
     emailInput.addEventListener('keypress', (event) => {
