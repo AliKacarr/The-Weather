@@ -151,6 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     translateElementText(regioninfo, 'auto', targetLang);
                 }
 
+                const lastupdate = document.getElementById('last-update');
+                if (lastupdate) {
+                    translateElementText(lastupdate, 'auto', targetLang);
+                }
+
             
             })
             .catch(error => console.error('Veri çekme hatası:', error));
