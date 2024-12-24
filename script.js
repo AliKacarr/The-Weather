@@ -352,7 +352,73 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
             matches.style.display = 'none';
         }
     });
+    function translatePage(sourceLang, targetLang) {
+        // Tüm metin düğümlerini bul
+        const textNodes = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while ((node = walker.nextNode())) {
+            if (node.nodeValue.trim()) {
+                textNodes.push(node);
+            }
+        }
+    
+        // Çeviri için tüm metinleri topla
+        const texts = textNodes.map(node => node.nodeValue);
+    
+        // Her bir metni çevir ve DOM'u güncelle
+        texts.forEach((text, index) => {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    textNodes[index].nodeValue = data[0][0][0];
+                })
+                .catch(error => {
+                    console.error(`"${text}" metni çevrilemedi:`, error);
+                });
+        });
+    }
+    
+    // Kullanıcı bir dil seçtiğinde çağır
+    document.querySelectorAll('.matches-group a').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            const targetLang = link.getAttribute('hreflang'); // Seçilen dil
+            const selectedElement = document.querySelector('.matches-group .selected a');
+            const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
 
+            translatePage(sourceLang, targetLang);
+            updateSelectedClass(targetLang);
+        });
+    });
+
+    function updateSelectedClass(targetLang) {
+        // Mevcut 'selected' sınıfını kaldır
+        const currentSelected = document.querySelector('.matches-group .selected');
+        if (currentSelected) {
+            currentSelected.classList.remove('selected');
+        }
+    
+        // Yeni 'selected' sınıfını ekle
+        const matchingLink = document.querySelector(`.matches-group a[hreflang="${targetLang}"]`);
+        if (matchingLink) {
+            matchingLink.parentElement.classList.add('selected');
+        }
+    }
+
+    const browserLang = navigator.language.split('-')[0]; // Tarayıcı dili (ör. "en-US" → "en")
+    const selectedElement = document.querySelector('.matches-group .selected a');
+    const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
+    translatePage(sourceLang, browserLang);
+    updateSelectedClass(browserLang);
+    
 });
 /* --------------------------------DOMContentLoaded Bitişi--------------------------------- */
 
