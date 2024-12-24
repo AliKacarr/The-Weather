@@ -84,7 +84,7 @@
             <div class="additional-settings ">
                   <div id="settings" class="button settings">
                     <div class="inner">
-                        <a href="#" aria-label="Settings">
+                        <a href="#" id="setting" aria-label="Settings">
                             TR
                         </a>
                 </div>
@@ -158,38 +158,46 @@
 <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
 <section class="current-weather">
     <h1 id="city-name">Sivas</h1>
-    <p id="region-info" >Bölge Bilgisi...</p>
-    <p id="date-time">Güncel Tarih ve Saat</p>
+    <p id="region-info" >İç Anadolu Bölgesi</p>
+    <p id="date-time"></p>
     <div class="weather-info">
         <p><span id="temperature">--°C</span></p>
-        <img id="weather-icon" src="" alt="Hava durumu ikonu">
+        <img id="weather-icon" src="images/icon.png" >
     </div>
-    <p id="description">Hava durumu açıklaması...</p>
+    <p id="description">Güneşli</p>
 </section>
 
         <!-- Günlük Tahmin -->
          
         <section class="daily-forecast">
+        <div class="daily-main">
+                <h2>Sabah</h2>
             <div class="forecast-box" id="forecast-morning">
-                <h3>Sabah</h3>
-                <img src="" alt="Sabah ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Sabah ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Öğle</h2>
             <div class="forecast-box" id="forecast-noon">
-                <h3>Öğle</h3>
-                <img src="" alt="Öğle ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Öğle ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Akşam</h2>
             <div class="forecast-box" id="forecast-evening">
-                <h3>Akşam</h3>
-                <img src="" alt="Akşam ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Akşam ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Gece</h2>
             <div class="forecast-box" id="forecast-night">
-                <h3>Gece</h3>
-                <img src="" alt="Gece ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Gece ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
         </section>
     </main>
     
@@ -209,8 +217,8 @@
 
     <!-- Alt Bilgi -->
     <footer id="last_update_footer">
-        <p id="last-update">Son Güncelleme: --</p>
-          </svg>
+        <p id="songüncelleme">Son Güncelleme: </p>
+        <p id="last-update">--</p>
     </footer>
 
 
@@ -421,14 +429,14 @@ var hourlyChart = new Chart(ctxHourly, {
                     <polygon points="12,4 4,12 6.5,12 12,6.5 17.5,12 20,12" />
                   </svg>
             </span>
-            <span class="to-top-text">Back to top</span>
+            <span class="to-top-text">Başa dön</span>
         </div>
     </div>
 
     
     <!-- Footer -->
     <div class="footer">
-        <div class="footer-categories">
+        <div class="footer-categories"> 
             <h3>KURUMSAL</h3>
             <ul>
                 <li><a href="mailto:alikacar2361@gmail.com">Bize Ulaşın</a></li>
@@ -436,7 +444,7 @@ var hourlyChart = new Chart(ctxHourly, {
                 <li><a href="images/GizlilikPolitikası.html">Gizlilik Politikası</a></li>
                 <li><a href="images/ÇerezPolitikası.html">Çerez Politikası</a></li>
             </ul>
-        </div>
+        </div>  
         <div class="footer-categories">
             <h3>SOSYAL MEDYA</h3>
             <div class="social-media">
