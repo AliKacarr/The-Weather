@@ -112,19 +112,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Sabah, öğle, akşam ve gece tahminlerini güncelle
                 document.getElementById('forecast-morning').innerHTML = `
-                    <h2>Sabah</h2>
                     <img src="${data.hourly_weather[6].hava_durumu_ikonu}" alt="Sabah İkonu">
                     <p>${data.hourly_weather[6].sıcaklık}°C</p>`;
                 document.getElementById('forecast-noon').innerHTML = `
-                    <h2>Öğle</h2>
                     <img src="${data.hourly_weather[12].hava_durumu_ikonu}" alt="Öğle İkonu">
                     <p>${data.hourly_weather[12].sıcaklık}°C</p>`;
                 document.getElementById('forecast-evening').innerHTML = `
-                    <h2>Akşam</h2>
                     <img src="${data.hourly_weather[18].hava_durumu_ikonu}" alt="Akşam İkonu">
                     <p>${data.hourly_weather[18].sıcaklık}°C</p>`;
                 document.getElementById('forecast-night').innerHTML = `
-                    <h2>Gece</h2>
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
@@ -141,6 +137,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateWeeklyForecast(data) //Haftalık tabloyu doldur
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
                 updateCityWeatherIconsAndTemperatures();
+
+                const selectedElement = document.querySelector('.matches-group .selected a');
+                const targetLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto'; // Seçili dil veya varsayılan 'auto'
+                
+                const description = document.getElementById('description');
+                if (description) {
+                    translateElementText(description, 'auto', targetLang); // 'auto' kaynak dil olarak kullanılıyor
+                }
+    
+                const regioninfo = document.getElementById('region-info');
+                if (regioninfo) {
+                    translateElementText(regioninfo, 'auto', targetLang);
+                }
 
             
             })
@@ -384,6 +393,49 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
                     console.error(`"${text}" metni çevrilemedi:`, error);
                 });
         });
+
+        //  popup sınıfındaki placeholder'ları çevir
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => {
+            const placeholders = popup.querySelectorAll('input[placeholder]');
+            placeholders.forEach(input => {
+                translateElementText(input, sourceLang, targetLang);
+            });
+        });
+
+        // city-input id'sine sahip öğenin placeholder'ını çevir
+        const cityInput = document.getElementById('city-input');
+        if (cityInput && cityInput.placeholder) {
+            translateElementText(cityInput, sourceLang, targetLang);
+        }
+
+
+    }
+
+    function translateElementText(element, sourceLang, targetLang) {
+        const originalText = element.placeholder || element.innerHTML;
+        if (originalText) {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(originalText)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const translatedText = data[0][0][0];
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translatedText;
+                    } else {
+                        element.innerHTML = translatedText;
+                    }
+                })
+                .catch(error => {
+                    console.error(`"${originalText}" metni çevrilemedi:`, error);
+                });
+        }
     }
     
     // Kullanıcı bir dil seçtiğinde çağır
