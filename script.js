@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const defaultCity = 'Sivas'; 
     const openCageApiKey = '68f14cb81c9d4c1aa74af624b79baade'; 
+    
+    fetchWeatherData(defaultCity);
+    // Sayfa yüklendiğinde konumu kontrol et
+    requestLocation();
 
     async function getUserCity(latitude, longitude) {
         try {
@@ -45,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function requestLocation() {
         if (!navigator.geolocation) {
             console.warn('Tarayıcı konum izni desteklemiyor.');
-            fetchWeatherData(defaultCity); // Geolocation desteklenmezse
             return;
         }
 
@@ -55,15 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const city = await getUserCity(latitude, longitude);
                 console.log(`Bulunduğunuz şehir: ${city}`);
                 fetchWeatherData(city); // Şehirle hava durumunu getir
-            },
-            () => {
-                fetchWeatherData(defaultCity); // Konum izni reddedilirse
             }
         );
     }
 
-    // Sayfa yüklendiğinde konumu kontrol et
-    requestLocation();
+    
 
     // Giriş ekranındaki Enter tuşu davranışı
     emailInput.addEventListener('keypress', (event) => {
