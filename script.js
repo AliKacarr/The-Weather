@@ -402,9 +402,24 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
 
     // Dil kutusuna tıklanınca matches görünürlüğünü aç/kapat
     languageSelector.addEventListener('click', function (event) {
-        event.preventDefault(); // Sayfa yenilenmesini engelle
-        matches.style.display = matches.style.display === 'block' ? 'none' : 'block';
+        const clickedElement = event.target; // Tıklanan ögeyi al
+        const isInsideMatches = clickedElement.closest('.matches'); // Tıklanan öge matches sınıfının içinde mi?
+        const isLink = clickedElement.tagName === 'A'; // Tıklanan öge bir link mi?
+        
+        // Eğer tıklanan matches içindeki bir linkse görünürlüğü kapat
+        if (isInsideMatches && isLink) {
+            matches.style.display = 'none';
+        } 
+        // Eğer tıklanan matches'in kendisi ancak bir link değilse, hiçbir şey yapma
+        else if (isInsideMatches && !isLink) {
+            return;
+        } 
+        // Tıklanan matches değilse ve languageSelector ise, görünürlüğü aç/kapat
+        else {
+            matches.style.display = matches.style.display === 'block' ? 'none' : 'block';
+        }
     });
+    
 
     // Dil ekranı dışında bir yere tıklanırsa matches'i kapat
     document.addEventListener('click', function (event) {
