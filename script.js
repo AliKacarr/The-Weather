@@ -15,8 +15,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const iconsBasePath = "/icons/"; // İkonların bulunduğu klasör
 
 
-    // Varsayılan olarak Sivas verisini yükle
-    fetchWeatherData('Sivas');
+    const defaultCity = 'Sivas'; 
+    const openCageApiKey = '68f14cb81c9d4c1aa74af624b79baade'; 
+    
+    fetchWeatherData(defaultCity);
+    // Sayfa yüklendiğinde konumu kontrol et
+    requestLocation();
+
+    async function getUserCity(latitude, longitude) {
+        try {
+            const response = await fetch(
+                `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${openCageApiKey}`
+            );
+            const data = await response.json();
+
+            if (data.results.length > 0) {
+                // Öncelikle 'state' bilgisini kontrol et
+                const components = data.results[0].components;
+                return (
+                    components.state || // Öncelikli 'state' bilgisini al
+                    components.city || // Şehir bilgisini al
+                    components.town || // Kasaba bilgisini al
+                    components.village || // Köy bilgisini al
+                    defaultCity // Hiçbiri yoksa varsayılan şehir
+                );
+            }
+        } catch (error) {
+            console.error('Şehir bilgisi alınırken hata:', error);
+        }
+        return defaultCity; // Hata durumunda
+    }
+
+    function requestLocation() {
+        if (!navigator.geolocation) {
+            console.warn('Tarayıcı konum izni desteklemiyor.');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                const { latitude, longitude } = position.coords;
+                const city = await getUserCity(latitude, longitude);
+                console.log(`Bulunduğunuz şehir: ${city}`);
+                fetchWeatherData(city); // Şehirle hava durumunu getir
+            }
+        );
+    }
+
+    
 
     // Giriş ekranındaki Enter tuşu davranışı
     emailInput.addEventListener('keypress', (event) => {
@@ -108,23 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('humidity').textContent = `Nem: ${data.current_weather.nem}%`;
                 document.getElementById('wind-speed').textContent = `Rüzgar: ${data.current_weather.rüzgar} m/s`;
                 document.getElementById('pressure').textContent = `Basınç: ${data.current_weather.basınç} hPa`;
-                document.getElementById('last-update').textContent = `Son Güncelleme: ${new Date(data.current_weather.güncelleme_zamanı).toLocaleString('tr-TR')}`;
+                document.getElementById('last-update').textContent = ` ${new Date(data.current_weather.güncelleme_zamanı).toLocaleString('tr-TR')}`;
 
                 // Sabah, öğle, akşam ve gece tahminlerini güncelle
                 document.getElementById('forecast-morning').innerHTML = `
-                    <h2>Sabah</h2>
                     <img src="${data.hourly_weather[6].hava_durumu_ikonu}" alt="Sabah İkonu">
                     <p>${data.hourly_weather[6].sıcaklık}°C</p>`;
                 document.getElementById('forecast-noon').innerHTML = `
-                    <h2>Öğle</h2>
                     <img src="${data.hourly_weather[12].hava_durumu_ikonu}" alt="Öğle İkonu">
                     <p>${data.hourly_weather[12].sıcaklık}°C</p>`;
                 document.getElementById('forecast-evening').innerHTML = `
-                    <h2>Akşam</h2>
                     <img src="${data.hourly_weather[18].hava_durumu_ikonu}" alt="Akşam İkonu">
                     <p>${data.hourly_weather[18].sıcaklık}°C</p>`;
                 document.getElementById('forecast-night').innerHTML = `
-                    <h2>Gece</h2>
                     <img src="${data.hourly_weather[0].hava_durumu_ikonu}" alt="Gece İkonu">
                     <p>${data.hourly_weather[0].sıcaklık}°C</p>`;
 
@@ -141,6 +183,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateWeeklyForecast(data) //Haftalık tabloyu doldur
                 updateWeeklyChart(data); // haftalık grafiğe bilgileri gönderme
                 updateCityWeatherIconsAndTemperatures();
+
+                const selectedElement = document.querySelector('.matches-group .selected a');
+                const targetLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'en';
+                
+                const description = document.getElementById('description');
+                if (description) {
+                    translateElementText(description, 'auto', targetLang); 
+                }
+    
+                const regioninfo = document.getElementById('region-info');
+                if (regioninfo) {
+                    translateElementText(regioninfo, 'auto', targetLang);
+                }
+
+                const lastupdate = document.getElementById('last-update');
+                if (lastupdate) {
+                    translateElementText(lastupdate, 'auto', targetLang);
+                }
 
             
             })
@@ -228,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <p class="date">${new Date().toLocaleDateString('tr-TR', { day: '2-digit', month: 'long' })}</p>
                 <div class="temp-icon">
                     <img src="${iconPath}" alt="Hava Durumu İkonu">
-                    <p class="temp">${day.sabah_sıcaklık}°C / ${day.gece_sıcaklık}°C</p>
+                    <p class="temp">${day.gece_sıcaklık}°C / ${day.sabah_sıcaklık}°C</p>
                 </div>
             </div>
         `;
@@ -266,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('exitProfil').addEventListener('click', (event) => {
     event.preventDefault(); // Link varsayılan davranışını engelle
     closePopup('profilPopup'); // Popup'ı kapat
-    setVisibility(false); // Kullanıcı çıkış yaptı, görünürlük ayarla
+    setVisibility(false); // Kullanıcı çıkış yaptı, gör��nürlük ayarla
     islogin=""; //Kullanıcı çıkış yaptı
 });
 
@@ -342,9 +402,24 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
 
     // Dil kutusuna tıklanınca matches görünürlüğünü aç/kapat
     languageSelector.addEventListener('click', function (event) {
-        event.preventDefault(); // Sayfa yenilenmesini engelle
-        matches.style.display = matches.style.display === 'block' ? 'none' : 'block';
+        const clickedElement = event.target; // Tıklanan ögeyi al
+        const isInsideMatches = clickedElement.closest('.matches'); // Tıklanan öge matches sınıfının içinde mi?
+        const isLink = clickedElement.tagName === 'A'; // Tıklanan öge bir link mi?
+        
+        // Eğer tıklanan matches içindeki bir linkse görünürlüğü kapat
+        if (isInsideMatches && isLink) {
+            matches.style.display = 'none';
+        } 
+        // Eğer tıklanan matches'in kendisi ancak bir link değilse, hiçbir şey yapma
+        else if (isInsideMatches && !isLink) {
+            return;
+        } 
+        // Tıklanan matches değilse ve languageSelector ise, görünürlüğü aç/kapat
+        else {
+            matches.style.display = matches.style.display === 'block' ? 'none' : 'block';
+        }
     });
+    
 
     // Dil ekranı dışında bir yere tıklanırsa matches'i kapat
     document.addEventListener('click', function (event) {
@@ -353,6 +428,127 @@ const cityWeatherElements = document.querySelectorAll('.city-weather'); // Tüm 
         }
     });
 
+    //---Sayfa Çevirisi
+    function translatePage(sourceLang, targetLang) {
+        // Tüm metin düğümlerini bul
+        const textNodes = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+        let node;
+        while ((node = walker.nextNode())) {
+            if (node.nodeValue.trim()) {
+                textNodes.push(node);
+            }
+        }
+    
+        // Çeviri için tüm metinleri topla
+        const texts = textNodes.map(node => node.nodeValue);
+    
+        // Her bir metni çevir ve DOM'u güncelle
+        texts.forEach((text, index) => {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}`;
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    textNodes[index].nodeValue = data[0][0][0];
+                })
+                .catch(error => {
+                    console.error(`"${text}" metni çevrilemedi:`, error);
+                });
+                updateSettingElement(targetLang);
+        });
+
+        //  popup sınıfındaki placeholder'ları çevir
+        const popups = document.querySelectorAll('.popup');
+        popups.forEach(popup => {
+            const placeholders = popup.querySelectorAll('input[placeholder]');
+            placeholders.forEach(input => {
+                translateElementText(input, sourceLang, targetLang);
+            });
+        });
+
+        // city-input id'sine sahip öğenin placeholder'ını çevir
+        const cityInput = document.getElementById('city-input');
+        if (cityInput && cityInput.placeholder) {
+            translateElementText(cityInput, sourceLang, targetLang);
+        }
+
+
+    }
+
+    function translateElementText(element, sourceLang, targetLang) {
+        const originalText = element.placeholder || element.innerHTML;
+        if (originalText) {
+            const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(originalText)}`;
+
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const translatedText = data[0][0][0];
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translatedText;
+                    } else {
+                        element.innerHTML = translatedText;
+                    }
+                })
+                .catch(error => {
+                    console.error(`"${originalText}" metni çevrilemedi:`, error);
+                });
+        }
+    }
+    
+    // Kullanıcı bir dil seçtiğinde çağır
+    document.querySelectorAll('.matches-group a').forEach(link => {
+        link.addEventListener('click', event => {
+            event.preventDefault();
+            const targetLang = link.getAttribute('hreflang'); // Seçilen dil
+            const selectedElement = document.querySelector('.matches-group .selected a');
+            const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
+            
+            translatePage(sourceLang, targetLang);
+            updateSelectedClass(targetLang);
+        });
+    });
+
+    function updateSelectedClass(targetLang) { //dil değişiminde selected sınıfı
+
+        // Mevcut 'selected' sınıfını kaldır
+        const currentSelected = document.querySelector('.matches-group .selected');
+        if (currentSelected) {
+            currentSelected.classList.remove('selected');
+        }
+    
+        // Yeni 'selected' sınıfını ekle
+        const matchingLink = document.querySelector(`.matches-group a[hreflang="${targetLang}"]`);
+        if (matchingLink) {
+            matchingLink.parentElement.classList.add('selected');
+        }
+    }
+
+    function updateSettingElement(targetLang) { //seçili dilin butonda gözükmesi
+        const settingElement = document.getElementById('setting');
+        if (settingElement) {
+            settingElement.textContent = targetLang.toUpperCase(); // Dil kodunu büyük harflerle yaz
+        }
+    }
+
+    const browserLang = navigator.language.split('-')[0]; // Tarayıcı dili (ör. "en-US" → "en")
+    const selectedElement = document.querySelector('.matches-group .selected a');
+    const sourceLang = selectedElement ? selectedElement.getAttribute('hreflang') : 'auto';
+    translatePage(sourceLang, browserLang);
+    updateSelectedClass(browserLang);
+    updateSettingElement(browserLang);
+    
 });
 /* --------------------------------DOMContentLoaded Bitişi--------------------------------- */
 
@@ -564,5 +760,106 @@ async function updateVisitedCities(city) {
         console.error('Hata oluştu:', error);
     }
 }
+
+const weeklyChartConfig = {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: 'Sıcaklık (°C)',
+            borderColor: '#ffffff',         // Beyaz çizgi
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz dolgu
+            pointBackgroundColor: '#ffffff', // Beyaz noktalar
+            pointBorderColor: '#ffffff',
+            borderWidth: 3,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ffffff',       // Beyaz etiket yazıları
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 13
+                },
+                padding: 12
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz grid
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#ffffff',       // Beyaz eksen yazıları
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz grid
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#ffffff',       // Beyaz eksen yazıları
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                }
+            }
+        }
+    }
+};
+
+// Tarih ve saat bilgisini güncelleme fonksiyonu
+function updateDateTime() {
+    const now = new Date();
+    const dateElement = document.getElementById('date-time');
+    
+    // Tarih ve saat formatı: 1 Ocak 2024\n14:30 (alt satıra geçmek için \n kullanıyoruz)
+    const dateOptions = { 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric'
+    };
+    
+    const timeOptions = {
+        hour: '2-digit', 
+        minute: '2-digit'
+    };
+    
+    const date = now.toLocaleDateString('tr-TR', dateOptions);
+    const time = now.toLocaleTimeString('tr-TR', timeOptions);
+    
+    dateElement.innerHTML = `${date}<br>${time}`;
+}
+
+// Sayfa yüklendiğinde ve her saniye tarih/saat güncelleme
+document.addEventListener('DOMContentLoaded', () => {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+});
 
 

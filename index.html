@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <!-- Giriş Yap Popupp -->
+    <!-- Giriş Yap Popup -->
     <div id="girisPopup" class="popup">
         <div class="popup-content">
             <span class="close" onclick="closePopup('girisPopup')">&times;</span>
@@ -66,7 +66,6 @@
         </div>
         <div class="search-city">
             <input type="text" id="city-input" placeholder="Şehir Ara...">
-            <span class="search-icon"><i class="fas fa-search"></i></span>
         </div>
 
         <div class="user-actions">
@@ -84,7 +83,7 @@
             <div class="additional-settings ">
                   <div id="settings" class="button settings">
                     <div class="inner">
-                        <a href="#" aria-label="Settings">
+                        <a href="#" id="setting" aria-label="Settings">
                             TR
                         </a>
                 </div>
@@ -119,9 +118,7 @@
             </div>
         </div>
 
-            <a href="#" class="menu-btn" id="menu-btn-aside">☰</a>
         </div>
-        
     </nav>
 
     <!-- Ana İçerik -->
@@ -158,38 +155,46 @@
 <!-- Mevcut Bölge ve Tarih/Saat Bilgileri -->
 <section class="current-weather">
     <h1 id="city-name">Sivas</h1>
-    <p id="region-info" >Bölge Bilgisi...</p>
-    <p id="date-time">Güncel Tarih ve Saat</p>
+    <p id="region-info" >İç Anadolu Bölgesi</p>
+    <p id="date-time"></p>
     <div class="weather-info">
         <p><span id="temperature">--°C</span></p>
-        <img id="weather-icon" src="" alt="Hava durumu ikonu">
+        <img id="weather-icon" src="images/icon.png" >
     </div>
-    <p id="description">Hava durumu açıklaması...</p>
+    <p id="description">Güneşli</p>
 </section>
 
         <!-- Günlük Tahmin -->
          
         <section class="daily-forecast">
+        <div class="daily-main">
+                <h2>Sabah</h2>
             <div class="forecast-box" id="forecast-morning">
-                <h3>Sabah</h3>
-                <img src="" alt="Sabah ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Sabah ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Öğle</h2>
             <div class="forecast-box" id="forecast-noon">
-                <h3>Öğle</h3>
-                <img src="" alt="Öğle ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Öğle ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Akşam</h2>
             <div class="forecast-box" id="forecast-evening">
-                <h3>Akşam</h3>
-                <img src="" alt="Akşam ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Akşam ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
+        <div class="daily-main">
+                <h2>Gece</h2>
             <div class="forecast-box" id="forecast-night">
-                <h3>Gece</h3>
-                <img src="" alt="Gece ikonu" class="forecast-icon">
+                <img src="images/icon.png" alt="Gece ikonu" class="forecast-icon">
                 <p class="forecast-temperature">--°C</p>
             </div>
+        </div>
         </section>
     </main>
     
@@ -209,8 +214,8 @@
 
     <!-- Alt Bilgi -->
     <footer id="last_update_footer">
-        <p id="last-update">Son Güncelleme: --</p>
-          </svg>
+        <p id="songüncelleme">Son Güncelleme: </p>
+        <p id="last-update">--</p>
     </footer>
 
 
@@ -353,36 +358,90 @@ var hourlyChart = new Chart(ctxHourly, {
         }
     }
 });
-        // haftalık grafik
-        var ctxWeekly = document.getElementById('weekly-chart').getContext('2d');
-        var weeklyChart = new Chart(ctxWeekly, {
-            type: 'bar',
-            data: {
-                labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'],
-                datasets: [{
-                    label: 'Günlük Ortalama Sıcaklık (°C)',
-                    data: [20, 22, 24, 19, 18],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        beginAtZero: false
+        // Haftalık grafik
+var ctxWeekly = document.getElementById('weekly-chart').getContext('2d');
+var weeklyChart = new Chart(ctxWeekly, {
+    type: 'bar',
+    data: {
+        labels: ['Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma'],
+        datasets: [{
+            label: 'En Yüksek Sıcaklık (°C)',
+            data: [20, 22, 24, 19, 18],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 2,
+            borderRadius: 8,
+            barThickness: 25
+        }, {
+            label: 'En Düşük Sıcaklık (°C)',
+            data: [14, 15, 17, 12, 11],
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 2,
+            borderRadius: 8,
+            barThickness: 25
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    color: '#ffffff',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
                     },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Sıcaklık (°C)'
-                        }
+                    padding: 20
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                padding: 12,
+                displayColors: false
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: '#ffffff',
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.1)'
+                },
+                ticks: {
+                    color: '#ffffff',
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Sıcaklık (°C)',
+                    color: '#ffffff',
+                    font: {
+                        size: 14,
+                        weight: 'bold'
                     }
                 }
             }
-        });
+        }
+    }
+});
     </script>
 
 
@@ -421,7 +480,7 @@ var hourlyChart = new Chart(ctxHourly, {
                     <polygon points="12,4 4,12 6.5,12 12,6.5 17.5,12 20,12" />
                   </svg>
             </span>
-            <span class="to-top-text">Back to top</span>
+            <span class="to-top-text">Başa dön</span>
         </div>
     </div>
 
@@ -436,7 +495,7 @@ var hourlyChart = new Chart(ctxHourly, {
                 <li><a href="images/GizlilikPolitikası.html">Gizlilik Politikası</a></li>
                 <li><a href="images/ÇerezPolitikası.html">Çerez Politikası</a></li>
             </ul>
-        </div>
+        </div>  
         <div class="footer-categories">
             <h3>SOSYAL MEDYA</h3>
             <div class="social-media">
