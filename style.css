@@ -652,7 +652,11 @@ section {
 
 /* Saatlik tablo */
 .hourly-forecast {
+<<<<<<< HEAD
     background: linear-gradient(135deg, rgba(5, 24, 148, 0.09), rgba(5, 24, 148, 0.92));
+=======
+    background: linear-gradient(135deg, rgba(5, 24, 148, 0.85), rgba(5, 24, 148, 0.92));
+>>>>>>> 9ad9fe70657fa36e1834090ecddeddb4cc2afb2d
     border-radius: 1.25rem;
     padding: 2rem;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
