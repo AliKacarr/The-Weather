@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('exitProfil').addEventListener('click', (event) => {
     event.preventDefault(); // Link varsayılan davranışını engelle
     closePopup('profilPopup'); // Popup'ı kapat
-    setVisibility(false); // Kullanıcı çıkış yaptı, görünürlük ayarla
+    setVisibility(false); // Kullanıcı çıkış yaptı, gör��nürlük ayarla
     islogin=""; //Kullanıcı çıkış yaptı
 });
 
@@ -760,5 +760,106 @@ async function updateVisitedCities(city) {
         console.error('Hata oluştu:', error);
     }
 }
+
+const weeklyChartConfig = {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: 'Sıcaklık (°C)',
+            borderColor: '#ffffff',         // Beyaz çizgi
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz dolgu
+            pointBackgroundColor: '#ffffff', // Beyaz noktalar
+            pointBorderColor: '#ffffff',
+            borderWidth: 3,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#ffffff',       // Beyaz etiket yazıları
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    }
+                }
+            },
+            tooltip: {
+                backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                titleColor: '#ffffff',
+                bodyColor: '#ffffff',
+                titleFont: {
+                    size: 14,
+                    weight: 'bold'
+                },
+                bodyFont: {
+                    size: 13
+                },
+                padding: 12
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz grid
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#ffffff',       // Beyaz eksen yazıları
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                }
+            },
+            y: {
+                grid: {
+                    color: 'rgba(255, 255, 255, 0.2)',  // Yarı saydam beyaz grid
+                    borderColor: 'rgba(255, 255, 255, 0.3)'
+                },
+                ticks: {
+                    color: '#ffffff',       // Beyaz eksen yazıları
+                    font: {
+                        size: 13,
+                        weight: '600'
+                    }
+                }
+            }
+        }
+    }
+};
+
+// Tarih ve saat bilgisini güncelleme fonksiyonu
+function updateDateTime() {
+    const now = new Date();
+    const dateElement = document.getElementById('date-time');
+    
+    // Tarih ve saat formatı: 1 Ocak 2024\n14:30 (alt satıra geçmek için \n kullanıyoruz)
+    const dateOptions = { 
+        day: 'numeric', 
+        month: 'long', 
+        year: 'numeric'
+    };
+    
+    const timeOptions = {
+        hour: '2-digit', 
+        minute: '2-digit'
+    };
+    
+    const date = now.toLocaleDateString('tr-TR', dateOptions);
+    const time = now.toLocaleTimeString('tr-TR', timeOptions);
+    
+    dateElement.innerHTML = `${date}<br>${time}`;
+}
+
+// Sayfa yüklendiğinde ve her saniye tarih/saat güncelleme
+document.addEventListener('DOMContentLoaded', () => {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+});
 
 
