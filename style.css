@@ -326,7 +326,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border-radius: 8px;
-    padding: 8px 16px;
+    padding: 0 16px;
     transition: all 0.3s ease;
     font-weight: 500;
     letter-spacing: 0.3px;
@@ -627,7 +627,7 @@ main {
 #last_update_footer {
     display: flex;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     color: rgba(255, 255, 255, 0.95);
     font-size: 0.875rem;
     background: linear-gradient(135deg, rgba(39, 10, 120, 0.8), rgba(39, 10, 120, 0.6));
@@ -652,11 +652,7 @@ section {
 
 /* Saatlik tablo */
 .hourly-forecast {
-<<<<<<< HEAD
-    background: linear-gradient(135deg, rgba(5, 24, 148, 0.09), rgba(5, 24, 148, 0.92));
-=======
     background: linear-gradient(135deg, rgba(5, 24, 148, 0.85), rgba(5, 24, 148, 0.92));
->>>>>>> 9ad9fe70657fa36e1834090ecddeddb4cc2afb2d
     border-radius: 1.25rem;
     padding: 2rem;
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
@@ -1155,7 +1151,6 @@ section {
     margin-inline-start: auto;
     order: 3;
     transition: all 0.3s ease;
-    padding: 0.5rem;
     border-radius: 0.5rem;
     gap: 0.75rem;
 }
@@ -1188,7 +1183,7 @@ section {
     user-select: none;
     width: auto;
     z-index: 10;
-    padding: 0.5rem;
+    padding: 0.2rem;
     transition: all 0.2s ease-in-out;
 }
 
@@ -1226,7 +1221,7 @@ section {
 .additional-settings .matches ul.matches-group li {
     width: 100%;
     text-align: left;
-    padding: 6px 10px;
+    padding: 7px 5px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     transition: all 0.2s ease-in-out;
@@ -1240,7 +1235,7 @@ section {
 }
 
 .additional-settings .matches ul.matches-group li:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(217, 46, 46, 0.2);
 }
 
 .additional-settings .matches {
