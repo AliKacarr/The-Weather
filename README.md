@@ -17,22 +17,6 @@
 
 ---
 
-## 📋 İçindekiler
-
-- [Proje Hakkında](#-proje-hakkında)
-- [Özellikler](#-özellikler)
-- [Ekran Görüntüleri](#-ekran-görüntüleri)
-- [Teknoloji Stack](#-teknoloji-stack)
-- [Kullanılan APIler](#-kullanılan-apiler)
-- [Kurulum](#-kurulum)
-- [Çevre Değişkenleri](#-çevre-değişkenleri)
-- [Kullanım](#-kullanım)
-- [Proje Yapısı](#-proje-yapısı)
-- [Katkıda Bulunma](#-katkıda-bulunma)
-- [İletişim](#-iletişim)
-
----
-
 ## 🌍 Proje Hakkında
 
 **The Weather**, kullanıcılara anlık, saatlik ve haftalık hava durumu bilgilerini sunan tam kapsamlı bir web uygulamasıdır. **WeatherAPI** ve **OpenWeatherMap** entegrasyonuyla çalışan bu uygulama; şehir bazlı hava durumu sorgulama, konuma dayalı otomatik tespit, kullanıcı hesabı yönetimi ve ziyaret geçmişi gibi gelişmiş özellikler sunar.
@@ -222,9 +206,9 @@ Katkılarınızı memnuniyetle karşılıyoruz! Şu adımları izleyin:
 
 **Ali Kaçar**
 
-[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:alikacar2361@gmail.com)
+[![Email](https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white)](mailto:alikacardev@gmail.com)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/AliKacarr)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alikacar)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alikacar23)
 
 </div>
 
